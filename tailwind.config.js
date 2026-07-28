@@ -6,7 +6,18 @@ export default {
     "./Portfolio.jsx"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bg: '#0A0A0A',
+        surface: '#111111',
+        border: '#262626',
+        primary: '#F5F5F5',
+        secondary: '#A3A3A3',
+        muted: '#737373',
+        hoverSurface: '#1A1A1A',
+        lightGray: '#E5E5E5',
+      }
+    },
   },
   plugins: [],
 }
