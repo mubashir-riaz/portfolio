@@ -13,17 +13,10 @@ import {
   Database,
   Menu,
   X,
-  Sparkles,
-  MapPin,
-  Briefcase,
-  Play,
-  RotateCcw,
-  GitBranch,
-  Activity,
   Code2,
   FileCode2,
-  ExternalLink,
-  ChevronRight,
+  Play,
+  FileText,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -32,16 +25,13 @@ import {
 const PROFILE = {
   name: "Mubashir Riaz",
   handle: "mubashir",
-  role: "AI Backend Engineer",
-  heading:
-    "Building AI-powered backend systems, intelligent document automation, and production-ready APIs.",
-  bio: "I specialise in Python, FastAPI, LLM integration, Retrieval-Augmented Generation (RAG), and scalable backend architecture.",
-  location: "Open to Remote",
+  role: "AI Backend Engineer & Intelligent Systems Developer",
+  heading: "Building intelligent backend systems that solve real-world problems.",
+  bio: "I build production-ready APIs, AI-powered document workflows, and scalable backend architectures that are reliable, maintainable, and designed for real-world applications.",
   email: "mubashiriaz10@gmail.com",
   avatar: "/profile.jpeg",
   github: "https://github.com/mubashir-riaz",
   linkedin: "https://www.linkedin.com/in/mubashir-riaz-51a881424/",
-  available: true,
 };
 
 const PROJECTS = [
@@ -55,11 +45,10 @@ const PROJECTS = [
     description:
       "InvoiceGuard AI automates freight invoice auditing by extracting invoice data with Vision LLMs, validating charges against contracted rates, identifying overcharges, and generating dispute-ready summaries.",
     highlights: [
-      "Multi-modal invoice extraction",
-      "AI-powered charge validation",
-      "Automated discrepancy detection",
-      "Structured audit reports",
-      "Draft dispute email generation",
+      "Multi-modal invoice extraction with Vision LLMs",
+      "AI-powered charge & contract rate validation",
+      "Automated overcharge discrepancy detection",
+      "Structured audit reports & dispute email generation",
     ],
     stack: [
       "Python",
@@ -80,7 +69,6 @@ const PROJECTS = [
 
     return audit_result`,
     github: "https://github.com/mubashir-riaz/InvoiceGuard-ai",
-    // demo: "https://example.com",
   },
   {
     id: "docu-mind",
@@ -92,11 +80,10 @@ const PROJECTS = [
     description:
       "Upload PDFs, Word documents, Excel files, PowerPoint presentations, and text files, then ask natural language questions with responses grounded in document context.",
     highlights: [
-      "Multi-format document support",
-      "Semantic search with ChromaDB",
-      "Source-aware responses",
-      "FastAPI backend",
-      "React frontend",
+      "Multi-format document parsing & chunking",
+      "Semantic vector search with ChromaDB",
+      "Source-aware grounded response generation",
+      "FastAPI backend & React frontend interface",
     ],
     stack: ["FastAPI", "React", "Python", "ChromaDB", "Llama 3.3", "LangChain"],
     codeSnippet: `def ask_document(question, document_id):
@@ -111,7 +98,6 @@ const PROJECTS = [
         context
     )`,
     github: "https://github.com/mubashir-riaz/documind-ai",
-    // demo: "https://example.com",
   },
 ];
 
@@ -155,23 +141,111 @@ const SKILLS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  ANIMATED DEV TERMINAL COMPONENT                                   */
+/*  TYPEWRITER ANIMATED TEXT COMPONENT                                */
+/* ------------------------------------------------------------------ */
+function TypewriterText({ words }) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const targetWord = words[currentWordIndex];
+    const speed = isDeleting ? 25 : 55;
+
+    if (!isDeleting && currentText === targetWord) {
+      const timeout = setTimeout(() => setIsDeleting(true), 2400);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && currentText === "") {
+      setIsDeleting(false);
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setCurrentText((prev) =>
+        isDeleting
+          ? targetWord.substring(0, prev.length - 1)
+          : targetWord.substring(0, prev.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex, words]);
+
+  return (
+    <span className="inline-flex items-center font-mono">
+      <span className="text-slate-200 font-semibold">{currentText}</span>
+      <span className="w-1.5 h-3.5 ml-1 bg-emerald-400 animate-pulse rounded-xs" />
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SYNTAX HIGHLIGHTED CODE SNIPPET COMPONENT                         */
+/* ------------------------------------------------------------------ */
+function SyntaxHighlightedCode({ code }) {
+  const lines = code.split("\n");
+  return (
+    <div className="font-mono text-[11px] leading-relaxed space-y-0.5">
+      {lines.map((line, idx) => {
+        if (line.startsWith("def ")) {
+          const parts = line.split("(");
+          const fnName = parts[0].replace("def ", "");
+          const rest = parts.slice(1).join("(");
+          return (
+            <div key={idx}>
+              <span className="text-purple-400 font-semibold">def </span>
+              <span className="text-blue-400 font-semibold">{fnName}</span>
+              <span className="text-slate-300">({rest}</span>
+            </div>
+          );
+        }
+        if (line.trim().startsWith("return ")) {
+          const indent = line.substring(0, line.indexOf("return"));
+          const val = line.trim().replace("return ", "");
+          return (
+            <div key={idx}>
+              <span>{indent}</span>
+              <span className="text-rose-400 font-semibold">return </span>
+              <span className="text-emerald-300">{val}</span>
+            </div>
+          );
+        }
+        if (line.includes(" = ")) {
+          const parts = line.split(" = ");
+          return (
+            <div key={idx}>
+              <span className="text-slate-200">{parts[0]}</span>
+              <span className="text-purple-400 font-semibold"> = </span>
+              <span className="text-sky-300">{parts.slice(1).join(" = ")}</span>
+            </div>
+          );
+        }
+        return <div key={idx} className="text-slate-300">{line}</div>;
+      })}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  MINIMAL DEV TERMINAL COMPONENT WITH VIBRANT SYNTAX COLORS         */
 /* ------------------------------------------------------------------ */
 function DevTerminal() {
   const [activeTab, setActiveTab] = useState("terminal");
   const [inputVal, setInputVal] = useState("");
   const [history, setHistory] = useState([
-    { type: "sys", text: "Initializing Mubashir Riaz CLI v2.4.0..." },
-    { type: "sys", text: "Connected to mubashir-backend-node" },
-    { type: "cmd", text: "npx mubashir --status" },
+    { type: "sys", text: "Initializing Mubashir Riaz Production Node v2.4.0..." },
+    { type: "cmd", text: "python status.py" },
     {
       type: "out",
-      text: "✔ Status: Online | Backend API: FastAPI | RAG Engine: Ready",
+      text: "✔ API Server ........ Running [FastAPI]\n✔ PostgreSQL ........ Connected [Port 5432]\n✔ Redis ............. Connected [Cache Ready]\n✔ AI Model .......... Ready [Llama 3.3]\n✔ RAG Pipeline ...... Active [ChromaDB]\n\nSystem Status: ONLINE",
     },
-    { type: "cmd", text: "cat tech_stack.json" },
+    { type: "cmd", text: "deploy --env production" },
     {
       type: "out",
-      text: '{\n  "name": "Mubashir Riaz",\n  "role": "AI Backend Engineer",\n  "core": ["Python", "FastAPI", "Pydantic", "RAG"],\n  "infrastructure": ["PostgreSQL", "Redis", "Docker", "AWS", "ChromaDB"]\n}',
+      text: "Building container image...\n✓ Docker Image Created\n✓ Unit & Integration Tests Passed\n✓ API Services Deployed\n\nProduction Status: ONLINE",
     },
   ]);
 
@@ -189,8 +263,8 @@ function DevTerminal() {
     if (!raw) return;
 
     const newHistory = [...history, { type: "cmd", text: raw }];
-
     const lower = raw.toLowerCase();
+
     if (lower === "clear") {
       setHistory([]);
       setInputVal("");
@@ -236,29 +310,51 @@ function DevTerminal() {
     handleCommand(inputVal);
   };
 
+  const renderColoredOutput = (text) => {
+    return text.split("\n").map((line, i) => {
+      if (line.includes("✔") || line.includes("✓")) {
+        const parts = line.split(" ");
+        return (
+          <div key={i} className="flex items-center gap-1.5 py-0.5">
+            <span className="text-emerald-400 font-bold">✔</span>
+            <span className="text-slate-300">{line.replace("✔", "").replace("✓", "")}</span>
+          </div>
+        );
+      }
+      if (line.includes("System Status: ONLINE") || line.includes("Production Status: ONLINE")) {
+        return (
+          <div key={i} className="text-emerald-400 font-bold pt-1">
+            {line}
+          </div>
+        );
+      }
+      return <div key={i}>{line}</div>;
+    });
+  };
+
   return (
-    <div className="rounded-xl bg-[#090b10] border border-slate-800/80 shadow-2xl overflow-hidden font-mono text-xs text-slate-300">
+    <div className="rounded-xl bg-[#0b0d14] border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs text-slate-300">
       {/* Terminal Title Bar */}
-      <div className="bg-[#0f121a] px-4 py-2.5 border-b border-slate-800/80 flex items-center justify-between">
+      <div className="bg-[#121522] px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
             <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
             <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
           </div>
-          <span className="text-slate-500 text-[11px] ml-2">
+          <span className="text-slate-400 text-[11px] ml-2 font-medium">
             bash - mubashir@backend-node
           </span>
         </div>
 
         {/* Terminal Tabs */}
-        <div className="flex items-center gap-1 bg-[#090b10] p-1 rounded-md border border-slate-800/60">
+        <div className="flex items-center gap-1 bg-[#06070a] p-1 rounded-md border border-slate-800">
           <button
             onClick={() => setActiveTab("terminal")}
             className={`px-2.5 py-0.5 rounded text-[11px] transition-colors ${
               activeTab === "terminal"
-                ? "bg-slate-800 text-slate-100 font-semibold"
-                : "text-slate-500 hover:text-slate-300"
+                ? "bg-slate-800 text-emerald-400 font-semibold"
+                : "text-slate-400 hover:text-slate-200"
             }`}
           >
             ~/cli-session
@@ -267,8 +363,8 @@ function DevTerminal() {
             onClick={() => setActiveTab("activity")}
             className={`px-2.5 py-0.5 rounded text-[11px] transition-colors ${
               activeTab === "activity"
-                ? "bg-slate-800 text-slate-100 font-semibold"
-                : "text-slate-500 hover:text-slate-300"
+                ? "bg-slate-800 text-sky-400 font-semibold"
+                : "text-slate-400 hover:text-slate-200"
             }`}
           >
             ~/system_logs
@@ -280,7 +376,7 @@ function DevTerminal() {
       {activeTab === "terminal" ? (
         <div
           ref={terminalContainerRef}
-          className="p-4 h-72 overflow-y-auto space-y-3 bg-[#07090e]"
+          className="p-4 h-72 overflow-y-auto space-y-3 bg-[#06070a]"
         >
           {history.map((item, idx) => (
             <div key={idx} className="leading-relaxed">
@@ -289,16 +385,16 @@ function DevTerminal() {
               )}
               {item.type === "cmd" && (
                 <div className="flex items-center gap-2 text-slate-200">
-                  <span className="text-sky-400 font-bold">
+                  <span className="text-emerald-400 font-bold">
                     mubashir@backend:~$
                   </span>
-                  <span>{item.text}</span>
+                  <span className="text-sky-300 font-medium">{item.text}</span>
                 </div>
               )}
               {item.type === "out" && (
-                <pre className="text-slate-400 whitespace-pre-wrap pl-4 border-l border-slate-800 mt-1">
-                  {item.text}
-                </pre>
+                <div className="text-slate-300 whitespace-pre-wrap pl-3 border-l-2 border-slate-800 mt-1 font-mono text-[11px]">
+                  {renderColoredOutput(item.text)}
+                </div>
               )}
             </div>
           ))}
@@ -308,7 +404,7 @@ function DevTerminal() {
             onSubmit={handleFormSubmit}
             className="flex items-center gap-2 pt-2 text-slate-200"
           >
-            <span className="text-sky-400 font-bold">mubashir@backend:~$</span>
+            <span className="text-emerald-400 font-bold">mubashir@backend:~$</span>
             <input
               type="text"
               value={inputVal}
@@ -316,59 +412,50 @@ function DevTerminal() {
               placeholder="type 'help', 'skills', or 'projects'..."
               className="bg-transparent border-none outline-none flex-1 text-slate-100 font-mono text-xs placeholder:text-slate-600"
             />
-            <span className="w-2 h-4 bg-sky-400 animate-cursor inline-block" />
           </form>
         </div>
       ) : (
         /* Activity Log View */
-        <div className="p-4 h-72 overflow-y-auto space-y-2 bg-[#07090e] text-[11px] font-mono">
-          <div className="text-emerald-400">
-            [INFO] FastAPI server listening on 0.0.0.0:8000
-          </div>
-          <div className="text-slate-400">
-            [LOG] ChromaDB vector store initialized
-          </div>
-          <div className="text-slate-400">
-            [AUDIT] Vision LLM document parser active
-          </div>
-          <div className="text-sky-400">[LLM] LangChain RAG pipeline ready</div>
-          <div className="text-slate-500">
-            [HEALTH] All system services operational
-          </div>
+        <div className="p-4 h-72 overflow-y-auto space-y-2 bg-[#06070a] text-[11px] font-mono text-slate-400">
+          <div><span className="text-emerald-400 font-semibold">[INFO]</span> FastAPI server listening on 0.0.0.0:8000</div>
+          <div><span className="text-sky-400 font-semibold">[LOG]</span> ChromaDB vector store initialized</div>
+          <div><span className="text-purple-400 font-semibold">[AUDIT]</span> Vision LLM document parser active</div>
+          <div><span className="text-indigo-400 font-semibold">[LLM]</span> LangChain RAG pipeline ready</div>
+          <div><span className="text-emerald-400 font-semibold">[HEALTH]</span> All system services operational</div>
         </div>
       )}
 
       {/* Quick Interactive Command Buttons Footer */}
-      <div className="bg-[#0b0e16] px-4 py-2 border-t border-slate-800/60 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-[11px] text-slate-500">
-          <span>Quick Run:</span>
+      <div className="bg-[#121522] px-4 py-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="text-slate-500">Quick Run:</span>
           <button
             onClick={() => handleCommand("help")}
-            className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="px-2 py-0.5 rounded bg-slate-800/80 hover:bg-slate-700 text-sky-300 transition-colors"
           >
             help
           </button>
           <button
             onClick={() => handleCommand("skills")}
-            className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="px-2 py-0.5 rounded bg-slate-800/80 hover:bg-slate-700 text-emerald-300 transition-colors"
           >
             skills
           </button>
           <button
             onClick={() => handleCommand("projects")}
-            className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="px-2 py-0.5 rounded bg-slate-800/80 hover:bg-slate-700 text-purple-300 transition-colors"
           >
             projects
           </button>
           <button
             onClick={() => handleCommand("clear")}
-            className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="px-2 py-0.5 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors"
           >
             clear
           </button>
         </div>
 
-        <span className="text-[10px] text-slate-600 font-mono">
+        <span className="text-[10px] text-slate-500 font-mono">
           UTF-8 | Python 3.12
         </span>
       </div>
@@ -390,53 +477,58 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050609] text-slate-200 font-sans bg-dev-grid relative">
+    <div className="min-h-screen bg-[#090a0f] text-slate-100 font-sans relative">
       {/* ------------------------------------------------------------ */}
-      {/* DEV TOOLS TOP BAR / HEADER                                   */}
+      {/* HEADER / NAVIGATION BAR                                      */}
       {/* ------------------------------------------------------------ */}
-      <header className="sticky top-0 z-50 bg-[#07090e]/90 backdrop-blur-md border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 h-14 flex items-center justify-between text-xs">
+      <header className="sticky top-0 z-50 bg-[#090a0f]/90 backdrop-blur-md border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-10 h-16 flex items-center justify-between text-xs">
           <a
             href="#top"
-            className="flex items-center gap-2 text-slate-200 hover:text-sky-400 transition-colors font-mono font-semibold"
+            className="flex items-center gap-2.5 text-slate-100 hover:text-slate-300 transition-colors font-mono font-bold text-sm tracking-tight group"
           >
-            <Terminal className="w-4 h-4 text-sky-400" />
+            <div className="p-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 text-slate-300">
+              <Terminal className="w-4 h-4" />
+            </div>
             <span>&lt;MubashirRiaz /&gt;</span>
           </a>
 
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-slate-400 font-medium">
-            <a href="#about" className="hover:text-slate-100 transition-colors">
+          <nav className="hidden md:flex items-center gap-2 text-slate-400 font-medium font-sans">
+            <a
+              href="#about"
+              className="px-3.5 py-1.5 rounded-lg hover:bg-slate-800/60 hover:text-white transition-all text-xs"
+            >
               About
             </a>
             <a
               href="#projects"
-              className="hover:text-slate-100 transition-colors"
+              className="px-3.5 py-1.5 rounded-lg hover:bg-slate-800/60 hover:text-white transition-all text-xs"
             >
               Projects
             </a>
             <a
               href="#skills"
-              className="hover:text-slate-100 transition-colors"
+              className="px-3.5 py-1.5 rounded-lg hover:bg-slate-800/60 hover:text-white transition-all text-xs"
             >
               Skills
             </a>
             <a
               href="#contact"
-              className="hover:text-slate-100 transition-colors"
+              className="px-3.5 py-1.5 rounded-lg hover:bg-slate-800/60 hover:text-white transition-all text-xs"
             >
               Contact
             </a>
           </nav>
 
           {/* Quick Actions */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-1 border-r border-slate-800 pr-3">
               <a
                 href={PROFILE.github}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 text-slate-400 hover:text-slate-100 transition-colors"
+                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all"
                 aria-label="GitHub"
               >
                 <Github size={16} />
@@ -445,7 +537,7 @@ export default function Portfolio() {
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 text-slate-400 hover:text-slate-100 transition-colors"
+                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} />
@@ -453,42 +545,59 @@ export default function Portfolio() {
             </div>
 
             <button
+              onClick={copyEmail}
+              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700/60 text-slate-200 font-mono text-[11px] font-medium transition-all"
+            >
+              {copied ? (
+                <>
+                  <Check size={13} className="text-emerald-400" />
+                  <span className="text-emerald-400 font-semibold">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Mail size={13} className="text-slate-400" />
+                  <span>Copy Email</span>
+                </>
+              )}
+            </button>
+
+            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 text-slate-400"
+              className="md:hidden p-2 text-slate-400 hover:text-white rounded-lg bg-slate-800/50 border border-slate-700/50"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Nav */}
+        {/* Mobile Nav Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#090b10] border-b border-slate-800 px-6 py-4 flex flex-col gap-3 text-sm">
+          <div className="md:hidden bg-[#090a0f] border-b border-slate-800 px-6 py-4 flex flex-col gap-3 text-sm font-sans">
             <a
               href="#about"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-400 hover:text-slate-100"
+              className="text-slate-300 hover:text-white py-1"
             >
               About
             </a>
             <a
               href="#projects"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-400 hover:text-slate-100"
+              className="text-slate-300 hover:text-white py-1"
             >
               Projects
             </a>
             <a
               href="#skills"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-400 hover:text-slate-100"
+              className="text-slate-300 hover:text-white py-1"
             >
               Skills
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-400 hover:text-slate-100"
+              className="text-slate-300 hover:text-white py-1"
             >
               Contact
             </a>
@@ -501,104 +610,85 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <section
         id="top"
-        className="max-w-7xl mx-auto px-6 sm:px-10 pt-12 pb-16 lg:pt-20 lg:pb-24"
+        className="relative max-w-7xl mx-auto px-6 sm:px-10 pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden"
       >
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column (6 cols): Developer Profile & Heading */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="flex items-center gap-4">
-              {/* Profile Photo Container */}
-              <div className="relative w-16 h-16 rounded-xl bg-slate-900 border border-slate-700/80 overflow-hidden shadow-lg shrink-0">
-                <img
-                  src={PROFILE.avatar}
-                  alt={PROFILE.name}
-                  className="w-full h-full object-cover"
-                />
+            {/* Profile Avatar & Name Block */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
+              <div className="relative shrink-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-900 border border-slate-700/80 overflow-hidden shadow-md shrink-0">
+                  <img
+                    src={PROFILE.avatar}
+                    alt={PROFILE.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
-              <div>
-                <div className="font-mono text-xs text-sky-400 font-semibold tracking-wide">
-                  // {PROFILE.handle}
-                </div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-slate-100">
+              <div className="space-y-2 min-w-0 max-w-full">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
                   {PROFILE.name}
                 </h1>
-                <p className="text-xs text-slate-400 font-mono mt-0.5">
-                  {PROFILE.role}
-                </p>
+                <div className="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#0e111a] border border-slate-800 font-mono text-[11px] sm:text-xs font-medium text-slate-200 shadow-sm max-w-full overflow-hidden">
+                  <span className="text-emerald-400 font-bold mr-2 shrink-0">//</span>
+                  <TypewriterText
+                    words={[
+                      "AI Backend Engineer & Intelligent Systems Developer",
+                      "Building Production-Ready AI Applications",
+                      "FastAPI & RAG Systems Specialist",
+                    ]}
+                  />
+                </div>
               </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-100 leading-snug">
+            {/* Headline */}
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-100 leading-snug font-display">
               {PROFILE.heading}
             </h2>
 
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            {/* Subheading */}
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl font-sans">
               {PROFILE.bio}
             </p>
 
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            {/* Action CTA Buttons */}
+            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-100 font-medium text-xs font-mono px-4 py-2.5 rounded-lg transition-colors shadow-md"
+                className="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-white text-slate-900 font-semibold text-xs font-mono px-5 py-3 rounded-lg border border-slate-200 transition-colors shadow-sm text-center"
               >
-                <Play size={14} className="text-sky-400" />
-                View Projects
+                <Play size={14} className="fill-slate-900" />
+                Explore My Work
               </a>
 
-              <button
-                onClick={copyEmail}
-                className="inline-flex items-center gap-2 bg-[#090b10] hover:bg-slate-900 border border-slate-800 text-slate-300 font-mono text-xs px-4 py-2.5 rounded-lg transition-colors"
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/70 text-slate-200 font-mono text-xs px-5 py-3 rounded-lg transition-colors text-center"
               >
-                {copied ? (
-                  <>
-                    <Check size={14} className="text-emerald-400" />
-                    <span className="text-emerald-400">
-                      Copied to clipboard!
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={14} className="text-slate-400" />
-                    <span>{PROFILE.email}</span>
-                  </>
-                )}
-              </button>
+                <Mail size={14} className="text-slate-400" />
+                <span>Get in Touch</span>
+              </a>
             </div>
 
-            {/* Focus Strip */}
-            <div className="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 font-mono text-xs">
-              <div className="p-2.5 rounded bg-[#090b10] border border-slate-800/80">
-                <div className="text-slate-500 text-[10px]">
-                  // SPECIALISATION
-                </div>
-                <div className="text-sm font-bold text-slate-100 mt-0.5">
-                  AI Backend
-                </div>
-                <div className="text-[10px] text-slate-400">
-                  APIs & Workflows
-                </div>
+            {/* Trust Signals */}
+            <div className="pt-4 border-t border-slate-800/60 flex flex-wrap items-center gap-6 font-mono text-xs text-slate-400">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>
+                  <strong className="text-slate-200 font-semibold">10+</strong>{" "}
+                  Projects Built
+                </span>
               </div>
-              <div className="p-2.5 rounded bg-[#090b10] border border-slate-800/80">
-                <div className="text-slate-500 text-[10px]">// CORE ENGINE</div>
-                <div className="text-sm font-bold text-slate-100 mt-0.5">
-                  RAG & LLMs
-                </div>
-                <div className="text-[10px] text-slate-400">
-                  Document Search
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>FastAPI &amp; Docker</span>
               </div>
-              <div className="p-2.5 rounded bg-[#090b10] border border-slate-800/80">
-                <div className="text-slate-500 text-[10px]">
-                  // PRIMARY STACK
-                </div>
-                <div className="text-sm font-bold text-slate-100 mt-0.5">
-                  Python
-                </div>
-                <div className="text-[10px] text-slate-400">
-                  FastAPI & Pydantic
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>RAG &amp; LLMs</span>
               </div>
             </div>
           </div>
@@ -608,6 +698,45 @@ export default function Portfolio() {
             <DevTerminal />
           </div>
         </div>
+
+        {/* Feature Cards Grid (What You Build) */}
+        <div className="mt-14 pt-10 border-t border-slate-800/80 grid md:grid-cols-3 gap-6 font-sans">
+          <div className="p-5 rounded-xl bg-[#0c0e15] border border-slate-800 hover:border-slate-700 transition-colors shadow-md group">
+            <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 w-fit text-slate-200 mb-4">
+              <Cpu size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-slate-100 font-display mb-2">
+              AI Backend Systems
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              Scalable APIs with authentication, databases, and production architecture.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-xl bg-[#0c0e15] border border-slate-800 hover:border-slate-700 transition-colors shadow-md group">
+            <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 w-fit text-slate-200 mb-4">
+              <Database size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-slate-100 font-display mb-2">
+              Document Intelligence
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              RAG-powered document search, analysis, and automated workflows.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-xl bg-[#0c0e15] border border-slate-800 hover:border-slate-700 transition-colors shadow-md group">
+            <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 w-fit text-slate-200 mb-4">
+              <Zap size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-slate-100 font-display mb-2">
+              Cloud-Ready APIs
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              FastAPI applications built for containerized deployment and scaling.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ------------------------------------------------------------ */}
@@ -615,19 +744,19 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <section
         id="about"
-        className="border-t border-slate-800/80 py-16 bg-[#08090e]"
+        className="border-t border-slate-800/80 py-16 bg-[#0c0e15]"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="grid lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4 font-mono">
-              <span className="text-xs text-sky-400 tracking-wider">
+              <span className="text-xs font-mono text-slate-400 font-medium tracking-widest uppercase">
                 // ABOUT
               </span>
-              <h2 className="text-2xl font-bold text-slate-100 mt-2 font-sans">
+              <h2 className="text-2xl font-bold text-slate-100 mt-2 font-display">
                 Engineering Philosophy
               </h2>
             </div>
-            <div className="lg:col-span-8 text-slate-400 space-y-4 text-sm leading-relaxed">
+            <div className="lg:col-span-8 text-slate-400 space-y-4 text-sm leading-relaxed font-sans">
               <p>
                 I enjoy solving real business problems with AI instead of
                 building AI for its own sake.
@@ -650,29 +779,28 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4 font-mono">
             <div>
-              <span className="text-xs text-sky-400">// PROJECTS</span>
-              <h2 className="text-3xl font-bold text-slate-100 mt-2 font-sans">
+              <span className="text-xs font-mono text-slate-400 font-medium tracking-widest uppercase">
+                // PROJECTS
+              </span>
+              <h2 className="text-3xl font-bold text-slate-100 mt-2 font-display">
                 Featured Projects
               </h2>
             </div>
-            <p className="text-xs text-slate-500">
-              [ Integrated IDE Inspection ]
-            </p>
           </div>
 
           <div className="space-y-12">
             {PROJECTS.map((project) => (
               <div
                 key={project.id}
-                className="rounded-xl bg-[#08090e] border border-slate-800/80 overflow-hidden shadow-xl grid lg:grid-cols-12 gap-0"
+                className="rounded-xl bg-[#0c0e15] border border-slate-800 overflow-hidden shadow-lg grid lg:grid-cols-12 gap-0"
               >
                 {/* Project Info Panel (7 cols) */}
-                <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-800/80">
+                <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-800">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-sky-500/10 border border-sky-500/20 text-sky-400 font-semibold">
+                    <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/60 text-slate-300 font-medium">
                       {project.category}
                     </span>
-                    <h3 className="text-xl font-bold text-slate-100">
+                    <h3 className="text-xl font-bold text-slate-100 font-display">
                       {project.name}
                     </h3>
                   </div>
@@ -680,7 +808,7 @@ export default function Portfolio() {
                   <p className="text-xs font-mono text-slate-400">
                     {project.tagline}
                   </p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-400 text-sm leading-relaxed font-sans">
                     {project.description}
                   </p>
 
@@ -688,11 +816,11 @@ export default function Portfolio() {
                     {project.highlights.map((h, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-xs text-slate-400"
+                        className="flex items-start gap-2 text-xs text-slate-400 font-sans"
                       >
-                        <Zap
+                        <Check
                           size={13}
-                          className="text-sky-400 shrink-0 mt-0.5"
+                          className="text-slate-400 shrink-0 mt-0.5"
                         />
                         <span>{h}</span>
                       </li>
@@ -703,7 +831,7 @@ export default function Portfolio() {
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-[#0c0e15] border border-slate-800 text-slate-300"
+                        className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-[#06070a] border border-slate-800 text-slate-300"
                       >
                         {tech}
                       </span>
@@ -715,35 +843,27 @@ export default function Portfolio() {
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-slate-300 hover:text-sky-400 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-slate-400 hover:text-slate-100 transition-colors"
                     >
-                      <Github size={14} /> Repository
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-slate-300 hover:text-sky-400 transition-colors"
-                    >
-                      <ExternalLink size={14} /> Live Demo
+                      <Github size={14} /> Repository <ArrowUpRight size={12} />
                     </a>
                   </div>
                 </div>
 
                 {/* IDE Code Viewer (5 cols) */}
-                <div className="lg:col-span-5 bg-[#050609] p-5 font-mono text-xs text-slate-300 flex flex-col justify-between">
+                <div className="lg:col-span-5 bg-[#06070a] p-5 font-mono text-xs text-slate-300 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-3 text-slate-500 text-[11px]">
                       <div className="flex items-center gap-1.5">
-                        <FileCode2 size={13} className="text-sky-400" />
+                        <FileCode2 size={13} className="text-slate-400" />
                         <span>{project.filename}</span>
                       </div>
                       <span>{project.language}</span>
                     </div>
 
-                    <pre className="overflow-x-auto text-[11px] leading-relaxed text-slate-300">
-                      <code>{project.codeSnippet}</code>
-                    </pre>
+                    <div className="overflow-x-auto p-1">
+                      <SyntaxHighlightedCode code={project.codeSnippet} />
+                    </div>
                   </div>
 
                   <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 font-mono">
@@ -762,12 +882,14 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <section
         id="skills"
-        className="border-t border-slate-800/80 py-20 bg-[#08090e]"
+        className="border-t border-slate-800/80 py-20 bg-[#0c0e15]"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="mb-10 font-mono">
-            <span className="text-xs text-sky-400">// SKILLS</span>
-            <h2 className="text-3xl font-bold text-slate-100 mt-2 font-sans">
+            <span className="text-xs font-mono text-slate-400 font-medium tracking-widest uppercase">
+              // SKILLS
+            </span>
+            <h2 className="text-3xl font-bold text-slate-100 mt-2 font-display">
               Skills &amp; Architecture
             </h2>
           </div>
@@ -778,9 +900,9 @@ export default function Portfolio() {
               return (
                 <div
                   key={group.category}
-                  className="p-5 rounded-xl bg-[#090b10] border border-slate-800/80 hover:border-slate-700/80 transition-colors"
+                  className="p-5 rounded-xl bg-[#090a0f] border border-slate-800 hover:border-slate-700 transition-colors"
                 >
-                  <div className="flex items-center gap-2.5 mb-4 text-sky-400 font-mono text-xs font-semibold">
+                  <div className="flex items-center gap-2.5 mb-4 text-slate-300 font-mono text-xs font-semibold">
                     <IconComp size={16} />
                     <span>{group.category}</span>
                   </div>
@@ -789,7 +911,7 @@ export default function Portfolio() {
                     {group.items.map((skill, i) => (
                       <span
                         key={`${skill}-${i}`}
-                        className="font-mono text-xs px-2.5 py-1 rounded bg-[#06080c] border border-slate-800 text-slate-300"
+                        className="font-mono text-xs px-2.5 py-1 rounded bg-[#06070a] border border-slate-800 text-slate-300"
                       >
                         {skill}
                       </span>
@@ -808,11 +930,13 @@ export default function Portfolio() {
       <section id="contact" className="border-t border-slate-800/80 py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="max-w-3xl mx-auto text-center space-y-4">
-            <span className="font-mono text-xs text-sky-400">// CONTACT</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-100">
+            <span className="text-xs font-mono text-slate-400 font-medium tracking-widest uppercase">
+              // CONTACT
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 font-display">
               Let's Build Something Intelligent
             </h2>
-            <p className="text-slate-400 text-sm max-w-xl mx-auto leading-relaxed pt-1">
+            <p className="text-slate-400 text-sm max-w-xl mx-auto leading-relaxed pt-1 font-sans">
               Whether you're building an AI product, need backend expertise, or
               want to automate business workflows, I'd love to hear about your
               project.
@@ -822,91 +946,106 @@ export default function Portfolio() {
               <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">
                 Available for:
               </p>
-              <ul className="text-left max-w-md mx-auto space-y-2.5 text-xs sm:text-sm text-slate-300">
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#08090e] border border-slate-800/80">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
+              <ul className="text-left max-w-md mx-auto space-y-2.5 text-xs sm:text-sm text-slate-300 font-sans">
+                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#0c0e15] border border-slate-800">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
                   <span>AI Backend Engineering</span>
                 </li>
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#08090e] border border-slate-800/80">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
-                  <span>AI Automation &amp; LLM Solutions</span>
+                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#0c0e15] border border-slate-800">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                  <span>RAG &amp; LLM Systems</span>
                 </li>
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#08090e] border border-slate-800/80">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
-                  <span>Freelance Projects</span>
-                </li>
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#08090e] border border-slate-800/80">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
-                  <span>Technical Collaborations</span>
+                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#0c0e15] border border-slate-800">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                  <span>API Design &amp; Integration</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-6 font-mono">
-              <div className="p-4 rounded-xl bg-[#08090e] border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-                <div className="flex items-center gap-2 text-slate-300">
-                  <span className="text-sky-400 font-bold">$</span>
-                  <span className="text-slate-500">mail --to</span>
-                  <span className="text-slate-100 font-semibold">
-                    {PROFILE.email}
-                  </span>
+            {/* Terminal Contact Box */}
+            <div className="pt-6 max-w-xl mx-auto">
+              <div className="rounded-xl bg-[#0b0d14] border border-slate-800 p-4 sm:p-5 font-mono text-xs shadow-xl text-left space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 text-[11px] text-slate-500">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                    <span className="ml-2 text-slate-400 font-medium">contact.sh</span>
+                  </div>
+                  <span className="text-emerald-400 font-semibold">[READY]</span>
                 </div>
 
-                <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-                  <button
-                    onClick={copyEmail}
-                    className="px-4 py-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors flex items-center gap-1.5"
-                  >
-                    {copied ? (
-                      <Check size={14} className="text-emerald-400" />
-                    ) : (
-                      <Copy size={14} />
-                    )}
-                    {copied ? "Copied" : "Copy Email"}
-                  </button>
-                  <a
-                    href={`mailto:${PROFILE.email}`}
-                    className="px-4 py-2 rounded bg-sky-600 hover:bg-sky-500 text-white font-semibold transition-colors flex items-center gap-1.5"
-                  >
-                    <Mail size={14} /> Get in Touch
-                  </a>
+                <div className="space-y-2 text-slate-300">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-emerald-400 font-bold">$</span>
+                    <span className="text-slate-400">mail --to</span>
+                    <span className="text-white font-semibold underline decoration-slate-700 underline-offset-4">
+                      {PROFILE.email}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-500 italic pl-3 border-l border-slate-800">
+                    // Direct email response within 24 hours. Open to remote &amp; contract projects.
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-slate-800/80">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={copyEmail}
+                      className="px-4 py-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors flex items-center gap-2 text-xs font-mono"
+                    >
+                      {copied ? (
+                        <>
+                          <Check size={14} className="text-emerald-400" />
+                          <span className="text-emerald-400 font-semibold">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={14} className="text-slate-400" />
+                          <span>Copy Email</span>
+                        </>
+                      )}
+                    </button>
+
+                    <a
+                      href={`mailto:${PROFILE.email}`}
+                      className="px-4 py-2 rounded bg-slate-100 hover:bg-white text-slate-950 font-semibold transition-colors flex items-center gap-2 text-xs font-mono"
+                    >
+                      <Mail size={14} /> Send Email
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-4 text-slate-400 text-xs font-mono pt-1 sm:pt-0">
+                    <a
+                      href={PROFILE.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1"
+                    >
+                      <Github size={14} /> GitHub
+                    </a>
+                    <a
+                      href={PROFILE.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-white transition-colors flex items-center gap-1"
+                    >
+                      <Linkedin size={14} /> LinkedIn
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="pt-6 flex items-center justify-center gap-8 font-mono text-xs text-slate-400">
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
-              >
-                <Mail size={16} /> Email
-              </a>
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
-              >
-                <Github size={16} /> GitHub
-              </a>
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
-              >
-                <Linkedin size={16} /> LinkedIn
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-600">
+      {/* ------------------------------------------------------------ */}
+      {/* FOOTER                                                       */}
+      {/* ------------------------------------------------------------ */}
+      <footer className="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-500 bg-[#06070a]">
         <p>
-          © {new Date().getFullYear()} {PROFILE.name}. All rights reserved. Built with React, Vite
-          &amp; Tailwind CSS.
+          &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved. Built with React, Vite &amp; Tailwind CSS.
         </p>
       </footer>
     </div>
