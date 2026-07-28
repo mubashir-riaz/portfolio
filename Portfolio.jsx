@@ -905,7 +905,7 @@ export default function Portfolio() {
       {/* FOOTER */}
       <footer className="border-t border-slate-800/80 py-8 text-center font-mono text-xs text-slate-600">
         <p>
-          © {new Date().getFullYear()} {PROFILE.name}. Built with React, Vite
+          © {new Date().getFullYear()} {PROFILE.name}. All rights reserved. Built with React, Vite
           &amp; Tailwind CSS.
         </p>
       </footer>
