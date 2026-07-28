@@ -175,10 +175,13 @@ function DevTerminal() {
     },
   ]);
 
-  const terminalEndRef = useRef(null);
+  const terminalContainerRef = useRef(null);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (terminalContainerRef.current) {
+      terminalContainerRef.current.scrollTop =
+        terminalContainerRef.current.scrollHeight;
+    }
   }, [history]);
 
   const handleCommand = (cmdText) => {
@@ -275,7 +278,10 @@ function DevTerminal() {
 
       {/* Terminal Content Body */}
       {activeTab === "terminal" ? (
-        <div className="p-4 h-72 overflow-y-auto space-y-3 bg-[#07090e]">
+        <div
+          ref={terminalContainerRef}
+          className="p-4 h-72 overflow-y-auto space-y-3 bg-[#07090e]"
+        >
           {history.map((item, idx) => (
             <div key={idx} className="leading-relaxed">
               {item.type === "sys" && (
@@ -296,7 +302,6 @@ function DevTerminal() {
               )}
             </div>
           ))}
-          <div ref={terminalEndRef} />
 
           {/* Interactive Command Prompt Line */}
           <form
