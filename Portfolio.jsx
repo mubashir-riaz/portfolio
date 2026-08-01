@@ -16,6 +16,8 @@ import {
   Code2,
   FileCode2,
   Play,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -334,23 +336,23 @@ function DevTerminal() {
   return (
     <div className="rounded-xl bg-[#111111] border border-[#262626] shadow-2xl overflow-hidden font-mono text-xs text-[#A3A3A3]">
       {/* Terminal Title Bar */}
-      <div className="bg-[#0A0A0A] px-4 py-2.5 border-b border-[#262626] flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
+      <div className="bg-[#0A0A0A] px-3 sm:px-4 py-2.5 border-b border-[#262626] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-3 h-3 rounded-full bg-rose-500/90 inline-block" />
             <span className="w-3 h-3 rounded-full bg-amber-500/90 inline-block" />
             <span className="w-3 h-3 rounded-full bg-emerald-500/90 inline-block" />
           </div>
-          <span className="text-[#A3A3A3] text-[11px] ml-2 font-medium">
+          <span className="text-[#A3A3A3] text-[11px] sm:text-xs ml-1 sm:ml-2 font-medium truncate">
             bash - mubashir@backend-node
           </span>
         </div>
 
         {/* Terminal Tabs */}
-        <div className="flex items-center gap-1 bg-[#111111] p-1 rounded-md border border-[#262626]">
+        <div className="flex items-center gap-1 bg-[#111111] p-1 rounded-md border border-[#262626] shrink-0 w-full sm:w-auto">
           <button
             onClick={() => setActiveTab("terminal")}
-            className={`px-2.5 py-0.5 rounded text-[11px] transition-colors ${
+            className={`flex-1 sm:flex-none text-center px-2.5 py-1 sm:py-0.5 rounded text-[11px] transition-colors whitespace-nowrap ${
               activeTab === "terminal"
                 ? "bg-[#1A1A1A] text-emerald-400 font-semibold"
                 : "text-[#737373] hover:text-[#F5F5F5]"
@@ -360,7 +362,7 @@ function DevTerminal() {
           </button>
           <button
             onClick={() => setActiveTab("activity")}
-            className={`px-2.5 py-0.5 rounded text-[11px] transition-colors ${
+            className={`flex-1 sm:flex-none text-center px-2.5 py-1 sm:py-0.5 rounded text-[11px] transition-colors whitespace-nowrap ${
               activeTab === "activity"
                 ? "bg-[#1A1A1A] text-sky-400 font-semibold"
                 : "text-[#737373] hover:text-[#F5F5F5]"
@@ -375,7 +377,7 @@ function DevTerminal() {
       {activeTab === "terminal" ? (
         <div
           ref={terminalContainerRef}
-          className="p-4 h-72 overflow-y-auto space-y-3 bg-[#0A0A0A]"
+          className="p-3 sm:p-4 h-72 overflow-y-auto space-y-3 bg-[#0A0A0A]"
         >
           {history.map((item, idx) => (
             <div key={idx} className="leading-relaxed">
@@ -383,15 +385,15 @@ function DevTerminal() {
                 <div className="text-[#737373] italic">// {item.text}</div>
               )}
               {item.type === "cmd" && (
-                <div className="flex items-center gap-2 text-[#F5F5F5]">
-                  <span className="text-emerald-400 font-bold">
+                <div className="flex items-center gap-2 text-[#F5F5F5] flex-wrap">
+                  <span className="text-emerald-400 font-bold shrink-0">
                     mubashir@backend:~$
                   </span>
-                  <span className="text-sky-300 font-medium">{item.text}</span>
+                  <span className="text-sky-300 font-medium break-all">{item.text}</span>
                 </div>
               )}
               {item.type === "out" && (
-                <div className="text-[#A3A3A3] whitespace-pre-wrap pl-3 border-l-2 border-[#262626] mt-1 font-mono text-[11px]">
+                <div className="text-[#A3A3A3] whitespace-pre-wrap break-words pl-3 border-l-2 border-[#262626] mt-1 font-mono text-[11px]">
                   {renderColoredOutput(item.text)}
                 </div>
               )}
@@ -401,21 +403,21 @@ function DevTerminal() {
           {/* Interactive Command Prompt Line */}
           <form
             onSubmit={handleFormSubmit}
-            className="flex items-center gap-2 pt-2 text-[#F5F5F5]"
+            className="flex items-center gap-2 pt-2 text-[#F5F5F5] flex-wrap sm:flex-nowrap"
           >
-            <span className="text-emerald-400 font-bold">mubashir@backend:~$</span>
+            <span className="text-emerald-400 font-bold shrink-0">mubashir@backend:~$</span>
             <input
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               placeholder="type 'help', 'skills', or 'projects'..."
-              className="bg-transparent border-none outline-none flex-1 text-[#F5F5F5] font-mono text-xs placeholder:text-[#737373]"
+              className="bg-transparent border-none outline-none flex-1 min-w-0 text-[#F5F5F5] font-mono text-xs placeholder:text-[#737373]"
             />
           </form>
         </div>
       ) : (
         /* Activity Log View */
-        <div className="p-4 h-72 overflow-y-auto space-y-2 bg-[#0A0A0A] text-[11px] font-mono text-[#A3A3A3]">
+        <div className="p-3 sm:p-4 h-72 overflow-y-auto space-y-2 bg-[#0A0A0A] text-[11px] font-mono text-[#A3A3A3]">
           <div><span className="text-emerald-400 font-semibold">[INFO]</span> FastAPI server listening on 0.0.0.0:8000</div>
           <div><span className="text-sky-400 font-semibold">[LOG]</span> ChromaDB vector store initialized</div>
           <div><span className="text-purple-400 font-semibold">[AUDIT]</span> Vision LLM document parser active</div>
@@ -425,9 +427,9 @@ function DevTerminal() {
       )}
 
       {/* Quick Interactive Command Buttons Footer */}
-      <div className="bg-[#0A0A0A] px-4 py-2 border-t border-[#262626] flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-[11px] text-[#A3A3A3]">
-          <span className="text-[#737373]">Quick Run:</span>
+      <div className="bg-[#0A0A0A] px-3 sm:px-4 py-2 border-t border-[#262626] flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] text-[#A3A3A3]">
+          <span className="text-[#737373] shrink-0">Quick Run:</span>
           <button
             onClick={() => handleCommand("help")}
             className="px-2 py-0.5 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-sky-300 transition-colors"
@@ -454,7 +456,7 @@ function DevTerminal() {
           </button>
         </div>
 
-        <span className="text-[10px] text-[#737373] font-mono">
+        <span className="text-[10px] text-[#737373] font-mono shrink-0">
           UTF-8 | Python 3.12
         </span>
       </div>
@@ -468,6 +470,14 @@ function DevTerminal() {
 export default function Portfolio() {
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedProjects, setExpandedProjects] = useState({});
+
+  const toggleProject = (id) => {
+    setExpandedProjects((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   const copyEmail = () => {
     navigator.clipboard.writeText(PROFILE.email);
@@ -743,7 +753,7 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <section
         id="about"
-        className="border-t border-[#262626] py-16 bg-[#0A0A0A]"
+        className="scroll-mt-20 border-t border-[#262626] py-16 bg-[#0A0A0A]"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="grid lg:grid-cols-12 gap-8 items-start">
@@ -774,104 +784,134 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       {/* FEATURED PROJECTS                                            */}
       {/* ------------------------------------------------------------ */}
-      <section id="projects" className="border-t border-[#262626] py-20 bg-[#0A0A0A]">
+      <section id="projects" className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4 font-mono">
-            <div>
-              <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
-                // PROJECTS
-              </span>
-              <h2 className="text-3xl font-bold text-[#F5F5F5] mt-2 font-display">
-                Featured Projects
-              </h2>
-            </div>
+          <div className="mb-10 font-mono">
+            <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
+              // PROJECTS
+            </span>
+            <h2 className="text-3xl font-bold text-[#F5F5F5] mt-2 font-display">
+              Featured Projects
+            </h2>
           </div>
 
-          <div className="space-y-12">
-            {PROJECTS.map((project) => (
-              <div
-                key={project.id}
-                className="rounded-xl bg-[#111111] border border-[#262626] overflow-hidden shadow-lg grid lg:grid-cols-12 gap-0"
-              >
-                {/* Project Info Panel (7 cols) */}
-                <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 border-b lg:border-b-0 lg:border-r border-[#262626]">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-[#1A1A1A] border border-[#262626] text-emerald-400 font-medium">
-                      {project.category}
-                    </span>
-                    <h3 className="text-xl font-bold text-[#F5F5F5] font-display">
-                      {project.name}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs font-mono text-[#A3A3A3]">
-                    {project.tagline}
-                  </p>
-                  <p className="text-[#A3A3A3] text-sm leading-relaxed font-sans">
-                    {project.description}
-                  </p>
-
-                  <ul className="space-y-2 pt-2">
-                    {project.highlights.map((h, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-xs text-[#A3A3A3] font-sans"
-                      >
-                        <Check
-                          size={13}
-                          className="text-emerald-400 shrink-0 mt-0.5"
-                        />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-wrap gap-2 pt-3">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-[#0A0A0A] border border-[#262626] text-[#E5E5E5]"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="pt-4 flex items-center gap-4 font-mono text-xs">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[#A3A3A3] hover:text-[#FFFFFF] transition-colors"
-                    >
-                      <Github size={14} /> Repository <ArrowUpRight size={12} />
-                    </a>
-                  </div>
-                </div>
-
-                {/* IDE Code Viewer (5 cols) */}
-                <div className="lg:col-span-5 bg-[#0A0A0A] p-5 font-mono text-xs text-[#A3A3A3] flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between border-b border-[#262626] pb-2 mb-3 text-[#737373] text-[11px]">
-                      <div className="flex items-center gap-1.5">
-                        <FileCode2 size={13} className="text-emerald-400" />
-                        <span>{project.filename}</span>
+          <div className="space-y-4">
+            {PROJECTS.map((project) => {
+              const isExpanded = !!expandedProjects[project.id];
+              return (
+                <div
+                  key={project.id}
+                  className="rounded-xl bg-[#111111] border border-[#262626] overflow-hidden shadow-lg transition-all duration-200 hover:border-[#333333]"
+                >
+                  {/* Collapsed Header Bar */}
+                  <div
+                    className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#111111] hover:bg-[#161616] transition-colors cursor-pointer"
+                    onClick={() => toggleProject(project.id)}
+                  >
+                    <div className="space-y-1.5 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        <h3 className="text-xl font-bold text-[#F5F5F5] font-display">
+                          {project.name}
+                        </h3>
+                        <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-[#1A1A1A] border border-[#262626] text-emerald-400 font-medium tracking-wider uppercase">
+                          {project.category}
+                        </span>
                       </div>
-                      <span className="text-sky-400">{project.language}</span>
+                      <p className="text-xs sm:text-sm font-mono text-[#A3A3A3]">
+                        {project.tagline}
+                      </p>
                     </div>
 
-                    <div className="overflow-x-auto p-1">
-                      <SyntaxHighlightedCode code={project.codeSnippet} />
-                    </div>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleProject(project.id);
+                      }}
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-xs font-mono text-[#F5F5F5] transition-all shrink-0 self-start sm:self-center group"
+                    >
+                      <span>{isExpanded ? "Hide Details" : "View Project"}</span>
+                      {isExpanded ? (
+                        <ChevronUp size={15} className="text-emerald-400 group-hover:-translate-y-0.5 transition-transform" />
+                      ) : (
+                        <ChevronDown size={15} className="text-emerald-400 group-hover:translate-y-0.5 transition-transform" />
+                      )}
+                    </button>
                   </div>
 
-                  <div className="pt-4 border-t border-[#262626] flex items-center justify-between text-[10px] text-[#737373] font-mono">
-                    <span>UTF-8 | Python 3.12</span>
-                    <span className="text-emerald-400 font-medium">✓ Main Branch</span>
-                  </div>
+                  {/* Expanded Content Panel */}
+                  {isExpanded && (
+                    <div className="border-t border-[#262626] grid lg:grid-cols-12 gap-0">
+                      {/* Project Info Panel (7 cols) */}
+                      <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 border-b lg:border-b-0 lg:border-r border-[#262626] bg-[#111111]">
+                        <p className="text-[#A3A3A3] text-sm leading-relaxed font-sans">
+                          {project.description}
+                        </p>
+
+                        <ul className="space-y-2 pt-2">
+                          {project.highlights.map((h, i) => (
+                            <li
+                              key={i}
+                              className="flex items-start gap-2 text-xs text-[#A3A3A3] font-sans"
+                            >
+                              <Check
+                                size={13}
+                                className="text-emerald-400 shrink-0 mt-0.5"
+                              />
+                              <span>{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <div className="flex flex-wrap gap-2 pt-3">
+                          {project.stack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-[#0A0A0A] border border-[#262626] text-[#E5E5E5]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="pt-4 flex items-center gap-4 font-mono text-xs">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[#A3A3A3] hover:text-[#FFFFFF] transition-colors"
+                          >
+                            <Github size={14} /> Repository <ArrowUpRight size={12} />
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* IDE Code Viewer (5 cols) */}
+                      <div className="lg:col-span-5 bg-[#0A0A0A] p-5 font-mono text-xs text-[#A3A3A3] flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between border-b border-[#262626] pb-2 mb-3 text-[#737373] text-[11px]">
+                            <div className="flex items-center gap-1.5">
+                              <FileCode2 size={13} className="text-emerald-400" />
+                              <span>{project.filename}</span>
+                            </div>
+                            <span className="text-sky-400">{project.language}</span>
+                          </div>
+
+                          <div className="overflow-x-auto p-1">
+                            <SyntaxHighlightedCode code={project.codeSnippet} />
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-[#262626] flex items-center justify-between text-[10px] text-[#737373] font-mono">
+                          <span>UTF-8 | Python 3.12</span>
+                          <span className="text-emerald-400 font-medium">✓ Main Branch</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -881,7 +921,7 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <section
         id="skills"
-        className="border-t border-[#262626] py-20 bg-[#0A0A0A]"
+        className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="mb-10 font-mono">
@@ -926,7 +966,7 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       {/* CONTACT SECTION                                              */}
       {/* ------------------------------------------------------------ */}
-      <section id="contact" className="border-t border-[#262626] py-20 bg-[#0A0A0A]">
+      <section id="contact" className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
@@ -987,52 +1027,51 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-[#262626]">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={copyEmail}
-                      className="px-4 py-2 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-[#F5F5F5] transition-colors flex items-center gap-2 text-xs font-mono"
-                    >
-                      {copied ? (
-                        <>
-                          <Check size={14} className="text-emerald-400" />
-                          <span className="text-emerald-400 font-semibold">Copied</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy size={14} className="text-[#A3A3A3]" />
-                          <span>Copy Email</span>
-                        </>
-                      )}
-                    </button>
+                <div className="pt-2 flex items-center gap-2 border-t border-[#262626]">
+                  <button
+                    onClick={copyEmail}
+                    className="px-4 py-2 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-[#F5F5F5] transition-colors flex items-center gap-2 text-xs font-mono"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={14} className="text-emerald-400" />
+                        <span className="text-emerald-400 font-semibold">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} className="text-[#A3A3A3]" />
+                        <span>Copy Email</span>
+                      </>
+                    )}
+                  </button>
 
-                    <a
-                      href={`mailto:${PROFILE.email}`}
-                      className="px-4 py-2 rounded bg-[#FFFFFF] hover:bg-[#E5E5E5] text-[#0A0A0A] font-semibold transition-colors flex items-center gap-2 text-xs font-mono"
-                    >
-                      <Mail size={14} /> Send Email
-                    </a>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-[#A3A3A3] text-xs font-mono pt-1 sm:pt-0">
-                    <a
-                      href={PROFILE.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hover:text-white transition-colors flex items-center gap-1"
-                    >
-                      <Github size={14} /> GitHub
-                    </a>
-                    <a
-                      href={PROFILE.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hover:text-white transition-colors flex items-center gap-1"
-                    >
-                      <Linkedin size={14} /> LinkedIn
-                    </a>
-                  </div>
+                  <a
+                    href={`mailto:${PROFILE.email}`}
+                    className="px-4 py-2 rounded bg-[#FFFFFF] hover:bg-[#E5E5E5] text-[#0A0A0A] font-semibold transition-colors flex items-center gap-2 text-xs font-mono"
+                  >
+                    <Mail size={14} /> Send Email
+                  </a>
                 </div>
+              </div>
+
+              {/* Social Links Below contact.sh Container */}
+              <div className="pt-4 flex flex-wrap items-center justify-center gap-3 text-[#A3A3A3] text-xs font-mono">
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] hover:border-[#404040] text-[#F5F5F5] transition-all flex items-center gap-2"
+                >
+                  <Github size={15} /> GitHub <ArrowUpRight size={13} className="text-[#737373]" />
+                </a>
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] hover:border-[#404040] text-[#F5F5F5] transition-all flex items-center gap-2"
+                >
+                  <Linkedin size={15} /> LinkedIn <ArrowUpRight size={13} className="text-[#737373]" />
+                </a>
               </div>
             </div>
           </div>
@@ -1044,7 +1083,7 @@ export default function Portfolio() {
       {/* ------------------------------------------------------------ */}
       <footer className="border-t border-[#262626] py-8 text-center font-mono text-xs text-[#737373] bg-[#0A0A0A]">
         <p>
-          &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved. Built with React, Vite &amp; Tailwind CSS.
+          &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
         </p>
       </footer>
     </div>

@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color-scheme: dark;
