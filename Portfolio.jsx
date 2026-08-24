@@ -762,19 +762,21 @@ export default function Portfolio() {
                 // ABOUT
               </span>
               <h2 className="text-2xl font-bold text-[#F5F5F5] mt-2 font-display">
-                Engineering Philosophy
+                About Me
               </h2>
             </div>
             <div className="lg:col-span-8 text-[#A3A3A3] space-y-4 text-sm leading-relaxed font-sans">
               <p>
-                I enjoy solving real business problems with AI instead of
-                building AI for its own sake.
+                I’m an AI Backend Engineer focused on building intelligent backend systems and practical AI applications.
               </p>
               <p>
-                My focus is designing reliable backend systems that automate
-                document-heavy workflows, integrate Large Language Models into
-                production APIs, and provide accurate, explainable results
-                through Retrieval-Augmented Generation.
+                I enjoy turning complex problems into reliable and well-structured solutions. I learn by building real projects, experimenting with new ideas, and solving practical problems.
+              </p>
+              <p>
+                I’m currently looking for opportunities to work on meaningful products, collaborate with strong teams, and continue growing as an AI Backend Engineer.
+              </p>
+              <p>
+                I’m always open to interesting projects, ideas, and opportunities to build something useful.
               </p>
             </div>
           </div>
