@@ -499,8 +499,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className={`px-4 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between h-[59px] sm:h-[72px]`}
-          style={{ borderBottomWidth: '1px' }}
+          className="px-4 sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
           {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
           <button
@@ -580,6 +579,16 @@ export default function Portfolio() {
             )}
           </button>
         </header>
+
+        {/* ---------------------------------------------------------- */}
+        {/* NAVBAR ORANGE HORIZONTAL DIVIDER                           */}
+        {/* ---------------------------------------------------------- */}
+        <div className="px-4 sm:px-6">
+          <div
+            className={`border-t ${themeClasses.border}`}
+            style={{ borderTopWidth: '1px' }}
+          />
+        </div>
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
