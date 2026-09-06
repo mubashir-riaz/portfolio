@@ -671,22 +671,22 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
+        {/* PROFILE SECTION: LEFT ALIGNED WITH THE ORANGE LINE         */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] px-4 sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
-          {/* 160px Centered Circular Avatar */}
-          <div className="shrink-0 mb-[25px] sm:mb-0">
+        <section className="pt-[24px] pb-[23px] px-4 sm:px-6 flex flex-col items-start text-left sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          {/* Circular Avatar */}
+          <div className="shrink-0 mb-[20px] sm:mb-0 self-start">
             <img
               src={PROFILE.avatar}
               alt={PROFILE.name}
-              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
+              className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
             />
           </div>
 
           {/* Intro Information */}
-          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="flex-1 min-w-0 flex flex-col items-start text-left">
             {/* Headline with RSS badge */}
-            <div className="flex items-center justify-center sm:justify-start gap-2">
+            <div className="flex items-center justify-start gap-2">
               <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm {PROFILE.handle}.
               </h1>
@@ -707,7 +707,7 @@ export default function Portfolio() {
             </div>
 
             {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
@@ -760,10 +760,12 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D86B18, 1PX)            */}
         {/* ---------------------------------------------------------- */}
-        <div
-          className={`border-t ${themeClasses.border}`}
-          style={{ borderTopWidth: '1px' }}
-        />
+        <div className="px-4 sm:px-6">
+          <div
+            className={`border-t ${themeClasses.border}`}
+            style={{ borderTopWidth: '1px' }}
+          />
+        </div>
 
         {/* ---------------------------------------------------------- */}
         {/* DYNAMIC CONTENT ROUTER: 'posts' | 'reader' | 'about'       */}
