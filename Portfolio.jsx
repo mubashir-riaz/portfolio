@@ -607,7 +607,7 @@ export default function Portfolio() {
           </div>
 
           {/* Intro Information */}
-          <div className="flex-1 min-w-0 space-y-1">
+          <div className="flex-1 min-w-0">
             {/* Headline */}
             <div>
               <h1 className={`text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
@@ -616,14 +616,14 @@ export default function Portfolio() {
             </div>
 
             {/* Description lines */}
-            <div className="space-y-1.5 pt-0.5 text-[16px] text-[#EAEDF3] leading-[1.6] font-mono">
+            <div className="mt-3 space-y-0 text-[16px] text-[#EAEDF3] leading-snug font-mono">
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
             {/* Monochrome Outline Social Icons */}
-            <div className="pt-2 flex items-center gap-4 text-[#d6d6d6]">
+            <div className="pt-4 flex items-center gap-4 text-[#d6d6d6]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
