@@ -9,6 +9,8 @@ import {
   ArrowUpRight,
   X,
   Mail,
+  Menu,
+  Rss,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
@@ -386,6 +388,9 @@ export default function Portfolio() {
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputRef = useRef(null);
 
+  // Mobile Navigation Menu State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Theme Mode: 'navy' (#202838), 'oled' (#0b0f17), 'paper' (#f4f1ea)
   const [theme, setTheme] = useState('navy');
 
@@ -494,30 +499,31 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className={`py-3 sm:py-5 px-3.5 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between min-h-[58px] sm:min-h-[80px] gap-2.5 sm:gap-8`}
+          className={`px-4 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between h-[59px] sm:h-[72px]`}
           style={{ borderBottomWidth: '1px' }}
         >
-          {/* Brand / Logo (System Monospace) */}
+          {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
           <button
             onClick={() => {
               setCurrentView('posts');
               setSelectedPostId(null);
+              setMobileMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             style={{ fontFamily: 'var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)' }}
-            className={`text-[19px] xs:text-[23px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
+            className={`text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
           >
             {PROFILE.name}
           </button>
 
-          {/* Navigation Items + Icons */}
-          <nav className="flex items-center gap-2.5 xs:gap-4 sm:gap-6 md:gap-7 text-[13.5px] xs:text-[15px] sm:text-[16px] shrink-0">
+          {/* Desktop Navigation Items + Icons (Hidden on Mobile) */}
+          <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[16px] shrink-0">
             <button
               onClick={() => {
                 setCurrentView('posts');
                 setSelectedPostId(null);
               }}
-              className={`py-1 px-1 sm:px-1.5 transition-colors ${
+              className={`py-1 px-1.5 transition-colors ${
                 currentView === 'posts' || currentView === 'reader'
                   ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
@@ -531,7 +537,7 @@ export default function Portfolio() {
                 setCurrentView('about');
                 setSelectedPostId(null);
               }}
-              className={`py-1 px-1 sm:px-1.5 transition-colors ${
+              className={`py-1 px-1.5 transition-colors ${
                 currentView === 'about'
                   ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
@@ -544,7 +550,7 @@ export default function Portfolio() {
             <button
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-label="Search Posts"
-              className="text-white hover:text-[#ff7300] transition-colors p-1 sm:p-1.5"
+              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
               title="Search (Cmd+K)"
             >
               <Search size={16} />
@@ -554,13 +560,84 @@ export default function Portfolio() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="text-white hover:text-[#ff7300] transition-colors p-1 sm:p-1.5"
+              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
               title={`Theme: ${theme} (Click to switch)`}
             >
               {theme === 'paper' ? <Sun size={16} className="text-[#d86b18]" /> : <Moon size={16} />}
             </button>
           </nav>
+
+          {/* Mobile Menu Hamburger Button (Only on Mobile, 19px, #e5e7eb) */}
+          <button
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label="Toggle mobile menu"
+            className="sm:hidden text-[#e5e7eb] hover:text-[#ff7300] p-1.5 transition-colors flex items-center justify-center focus:outline-none"
+          >
+            {mobileMenuOpen ? (
+              <X size={19} strokeWidth={2} />
+            ) : (
+              <Menu size={19} strokeWidth={2} />
+            )}
+          </button>
         </header>
+
+        {/* Mobile Dropdown Menu Drawer */}
+        {mobileMenuOpen && (
+          <div className="sm:hidden border-b border-[#d86b18]/40 bg-[#161c28] px-4 py-3.5 space-y-3 font-mono text-[15px]">
+            <div className="flex flex-col space-y-2">
+              <button
+                onClick={() => {
+                  setCurrentView('posts');
+                  setSelectedPostId(null);
+                  setMobileMenuOpen(false);
+                }}
+                className={`text-left py-1.5 px-2 rounded transition-colors ${
+                  currentView === 'posts' || currentView === 'reader'
+                    ? 'text-[#ff7300] font-semibold bg-[#202838]'
+                    : 'text-[#f2f2f2] hover:text-[#ff7300]'
+                }`}
+              >
+                // Posts
+              </button>
+
+              <button
+                onClick={() => {
+                  setCurrentView('about');
+                  setSelectedPostId(null);
+                  setMobileMenuOpen(false);
+                }}
+                className={`text-left py-1.5 px-2 rounded transition-colors ${
+                  currentView === 'about'
+                    ? 'text-[#ff7300] font-semibold bg-[#202838]'
+                    : 'text-[#f2f2f2] hover:text-[#ff7300]'
+                }`}
+              >
+                // About
+              </button>
+            </div>
+
+            <div className="pt-2 border-t border-[#2d374d] flex items-center justify-between px-2 text-[14px]">
+              <button
+                onClick={() => {
+                  setSearchOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 text-[#cbd5e1] hover:text-[#ff7300] py-1"
+              >
+                <Search size={15} />
+                <span>Search (Cmd+K)</span>
+              </button>
+
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-2 text-[#cbd5e1] hover:text-[#ff7300] py-1"
+              >
+                {theme === 'paper' ? <Sun size={15} className="text-[#d86b18]" /> : <Moon size={15} />}
+                <span className="capitalize">{theme}</span>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* ---------------------------------------------------------- */}
         {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
@@ -594,36 +671,43 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* PROFILE SECTION (HORIZONTAL, AVATAR LEFT, INTRO RIGHT)    */}
+        {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-3 sm:pt-4 pb-3.5 sm:pb-5 px-3.5 sm:px-6 flex flex-row items-center gap-3.5 xs:gap-4 sm:gap-6">
-          {/* Circular Avatar */}
-          <div className="shrink-0">
+        <section className="pt-[24px] pb-[23px] px-4 sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          {/* 160px Centered Circular Avatar */}
+          <div className="shrink-0 mb-[25px] sm:mb-0">
             <img
               src={PROFILE.avatar}
               alt={PROFILE.name}
-              className="w-[84px] h-[84px] xs:w-[100px] xs:h-[100px] sm:w-[140px] sm:h-[140px] md:w-[155px] md:h-[155px] rounded-full object-cover shrink-0 select-none"
+              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
             />
           </div>
 
           {/* Intro Information */}
-          <div className="flex-1 min-w-0">
-            {/* Headline */}
-            <div>
-              <h1 className={`text-[19px] xs:text-[23px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left">
+            {/* Headline with RSS badge */}
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm {PROFILE.handle}.
               </h1>
+              <span
+                className="text-[#ff7300] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5"
+                title="RSS Feed"
+                aria-label="RSS Feed"
+              >
+                <Rss size={17} className="stroke-[2.5]" />
+              </span>
             </div>
 
-            {/* Description lines */}
-            <div className="mt-1.5 xs:mt-2 sm:mt-3 space-y-0 text-[12px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#EAEDF3] leading-snug font-mono">
+            {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
+            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono max-w-[440px] sm:max-w-none">
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
-            {/* Monochrome Outline Social Icons */}
-            <div className="pt-2.5 xs:pt-3 sm:pt-4 flex items-center gap-3 sm:gap-4 text-[#d6d6d6]">
+            {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
@@ -633,7 +717,7 @@ export default function Portfolio() {
                 title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
+                <GithubIcon className="w-[24px] h-[24px]" />
               </a>
 
               {/* X / Twitter */}
@@ -645,7 +729,7 @@ export default function Portfolio() {
                 title="X Profile"
                 aria-label="X"
               >
-                <XIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
+                <XIcon className="w-[24px] h-[24px]" />
               </a>
 
               {/* LinkedIn */}
@@ -657,7 +741,7 @@ export default function Portfolio() {
                 title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
+                <LinkedinIcon className="w-[24px] h-[24px]" />
               </a>
 
               {/* Email */}
@@ -667,7 +751,7 @@ export default function Portfolio() {
                 title={`Send email to ${PROFILE.email}`}
                 aria-label="Email"
               >
-                <Mail className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
+                <Mail className="w-[24px] h-[24px]" />
               </a>
             </div>
           </div>
@@ -689,7 +773,7 @@ export default function Portfolio() {
         {/* VIEW 1: POSTS LIST (VERTICAL LIST, 768px, pt-12 pb-6 px-4) */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-8 sm:pt-12 pb-6 px-3.5 sm:px-6">
+          <section id="recent-posts" className="pt-10 sm:pt-14 md:pt-[83px] pb-10 px-4 sm:px-6">
             {searchQuery && (
               <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
@@ -699,22 +783,22 @@ export default function Portfolio() {
             <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
               {filteredPosts.map((post) => (
                 <article key={post.id} className="group text-left pb-2 sm:pb-3">
-                  {/* Title (Monospace, 18px, #ff7300) */}
+                  {/* Title (Monospace, 16px, #ff7300) */}
                   <h2 className="mb-1.5">
                     <button
                       onClick={() => handleOpenPost(post.id)}
-                      className={`text-[16px] sm:text-[18px] font-medium ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
+                      className={`text-[16px] sm:text-[18px] font-normal ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
                     >
                       {post.title}
                     </button>
                   </h2>
 
-                  {/* Metadata (Monospace, 14px, #d6d6d6, calendar icon) */}
-                  <div className={`flex flex-wrap items-center gap-1.5 text-[12px] sm:text-[14px] ${themeClasses.meta} mb-2`}>
-                    <Calendar size={12} className="shrink-0 opacity-80" />
+                  {/* Metadata (Monospace, 11px-12px, #d7d9df, calendar icon) */}
+                  <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] ${themeClasses.meta} mb-2`}>
+                    <Calendar size={11} className="shrink-0 opacity-80" />
                     <span>{post.date}</span>
                     <span className="opacity-50">·</span>
-                    <Clock size={12} className="shrink-0 opacity-80" />
+                    <Clock size={11} className="shrink-0 opacity-80" />
                     <span>{post.readingTime}</span>
                     {post.category && (
                       <>
