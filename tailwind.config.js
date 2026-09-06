@@ -16,6 +16,9 @@ export default {
         steiDesc: '#e0e0e0',
         steiMuted: '#d6d6d6',
       },
+      screens: {
+        xs: '480px',
+      },
       fontFamily: {
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
       }

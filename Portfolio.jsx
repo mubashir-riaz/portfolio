@@ -328,24 +328,24 @@ function MinimalDevCli() {
   };
 
   return (
-    <div className="border border-[#d86b18]/40 bg-[#161c28] p-3.5 rounded font-mono text-[14px] text-[#e0e0e0] space-y-2 mt-4">
-      <div className="flex items-center justify-between border-b border-[#2d374d] pb-2 text-[13px] text-[#94a3b8]">
-        <span>bash - mubashir@server:~$</span>
-        <span className="text-[#ff7300]">● online</span>
+    <div className="border border-[#d86b18]/40 bg-[#161c28] p-3 sm:p-3.5 rounded font-mono text-[13px] sm:text-[14px] text-[#e0e0e0] space-y-2 mt-3 sm:mt-4">
+      <div className="flex items-center justify-between border-b border-[#2d374d] pb-2 text-[12px] sm:text-[13px] text-[#94a3b8]">
+        <span className="truncate mr-2">bash - mubashir@server:~$</span>
+        <span className="text-[#ff7300] shrink-0">● online</span>
       </div>
 
-      <div ref={terminalRef} className="max-h-56 overflow-y-auto space-y-2 pt-1">
+      <div ref={terminalRef} className="max-h-56 overflow-y-auto space-y-2 pt-1 text-[12.5px] sm:text-[13.5px]">
         {history.map((h, i) => (
           <div key={i}>
             {h.type === 'sys' && <div className="text-[#94a3b8] italic">// {h.text}</div>}
             {h.type === 'cmd' && (
               <div className="flex items-center gap-1.5 text-[#f2f2f2]">
                 <span className="text-[#ff7300]">$</span>
-                <span>{h.text}</span>
+                <span className="break-all">{h.text}</span>
               </div>
             )}
             {h.type === 'out' && (
-              <div className="pl-2 border-l border-[#d86b18]/40 text-[#cbd5e1] whitespace-pre-wrap">
+              <div className="pl-2 border-l border-[#d86b18]/40 text-[#cbd5e1] whitespace-pre-wrap break-words">
                 {h.text}
               </div>
             )}
@@ -365,8 +365,8 @@ function MinimalDevCli() {
           type="text"
           value={cmdInput}
           onChange={(e) => setCmdInput(e.target.value)}
-          placeholder="type help, status, skills, or projects..."
-          className="bg-transparent border-none outline-none flex-1 text-[14px] font-mono text-[#f2f2f2] placeholder:text-[#64748b]"
+          placeholder="type help, status, skills..."
+          className="bg-transparent border-none outline-none flex-1 text-[12.5px] sm:text-[14px] font-mono text-[#f2f2f2] placeholder:text-[#64748b] min-w-0"
         />
       </form>
     </div>
@@ -494,7 +494,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className={`py-4 sm:py-5 px-4 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between min-h-[72px] sm:min-h-[80px] gap-6 sm:gap-8`}
+          className={`py-3 sm:py-5 px-3.5 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between min-h-[58px] sm:min-h-[80px] gap-2.5 sm:gap-8`}
           style={{ borderBottomWidth: '1px' }}
         >
           {/* Brand / Logo (System Monospace) */}
@@ -505,19 +505,19 @@ export default function Portfolio() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             style={{ fontFamily: 'var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)' }}
-            className={`text-[26px] sm:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
+            className={`text-[19px] xs:text-[23px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
           >
             {PROFILE.name}
           </button>
 
           {/* Navigation Items + Icons */}
-          <nav className="flex items-center gap-5 sm:gap-7 text-[16px] shrink-0">
+          <nav className="flex items-center gap-2.5 xs:gap-4 sm:gap-6 md:gap-7 text-[13.5px] xs:text-[15px] sm:text-[16px] shrink-0">
             <button
               onClick={() => {
                 setCurrentView('posts');
                 setSelectedPostId(null);
               }}
-              className={`py-1 px-1.5 transition-colors ${
+              className={`py-1 px-1 sm:px-1.5 transition-colors ${
                 currentView === 'posts' || currentView === 'reader'
                   ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
@@ -531,7 +531,7 @@ export default function Portfolio() {
                 setCurrentView('about');
                 setSelectedPostId(null);
               }}
-              className={`py-1 px-1.5 transition-colors ${
+              className={`py-1 px-1 sm:px-1.5 transition-colors ${
                 currentView === 'about'
                   ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
@@ -544,7 +544,7 @@ export default function Portfolio() {
             <button
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-label="Search Posts"
-              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              className="text-white hover:text-[#ff7300] transition-colors p-1 sm:p-1.5"
               title="Search (Cmd+K)"
             >
               <Search size={16} />
@@ -554,7 +554,7 @@ export default function Portfolio() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              className="text-white hover:text-[#ff7300] transition-colors p-1 sm:p-1.5"
               title={`Theme: ${theme} (Click to switch)`}
             >
               {theme === 'paper' ? <Sun size={16} className="text-[#d86b18]" /> : <Moon size={16} />}
@@ -566,27 +566,27 @@ export default function Portfolio() {
         {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
-          <div className="py-3 px-4 sm:px-6 border-b border-[#d86b18]/40 flex items-center gap-3 text-[16px]">
-            <Search size={16} className="text-[#ff7300] shrink-0" />
+          <div className="py-2.5 sm:py-3 px-3.5 sm:px-6 border-b border-[#d86b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+            <Search size={15} className="text-[#ff7300] shrink-0" />
             <input
               ref={searchInputRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search articles by keyword, stack or title..."
-              className="w-full bg-transparent outline-none text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
+              className="w-full bg-transparent outline-none text-[13.5px] sm:text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-[#94a3b8] hover:text-[#f2f2f2] text-[15px] px-1.5"
+                className="text-[#94a3b8] hover:text-[#f2f2f2] text-[13px] sm:text-[15px] px-1.5 shrink-0"
               >
                 Clear
               </button>
             )}
             <button
               onClick={() => setSearchOpen(false)}
-              className="text-[#94a3b8] hover:text-[#f2f2f2] p-1"
+              className="text-[#94a3b8] hover:text-[#f2f2f2] p-1 shrink-0"
             >
               <X size={15} />
             </button>
@@ -596,13 +596,13 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* PROFILE SECTION (HORIZONTAL, AVATAR LEFT, INTRO RIGHT)    */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-3.5 pb-4 px-4 flex flex-row items-start sm:items-center gap-4 sm:gap-6">
-          {/* 160px Circular Avatar */}
+        <section className="pt-3 sm:pt-4 pb-3.5 sm:pb-5 px-3.5 sm:px-6 flex flex-row items-center gap-3.5 xs:gap-4 sm:gap-6">
+          {/* Circular Avatar */}
           <div className="shrink-0">
             <img
               src={PROFILE.avatar}
               alt={PROFILE.name}
-              className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full object-cover shrink-0 select-none mt-0.5 sm:mt-0"
+              className="w-[84px] h-[84px] xs:w-[100px] xs:h-[100px] sm:w-[140px] sm:h-[140px] md:w-[155px] md:h-[155px] rounded-full object-cover shrink-0 select-none"
             />
           </div>
 
@@ -610,20 +610,20 @@ export default function Portfolio() {
           <div className="flex-1 min-w-0">
             {/* Headline */}
             <div>
-              <h1 className={`text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+              <h1 className={`text-[19px] xs:text-[23px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm {PROFILE.handle}.
               </h1>
             </div>
 
             {/* Description lines */}
-            <div className="mt-3 space-y-0 text-[16px] text-[#EAEDF3] leading-snug font-mono">
+            <div className="mt-1.5 xs:mt-2 sm:mt-3 space-y-0 text-[12px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#EAEDF3] leading-snug font-mono">
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
             {/* Monochrome Outline Social Icons */}
-            <div className="pt-4 flex items-center gap-4 text-[#d6d6d6]">
+            <div className="pt-2.5 xs:pt-3 sm:pt-4 flex items-center gap-3 sm:gap-4 text-[#d6d6d6]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
@@ -633,7 +633,7 @@ export default function Portfolio() {
                 title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
+                <GithubIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
               </a>
 
               {/* X / Twitter */}
@@ -645,7 +645,7 @@ export default function Portfolio() {
                 title="X Profile"
                 aria-label="X"
               >
-                <XIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
+                <XIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
               </a>
 
               {/* LinkedIn */}
@@ -657,7 +657,7 @@ export default function Portfolio() {
                 title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
+                <LinkedinIcon className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
               </a>
 
               {/* Email */}
@@ -667,7 +667,7 @@ export default function Portfolio() {
                 title={`Send email to ${PROFILE.email}`}
                 aria-label="Email"
               >
-                <Mail className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
+                <Mail className="w-[19px] h-[19px] sm:w-[22px] sm:h-[22px] md:w-[24px] md:h-[24px]" />
               </a>
             </div>
           </div>
@@ -689,28 +689,28 @@ export default function Portfolio() {
         {/* VIEW 1: POSTS LIST (VERTICAL LIST, 768px, pt-12 pb-6 px-4) */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-12 pb-6 px-4">
+          <section id="recent-posts" className="pt-8 sm:pt-12 pb-6 px-3.5 sm:px-6">
             {searchQuery && (
-              <div className="mb-6 text-[15px] text-[#94a3b8]">
+              <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
               </div>
             )}
 
-            <div className="flex flex-col space-y-12 sm:space-y-14">
+            <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
               {filteredPosts.map((post) => (
                 <article key={post.id} className="group text-left pb-2 sm:pb-3">
                   {/* Title (Monospace, 18px, #ff7300) */}
                   <h2 className="mb-1.5">
                     <button
                       onClick={() => handleOpenPost(post.id)}
-                      className={`text-[18px] font-medium ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
+                      className={`text-[16px] sm:text-[18px] font-medium ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
                     >
                       {post.title}
                     </button>
                   </h2>
 
                   {/* Metadata (Monospace, 14px, #d6d6d6, calendar icon) */}
-                  <div className={`flex items-center gap-1.5 text-[14px] ${themeClasses.meta} mb-2`}>
+                  <div className={`flex flex-wrap items-center gap-1.5 text-[12px] sm:text-[14px] ${themeClasses.meta} mb-2`}>
                     <Calendar size={12} className="shrink-0 opacity-80" />
                     <span>{post.date}</span>
                     <span className="opacity-50">·</span>
@@ -727,7 +727,7 @@ export default function Portfolio() {
                   {/* Description (Monospace, 16px, 1.6 line-height, #e0e0e0) */}
                   <p
                     onClick={() => handleOpenPost(post.id)}
-                    className={`text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
+                    className={`text-[14px] sm:text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
                   >
                     {post.description}
                   </p>
@@ -735,7 +735,7 @@ export default function Portfolio() {
               ))}
 
               {filteredPosts.length === 0 && (
-                <div className="text-center py-12 text-[16px] text-[#94a3b8]">
+                <div className="text-center py-12 text-[14px] sm:text-[16px] text-[#94a3b8]">
                   No posts found matching "{searchQuery}".
                 </div>
               )}
@@ -747,12 +747,12 @@ export default function Portfolio() {
         {/* VIEW 2: FULL POST ARTICLE READER                           */}
         {/* ========================================================== */}
         {currentView === 'reader' && activePost && (
-          <main className="pb-20 pt-6 px-4 space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
             {/* Back button */}
             <div>
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
                 <span>← Back to all posts</span>
@@ -760,12 +760,12 @@ export default function Portfolio() {
             </div>
 
             {/* Post Header */}
-            <div className="space-y-2 border-b border-[#d86b18]/40 pb-3">
-              <h1 className={`text-[18px] font-bold leading-snug ${themeClasses.postTitle}`}>
+            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d86b18]/40 pb-3">
+              <h1 className={`text-[17px] sm:text-[19px] md:text-[21px] font-bold leading-snug ${themeClasses.postTitle}`}>
                 {activePost.title}
               </h1>
 
-              <div className={`flex flex-wrap items-center gap-2 text-[14px] ${themeClasses.meta}`}>
+              <div className={`flex flex-wrap items-center gap-1.5 sm:gap-2 text-[12px] sm:text-[14px] ${themeClasses.meta}`}>
                 <div className="flex items-center gap-1">
                   <Calendar size={12} />
                   <span>{activePost.date}</span>
@@ -781,7 +781,7 @@ export default function Portfolio() {
             </div>
 
             {/* Article Body Paragraphs */}
-            <div className={`text-[16px] leading-[1.7] space-y-4 ${themeClasses.desc}`}>
+            <div className={`text-[14px] sm:text-[16px] leading-[1.7] space-y-3.5 sm:space-y-4 ${themeClasses.desc}`}>
               {activePost.fullContent?.map((paragraph, pIdx) => (
                 <p key={pIdx}>{paragraph}</p>
               ))}
@@ -789,8 +789,8 @@ export default function Portfolio() {
 
             {/* Architecture / Key Highlights */}
             {activePost.highlights && (
-              <div className="p-4 rounded bg-[#161c28] border border-[#2d374d] space-y-2 text-[15px]">
-                <div className="text-[#ff7300] font-semibold text-[14px] uppercase tracking-wider">
+              <div className="p-3 sm:p-4 rounded bg-[#161c28] border border-[#2d374d] space-y-2 text-[13.5px] sm:text-[15px]">
+                <div className="text-[#ff7300] font-semibold text-[13px] sm:text-[14px] uppercase tracking-wider">
                   // Key Highlights
                 </div>
                 <ul className="space-y-1.5 text-[#cbd5e1]">
@@ -807,11 +807,11 @@ export default function Portfolio() {
             {/* Code Snippet */}
             {activePost.codeSnippet && (
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[13px] text-[#94a3b8]">
+                <div className="flex items-center justify-between text-[12px] sm:text-[13px] text-[#94a3b8]">
                   <span>python implementation</span>
                   <span className="text-[#ff7300]">UTF-8 | Python 3.12</span>
                 </div>
-                <div className="p-3.5 rounded bg-[#121620] border border-[#2d374d] overflow-x-auto text-[14px] font-mono text-[#e0e0e0] leading-relaxed">
+                <div className="p-3 sm:p-3.5 rounded bg-[#121620] border border-[#2d374d] overflow-x-auto text-[12px] sm:text-[14px] font-mono text-[#e0e0e0] leading-relaxed">
                   <pre>{activePost.codeSnippet}</pre>
                 </div>
               </div>
@@ -823,7 +823,7 @@ export default function Portfolio() {
                 {activePost.tags?.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[13px] px-2.5 py-0.5 rounded bg-[#161c28] border border-[#2d374d] text-[#cbd5e1]"
+                    className="text-[12px] sm:text-[13px] px-2 sm:px-2.5 py-0.5 rounded bg-[#161c28] border border-[#2d374d] text-[#cbd5e1]"
                   >
                     {tag}
                   </span>
@@ -835,7 +835,7 @@ export default function Portfolio() {
                   href={activePost.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline font-medium"
+                  className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline font-medium"
                 >
                   <GithubIcon className="w-4 h-4" />
                   <span>View on GitHub</span>
@@ -848,7 +848,7 @@ export default function Portfolio() {
             <div className="pt-4 border-t border-[#d86b18]/30">
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
                 <span>← Back to all posts</span>
@@ -861,28 +861,28 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-20 pt-6 px-4 space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
             <div>
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
                 <span>← Back to all posts</span>
               </button>
             </div>
 
-            <div className="space-y-2 border-b border-[#d86b18]/40 pb-3">
-              <h1 className={`text-[18px] font-bold ${themeClasses.headline}`}>
+            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d86b18]/40 pb-3">
+              <h1 className={`text-[17px] sm:text-[20px] font-bold ${themeClasses.headline}`}>
                 About Mubashir Riaz
               </h1>
-              <p className="text-[14px] text-[#ff7300]">
+              <p className="text-[13px] sm:text-[14px] text-[#ff7300]">
                 // AI Backend Engineer & Intelligent Systems Developer
               </p>
             </div>
 
             {/* Bio Paragraphs */}
-            <div className={`text-[16px] leading-[1.7] space-y-4 ${themeClasses.desc}`}>
+            <div className={`text-[14px] sm:text-[16px] leading-[1.7] space-y-3.5 sm:space-y-4 ${themeClasses.desc}`}>
               <p>
                 I am an AI Backend Engineer focused on designing high-throughput API architectures,
                 multimodal document extraction pipelines, and citation-grounded RAG systems.
@@ -901,16 +901,16 @@ export default function Portfolio() {
 
             {/* Technical Skills Table */}
             <div className="space-y-2 pt-1">
-              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 // Technical Stack & Architecture
               </div>
-              <div className="space-y-2 text-[15px]">
+              <div className="space-y-2 text-[13px] sm:text-[15px]">
                 {SKILLS_LIST.map((grp) => (
                   <div
                     key={grp.label}
-                    className="p-2.5 rounded bg-[#161c28] border border-[#2d374d] flex flex-col sm:flex-row sm:items-baseline gap-1.5"
+                    className="p-2.5 rounded bg-[#161c28] border border-[#2d374d] flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-1.5"
                   >
-                    <span className="w-32 text-[#ff7300] font-semibold shrink-0">{grp.label}:</span>
+                    <span className="sm:w-32 text-[#ff7300] font-semibold shrink-0">{grp.label}:</span>
                     <span className="text-[#cbd5e1]">{grp.items.join(', ')}</span>
                   </div>
                 ))}
@@ -919,10 +919,10 @@ export default function Portfolio() {
 
             {/* Interactive Dev CLI */}
             <div className="pt-1 space-y-1.5">
-              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 // Interactive Shell
               </div>
-              <p className="text-[14px] text-[#94a3b8]">
+              <p className="text-[13px] sm:text-[14px] text-[#94a3b8]">
                 Try running commands in this retro node shell:
               </p>
               <MinimalDevCli />
@@ -930,25 +930,25 @@ export default function Portfolio() {
 
             {/* Direct Contact & Socials */}
             <div className="pt-3 border-t border-[#d86b18]/40 space-y-2.5">
-              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 // Connect
               </div>
-              <div className="flex flex-wrap items-center gap-3 text-[15px]">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
                 >
-                  <Mail size={15} className="text-[#ff7300]" />
-                  <span>{PROFILE.email}</span>
+                  <Mail size={15} className="text-[#ff7300] shrink-0" />
+                  <span className="break-all">{PROFILE.email}</span>
                 </a>
 
                 <a
                   href={PROFILE.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <GithubIcon className="w-4 h-4 text-[#ff7300]" />
+                  <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0" />
                   <span>GitHub</span>
                 </a>
 
@@ -956,9 +956,9 @@ export default function Portfolio() {
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <LinkedinIcon className="w-4 h-4 text-[#ff7300]" />
+                  <LinkedinIcon className="w-4 h-4 text-[#ff7300] shrink-0" />
                   <span>LinkedIn</span>
                 </a>
               </div>
@@ -969,7 +969,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className="py-8 px-4 border-t border-[#d86b18]/40 text-center text-[14px] text-[#94a3b8] font-mono">
+        <footer className="py-6 sm:py-8 px-4 border-t border-[#d86b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
