@@ -499,7 +499,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className={`pl-0 pr-4 sm:pl-0 sm:pr-6 border-b ${themeClasses.border} flex items-center justify-between h-[59px] sm:h-[72px]`}
+          className={`px-4 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between h-[59px] sm:h-[72px]`}
           style={{ borderBottomWidth: '1px' }}
         >
           {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
@@ -643,7 +643,7 @@ export default function Portfolio() {
         {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
-          <div className="py-2.5 sm:py-3 pl-0 pr-4 sm:pl-0 sm:pr-6 border-b border-[#d86b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+          <div className="py-2.5 sm:py-3 px-3.5 sm:px-6 border-b border-[#d86b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
             <Search size={15} className="text-[#ff7300] shrink-0" />
             <input
               ref={searchInputRef}
@@ -671,23 +671,23 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* PROFILE SECTION: LEFT ALIGNED WITH THE LINE                */}
+        {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] pl-0 pr-4 sm:pl-0 sm:pr-6 flex flex-col items-start text-left sm:py-8">
-          {/* Circular Avatar (Left Aligned) */}
-          <div className="shrink-0 mb-[20px] self-start">
+        <section className="pt-[24px] pb-[23px] px-4 sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          {/* 160px Centered Circular Avatar */}
+          <div className="shrink-0 mb-[25px] sm:mb-0">
             <img
               src={PROFILE.avatar}
               alt={PROFILE.name}
-              className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
+              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
             />
           </div>
 
-          {/* Intro Information (Left Aligned) */}
-          <div className="flex-1 min-w-0 flex flex-col items-start text-left w-full">
+          {/* Intro Information */}
+          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left">
             {/* Headline with RSS badge */}
-            <div className="flex items-center justify-start gap-2 text-left">
-              <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline} text-left`}>
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm {PROFILE.handle}.
               </h1>
               <span
@@ -699,15 +699,15 @@ export default function Portfolio() {
               </span>
             </div>
 
-            {/* Description lines (Monospace, 14px, line-height 1.7, left-aligned) */}
-            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono text-left max-w-[560px]">
+            {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
+            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono max-w-[440px] sm:max-w-none">
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
-            {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px, left-aligned) */}
-            <div className="mt-[18px] sm:mt-5 flex items-center justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
+            {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
@@ -773,7 +773,7 @@ export default function Portfolio() {
         {/* VIEW 1: POSTS LIST (VERTICAL LIST, 768px, pt-12 pb-6 px-4) */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-10 sm:pt-14 md:pt-[83px] pb-10 pl-0 pr-4 sm:pl-0 sm:pr-6">
+          <section id="recent-posts" className="pt-10 sm:pt-14 md:pt-[83px] pb-10 px-4 sm:px-6">
             {searchQuery && (
               <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
@@ -831,7 +831,7 @@ export default function Portfolio() {
         {/* VIEW 2: FULL POST ARTICLE READER                           */}
         {/* ========================================================== */}
         {currentView === 'reader' && activePost && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-0 pr-4 sm:pl-0 sm:pr-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
             {/* Back button */}
             <div>
               <button
@@ -945,7 +945,7 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-0 pr-4 sm:pl-0 sm:pr-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
             <div>
               <button
                 onClick={handleBackToPosts}
@@ -1053,7 +1053,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className="py-6 sm:py-8 pl-0 pr-4 sm:pl-0 sm:pr-6 border-t border-[#d86b18]/40 text-left text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
+        <footer className="py-6 sm:py-8 px-4 border-t border-[#d86b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
