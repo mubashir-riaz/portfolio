@@ -8,14 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#0A0A0A',
-        surface: '#111111',
-        border: '#262626',
-        primary: '#F5F5F5',
-        secondary: '#A3A3A3',
-        muted: '#737373',
-        hoverSurface: '#1A1A1A',
-        lightGray: '#E5E5E5',
+        steiBg: '#202838',
+        steiBorder: '#d86b18',
+        steiOrange: '#ff7300',
+        steiRss: '#ff6b00',
+        steiText: '#f2f2f2',
+        steiDesc: '#e0e0e0',
+        steiMuted: '#d6d6d6',
+      },
+      fontFamily: {
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
       }
     },
   },

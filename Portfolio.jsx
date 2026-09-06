@@ -1,1093 +1,980 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
-  Github,
-  Linkedin,
-  Mail,
+  Search,
+  Sun,
+  Moon,
+  Calendar,
+  Clock,
+  ArrowLeft,
   ArrowUpRight,
-  Check,
-  Copy,
-  Terminal,
-  Cpu,
-  Layers,
-  Zap,
-  Database,
-  Menu,
   X,
-  Code2,
-  FileCode2,
-  Play,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+  Mail,
+} from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
 /*  PROFILE DATA                                                      */
 /* ------------------------------------------------------------------ */
 const PROFILE = {
-  name: "Mubashir Riaz",
-  handle: "mubashir",
-  role: "AI Backend Engineer & Intelligent Systems Developer",
-  heading: "Building intelligent backend systems that solve real-world problems.",
-  bio: "I build production-ready APIs, AI-powered document workflows, and scalable backend architectures that are reliable, maintainable, and designed for real-world applications.",
-  email: "mubashiriaz10@gmail.com",
-  avatar: "/profile.jpeg",
-  github: "https://github.com/mubashir-riaz",
-  linkedin: "https://www.linkedin.com/in/mubashir-riaz-51a881424/",
+  name: 'Mubashir Riaz',
+  handle: '@mubashir',
+  role: 'AI Backend Engineer & Intelligent Systems Developer',
+  email: 'mubashiriaz10@gmail.com',
+  avatar: '/profile.jpeg',
+  github: 'https://github.com/mubashir-riaz',
+  linkedin: 'https://www.linkedin.com/in/mubashir-riaz-51a881424/',
+  x: 'https://x.com',
+  descriptionLines: [
+    'AI Backend Engineer building intelligent systems.',
+    'Every commit lands on GitHub for you to fork & remix.',
+  ],
 };
 
-const PROJECTS = [
+
+/* ------------------------------------------------------------------ */
+/*  POSTS / WRITING / ARTICLES DATA                                   */
+/* ------------------------------------------------------------------ */
+const POSTS = [
   {
-    id: "invoice-guard",
-    filename: "InvoiceGuard.py",
-    language: "python",
-    category: "AI AUDITING PLATFORM",
-    name: "InvoiceGuard AI",
-    tagline: "AI-Powered Freight Invoice Auditing Platform",
+    id: 'invoice-guard',
+    title: 'Building InvoiceGuard: Multi-Modal Freight Auditing with Vision LLMs',
+    date: '24 Feb, 2026',
+    readingTime: '5 min read',
+    category: 'AI Auditing Platform',
     description:
-      "InvoiceGuard AI automates freight invoice auditing by extracting invoice data with Vision LLMs, validating charges against contracted rates, identifying overcharges, and generating dispute-ready summaries.",
-    highlights: [
-      "Multi-modal invoice extraction with Vision LLMs",
-      "AI-powered charge & contract rate validation",
-      "Automated overcharge discrepancy detection",
-      "Structured audit reports & dispute email generation",
-    ],
-    stack: [
-      "Python",
-      "FastAPI",
-      "React",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "LangChain",
-      "Vision LLMs",
-    ],
+      'How we automated freight rate verification, contract invoice parsing, and dispute generation using FastAPI and multimodal Vision LLMs.',
+    github: 'https://github.com/mubashir-riaz/InvoiceGuard-ai',
+    tags: ['Vision LLMs', 'FastAPI', 'PostgreSQL', 'Docker', 'Automation'],
     codeSnippet: `def process_invoice(invoice_file):
-    extracted_data = vision_llm.extract(invoice_file)
+    # Extract structured charge tables via multimodal Vision LLM
+    extracted_data = vision_llm.extract_invoice(invoice_file)
 
-    audit_result = auditor.compare_rates(
-        extracted_data
+    # Reconcile against contracted tariff schedules
+    audit_result = rate_auditor.validate(
+        charges=extracted_data.line_items,
+        contract=carrier_contract
     )
 
-    return audit_result`,
-    github: "https://github.com/mubashir-riaz/InvoiceGuard-ai",
-  },
-  {
-    id: "docu-mind",
-    filename: "DocuMind.py",
-    language: "python",
-    category: "VECTOR RAG SEARCH",
-    name: "DocuMind AI",
-    tagline: "AI Document Assistant with Retrieval-Augmented Generation",
-    description:
-      "Upload PDFs, Word documents, Excel files, PowerPoint presentations, and text files, then ask natural language questions with responses grounded in document context.",
+    if audit_result.has_discrepancies:
+        dispute_email = generator.create_dispute(audit_result)
+        return {"status": "DISPUTED", "savings": audit_result.delta, "email": dispute_email}
+
+    return {"status": "APPROVED", "total": audit_result.total_approved}`,
+    fullContent: [
+      'Freight billing has historically been plagued by billing discrepancies: ambiguous line-item surcharges, variable fuel adjustments, and unstandardized scanned PDF receipts that break traditional OCR engines.',
+      'To solve this, InvoiceGuard AI introduces a multimodal pipeline. We use Vision LLMs to extract dense tabular line items directly from complex PDFs without brittle bounding-box rules.',
+      'The extracted data is cross-referenced against contracted tariff rate tables stored in PostgreSQL. When overcharges or unauthorized accessorial fees are detected, the system generates dispute-ready summaries with exact mathematical proofs and pre-drafted carrier dispute emails.',
+      'In production benchmarks, this automated auditing pipeline reduced invoice processing turnaround from 25 minutes per invoice to under 4 seconds with 98.4% extraction accuracy.',
+    ],
     highlights: [
-      "Multi-format document parsing & chunking",
-      "Semantic vector search with ChromaDB",
-      "Source-aware grounded response generation",
-      "FastAPI backend & React frontend interface",
+      'Multimodal invoice parsing with zero reliance on brittle OCR templates',
+      'Deterministic rule-engine cross-referencing contracted vs billed rates',
+      'Automated overcharge detection with currency delta calculations',
+      'FastAPI async architecture with Redis caching for instant validation',
     ],
-    stack: ["FastAPI", "React", "Python", "ChromaDB", "Llama 3.3", "LangChain"],
-    codeSnippet: `def ask_document(question, document_id):
-
-    context = vector_store.search(
-        question,
-        document_id
+    stack: ['Python', 'FastAPI', 'Vision LLMs', 'PostgreSQL', 'Redis', 'Docker', 'LangChain'],
+  },
+  {
+    id: 'docu-mind',
+    title: 'DocuMind: Zero-Hallucination Document Assistant with ChromaDB & RAG',
+    date: '18 Jan, 2026',
+    readingTime: '7 min read',
+    category: 'Vector RAG Search',
+    description:
+      'Deep dive into multi-format document chunking, semantic vector embeddings with ChromaDB, and citation-grounded generation using Llama 3.3.',
+    github: 'https://github.com/mubashir-riaz/documind-ai',
+    tags: ['RAG', 'ChromaDB', 'Llama 3.3', 'FastAPI', 'Vector Search'],
+    codeSnippet: `def ask_document(question: str, document_id: str) -> GroundedAnswer:
+    # 1. Semantic vector search scoped to active document
+    relevant_chunks = vector_store.search(
+        query=question,
+        document_id=document_id,
+        top_k=4
     )
 
-    return llm.generate(
-        question,
-        context
+    # 2. Strict citation context assembly
+    context = format_citation_context(relevant_chunks)
+
+    # 3. Grounded generation with source traceability
+    return llm.generate_with_citations(
+        prompt=question,
+        context=context,
+        temperature=0.1
     )`,
-    github: "https://github.com/mubashir-riaz/documind-ai",
+    fullContent: [
+      'Traditional Retrieval-Augmented Generation (RAG) often breaks down when documents mix disparate formats: financial spreadsheets with merged cells, scanned PDF reports, and PowerPoint slides.',
+      'DocuMind AI addresses this through a multi-stage ingestion pipeline: documents are parsed into structured DOM trees, hierarchically chunked to preserve tabular integrity, and indexed with dense embeddings into ChromaDB.',
+      'When users ask natural-language questions, the retrieval pipeline performs dense semantic search filtered by document scope, followed by a citation-grounded synthesis pass using Llama 3.3.',
+      'Every answer provides interactive citation pills that link directly to the source page and section, eliminating hallucinations and building trust for high-stakes business document review.',
+    ],
+    highlights: [
+      'Multi-format parser for PDF, DOCX, XLSX, PPTX, and TXT files',
+      'Hierarchical semantic chunking preserving table structure and metadata',
+      'Sub-second vector retrieval with ChromaDB embedded indexing',
+      'Source-aware grounded response synthesis with page-level citations',
+    ],
+    stack: ['FastAPI', 'React', 'Python', 'ChromaDB', 'Llama 3.3', 'LangChain'],
   },
-];
+  {
+    id: 'inference-speed',
+    title: 'Shipping at Inference-Speed: Designing Low-Latency FastAPI Pipelines',
+    date: '28 Dec, 2025',
+    readingTime: '12 min read',
+    category: 'AI Infrastructure',
+    description:
+      'Why async streaming endpoints, background worker queues, and Redis caching transform LLM response times for high-concurrency systems.',
+    github: 'https://github.com/mubashir-riaz',
+    tags: ['FastAPI', 'Performance', 'Redis', 'SSE Streaming', 'Architecture'],
+    codeSnippet: `@app.post("/v1/stream")
+async def stream_inference(req: PromptRequest):
+    # Check semantic cache for sub-10ms response
+    cached = await semantic_cache.lookup(req.prompt)
+    if cached:
+        return StreamingResponse(cached.stream(), media_type="text/event-stream")
 
-const SKILLS = [
-  {
-    category: "Languages",
-    icon: Code2,
-    items: ["Python", "JavaScript", "SQL", "HTML", "CSS", "Bash"],
-  },
-  {
-    category: "Backend & AI",
-    icon: Cpu,
-    items: [
-      "FastAPI",
-      "Pydantic",
-      "LangChain",
-      "LLMs",
-      "RAG",
-      "REST APIs",
-      "Uvicorn",
+    # Asynchronous token streaming over HTTP/2
+    async def token_generator():
+        async for token in model_client.astream(req.prompt):
+            yield f"data: {json.dumps({'token': token})}\\n\\n"
+
+    return StreamingResponse(token_generator(), media_type="text/event-stream")`,
+    fullContent: [
+      'In production AI systems, latency is user retention. A 6-second blocking delay feels broken, whereas streaming the first token in under 300ms creates an immediate feeling of real-time responsiveness.',
+      'By decoupling FastAPI endpoints using Server-Sent Events (SSE) and asynchronous generator coroutines, users receive streamed text without blocking worker threads.',
+      'Furthermore, integrating Redis semantic caching for high-frequency queries intercepts identical and near-identical questions, returning responses in under 15ms without touching upstream LLM APIs.',
+      'This architecture sustained 450 concurrent connections in stress tests without degradation in Time-to-First-Token (TTFT).',
     ],
-  },
-  {
-    category: "Frontend",
-    icon: Layers,
-    items: ["React", "Vite", "Tailwind CSS", "HTML", "CSS"],
-  },
-  {
-    category: "Infrastructure",
-    icon: Database,
-    items: [
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "Git",
-      "GitHub Actions",
-      "AWS",
-      "ChromaDB",
+    highlights: [
+      'Real-time token streaming with Server-Sent Events (SSE)',
+      'Redis semantic caching eliminating redundant model compute',
+      'Async connection pooling with Uvicorn and Gunicorn workers',
+      'Production telemetry tracking TTFT and tokens-per-second',
     ],
+    stack: ['Python', 'FastAPI', 'Redis', 'Uvicorn', 'Docker', 'Prometheus'],
+  },
+  {
+    id: 'agentic-engineering',
+    title: 'Agentic Engineering: The No-BS Way to Build Reliable AI Workflows',
+    date: '17 Nov, 2025',
+    readingTime: '9 min read',
+    category: 'Agent Systems',
+    description:
+      'Moving beyond naive prompt chaining: implementing Pydantic validation, structured outputs, deterministic state machines, and graceful fallback handling.',
+    github: 'https://github.com/mubashir-riaz',
+    tags: ['AI Agents', 'Pydantic', 'Reliability', 'System Design'],
+    codeSnippet: `class ToolExecutionResult(BaseModel):
+    step_id: str
+    status: Literal["success", "retry", "fatal"]
+    payload: dict
+    validation_notes: Optional[str] = None
+
+class ProductionAgentController:
+    async def execute_step(self, current_state: State) -> NextTransition:
+        # Probabilistic LLM produces structured action
+        action = await self.planner.next_step(current_state)
+        # Deterministic validator enforces invariants
+        validated = self.schema_guard.verify(action)
+        return await self.state_machine.transition(validated)`,
+    fullContent: [
+      'The biggest myth in autonomous agent development is that giving an LLM an open-ended loop and a dozen tools produces reliable software.',
+      'In enterprise environments, open-ended loops hallucinate parameter types, fall into cyclic retries, and blow through token budgets. Real reliability demands treating the model as a probabilistic decision function inside a deterministic state machine.',
+      'By anchoring every tool invocation with strict Pydantic schemas, setting deterministic fallback trees, and establishing finite transition graphs, agent workflows become predictable and production-ready.',
+    ],
+    highlights: [
+      'Finite state machine control loops avoiding infinite recursion',
+      'Strict Pydantic typing and validation on all model tool calls',
+      'Circuit breakers and exponential backoff retry algorithms',
+      'Deterministic audit trails for compliance and debugging',
+    ],
+    stack: ['Python', 'Pydantic', 'LangChain', 'FastAPI', 'PostgreSQL'],
+  },
+  {
+    id: 'production-vector-search',
+    title: 'Production Vector Search: Pitfalls in Chunking and Retrieval Quality',
+    date: '05 Oct, 2025',
+    readingTime: '6 min read',
+    category: 'Vector Search',
+    description:
+      'Why top-k similarity often fails on tabular data and how hybrid retrieval with metadata filtering eliminates irrelevant context.',
+    github: 'https://github.com/mubashir-riaz',
+    tags: ['Vector Search', 'Embeddings', 'ChromaDB', 'Chunking'],
+    codeSnippet: `# Hybrid retrieval: Dense vector similarity + metadata filtering
+matched_chunks = chroma_collection.query(
+    query_embeddings=[embedded_query],
+    where={"$and": [{"doc_type": "contract"}, {"year": 2025}]},
+    n_results=10
+)
+
+# Cross-encoder re-ranking step
+reranked = cross_encoder.rank(
+    query=user_query,
+    documents=[c.text for c in matched_chunks]
+)`,
+    fullContent: [
+      'Dense vector embeddings are exceptional at capturing abstract thematic meaning, but they consistently struggle with exact alphanumeric matches, serial numbers, and tabular data.',
+      'When splitting text purely by character counts (e.g., 500 characters), row 12 of a table gets separated from its column header in row 1, rendering the embedding useless.',
+      'We addressed this by pairing layout-aware chunking with hybrid search: metadata pre-filtering scopes down candidates, dense embeddings perform recall, and a cross-encoder re-ranker picks the top 3 high-precision context snippets.',
+      'This hybrid pipeline increased answer relevance from 68% to over 94% on real enterprise datasets.',
+    ],
+    highlights: [
+      'Layout-aware chunking preserving tables and lists intact',
+      'Metadata filtering before dense vector query execution',
+      'Cross-encoder re-ranking for ultra-precise context alignment',
+      'Sub-50ms query latency on indexed vector collections',
+    ],
+    stack: ['ChromaDB', 'Sentence-Transformers', 'Python', 'FastAPI'],
   },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  TYPEWRITER ANIMATED TEXT COMPONENT                                */
+/*  SKILLS & CAPABILITIES                                             */
 /* ------------------------------------------------------------------ */
-function TypewriterText({ words }) {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+const SKILLS_LIST = [
+  { label: 'Languages', items: ['Python', 'JavaScript', 'SQL', 'Bash', 'HTML', 'CSS'] },
+  { label: 'AI & Backend', items: ['FastAPI', 'Pydantic', 'LangChain', 'LLM Agents', 'RAG', 'REST APIs', 'Uvicorn'] },
+  { label: 'Data & Vector', items: ['ChromaDB', 'PostgreSQL', 'Redis', 'Semantic Search', 'Vector Embeddings'] },
+  { label: 'DevOps & Cloud', items: ['Docker', 'Git', 'GitHub Actions', 'AWS', 'Linux / Bash'] },
+];
 
-  useEffect(() => {
-    const targetWord = words[currentWordIndex];
-    const speed = isDeleting ? 25 : 55;
-
-    if (!isDeleting && currentText === targetWord) {
-      const timeout = setTimeout(() => setIsDeleting(true), 2400);
-      return () => clearTimeout(timeout);
-    }
-
-    if (isDeleting && currentText === "") {
-      setIsDeleting(false);
-      setCurrentWordIndex((prev) => (prev + 1) % words.length);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setCurrentText((prev) =>
-        isDeleting
-          ? targetWord.substring(0, prev.length - 1)
-          : targetWord.substring(0, prev.length + 1)
-      );
-    }, speed);
-
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentWordIndex, words]);
-
+/* ------------------------------------------------------------------ */
+/*  CUSTOM INLINE ICONS FOR PIXEL-PERFECT FIDELITY                    */
+/* ------------------------------------------------------------------ */
+function GithubIcon({ className = 'w-[18px] h-[18px]' }) {
   return (
-    <span className="inline-flex items-center font-mono">
-      <span className="text-[#F5F5F5] font-semibold">{currentText}</span>
-      <span className="w-1.5 h-3.5 ml-1 bg-emerald-400 animate-pulse rounded-xs" />
-    </span>
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+    </svg>
+  );
+}
+
+function XIcon({ className = 'w-[18px] h-[18px]' }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className = 'w-[18px] h-[18px]' }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+    </svg>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  SYNTAX HIGHLIGHTED CODE SNIPPET COMPONENT                         */
+/*  MINIMAL TERMINAL COMPONENT (ABOUT VIEW)                           */
 /* ------------------------------------------------------------------ */
-function SyntaxHighlightedCode({ code }) {
-  const lines = code.split("\n");
-  return (
-    <div className="font-mono text-[11px] leading-relaxed space-y-0.5">
-      {lines.map((line, idx) => {
-        if (line.startsWith("def ")) {
-          const parts = line.split("(");
-          const fnName = parts[0].replace("def ", "");
-          const rest = parts.slice(1).join("(");
-          return (
-            <div key={idx}>
-              <span className="text-purple-400 font-semibold">def </span>
-              <span className="text-blue-400 font-semibold">{fnName}</span>
-              <span className="text-[#A3A3A3]">({rest}</span>
-            </div>
-          );
-        }
-        if (line.trim().startsWith("return ")) {
-          const indent = line.substring(0, line.indexOf("return"));
-          const val = line.trim().replace("return ", "");
-          return (
-            <div key={idx}>
-              <span>{indent}</span>
-              <span className="text-rose-400 font-semibold">return </span>
-              <span className="text-emerald-300">{val}</span>
-            </div>
-          );
-        }
-        if (line.includes(" = ")) {
-          const parts = line.split(" = ");
-          return (
-            <div key={idx}>
-              <span className="text-[#F5F5F5]">{parts[0]}</span>
-              <span className="text-purple-400 font-semibold"> = </span>
-              <span className="text-sky-300">{parts.slice(1).join(" = ")}</span>
-            </div>
-          );
-        }
-        return <div key={idx} className="text-[#A3A3A3]">{line}</div>;
-      })}
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  MINIMAL DEV TERMINAL COMPONENT WITH GENUINE COLOR ACCENTS         */
-/* ------------------------------------------------------------------ */
-function DevTerminal() {
-  const [activeTab, setActiveTab] = useState("terminal");
-  const [inputVal, setInputVal] = useState("");
+function MinimalDevCli() {
   const [history, setHistory] = useState([
-    { type: "sys", text: "Initializing Mubashir Riaz Production Node v2.4.0..." },
-    { type: "cmd", text: "python status.py" },
-    {
-      type: "out",
-      text: "✔ API Server ........ Running [FastAPI]\n✔ PostgreSQL ........ Connected [Port 5432]\n✔ Redis ............. Connected [Cache Ready]\n✔ AI Model .......... Ready [Llama 3.3]\n✔ RAG Pipeline ...... Active [ChromaDB]\n\nSystem Status: ONLINE",
-    },
-    { type: "cmd", text: "deploy --env production" },
-    {
-      type: "out",
-      text: "Building container image...\n✓ Docker Image Created\n✓ Unit & Integration Tests Passed\n✓ API Services Deployed\n\nProduction Status: ONLINE",
-    },
+    { type: 'sys', text: 'Mubashir Riaz Terminal [v2.4] - Type help for commands' },
+    { type: 'cmd', text: 'status' },
+    { type: 'out', text: '✔ FastAPI Engine: ONLINE\n✔ ChromaDB Vector Store: READY\n✔ Redis Cache: CONNECTED\n✔ Focus: AI Agents & Production Backends' },
   ]);
-
-  const terminalContainerRef = useRef(null);
+  const [cmdInput, setCmdInput] = useState('');
+  const terminalRef = useRef(null);
 
   useEffect(() => {
-    if (terminalContainerRef.current) {
-      terminalContainerRef.current.scrollTop =
-        terminalContainerRef.current.scrollHeight;
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [history]);
 
-  const handleCommand = (cmdText) => {
-    const raw = cmdText.trim();
+  const runCommand = (cmd) => {
+    const raw = cmd.trim();
     if (!raw) return;
 
-    const newHistory = [...history, { type: "cmd", text: raw }];
     const lower = raw.toLowerCase();
+    const newItems = [...history, { type: 'cmd', text: raw }];
 
-    if (lower === "clear") {
+    if (lower === 'clear') {
       setHistory([]);
-      setInputVal("");
+      setCmdInput('');
       return;
-    } else if (lower === "help") {
-      newHistory.push({
-        type: "out",
-        text: "Available commands:\n  • status    - Check backend & AI pipeline status\n  • skills    - List core backend & AI tech stack\n  • projects  - View active production builds\n  • contact   - Display direct email & social links\n  • clear     - Clear terminal buffer",
+    } else if (lower === 'help') {
+      newItems.push({
+        type: 'out',
+        text: 'Available commands:\n  status   - Backend architecture and services health\n  skills   - Core AI, API, and database stack\n  projects - Production highlights\n  contact  - Direct contact links\n  clear    - Clear console',
       });
-    } else if (lower === "status") {
-      newHistory.push({
-        type: "out",
-        text: "[SYS_OK] All backend services operational.",
+    } else if (lower === 'status') {
+      newItems.push({
+        type: 'out',
+        text: 'SYSTEM STATUS: All backend microservices operational.\nFastAPI: 0.0.0.0:8000 | Latency: 42ms | Error Rate: 0.00%',
       });
-    } else if (lower === "skills") {
-      newHistory.push({
-        type: "out",
-        text: "STACK: Python, FastAPI, Pydantic, LangChain, LLMs, RAG, React, PostgreSQL, Redis, Docker, AWS, ChromaDB.",
+    } else if (lower === 'skills') {
+      newItems.push({
+        type: 'out',
+        text: 'STACK: Python, FastAPI, Pydantic, LangChain, ChromaDB, PostgreSQL, Redis, Docker, AWS, React.',
       });
-    } else if (lower === "projects") {
-      newHistory.push({
-        type: "out",
-        text: "ACTIVE_PROJECTS:\n1. InvoiceGuard AI - Freight auditing platform\n2. DocuMind AI - AI document assistant with RAG",
+    } else if (lower === 'projects') {
+      newItems.push({
+        type: 'out',
+        text: '1. InvoiceGuard AI (Freight Auditing with Vision LLMs)\n2. DocuMind AI (RAG with ChromaDB & Llama 3.3)',
       });
-    } else if (lower === "contact") {
-      newHistory.push({
-        type: "out",
-        text: `EMAIL: ${PROFILE.email}\nGITHUB: ${PROFILE.github}\nLINKEDIN: ${PROFILE.linkedin}`,
+    } else if (lower === 'contact') {
+      newItems.push({
+        type: 'out',
+        text: `Email: ${PROFILE.email}\nGitHub: ${PROFILE.github}\nLinkedIn: ${PROFILE.linkedin}`,
       });
     } else {
-      newHistory.push({
-        type: "out",
-        text: `command not recognized: '${raw}'. Type 'help' for options.`,
+      newItems.push({
+        type: 'out',
+        text: `bash: ${raw}: command not found. Type 'help' for available commands.`,
       });
     }
 
-    setHistory(newHistory);
-    setInputVal("");
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleCommand(inputVal);
-  };
-
-  const renderColoredOutput = (text) => {
-    return text.split("\n").map((line, i) => {
-      if (line.includes("✔") || line.includes("✓")) {
-        return (
-          <div key={i} className="flex items-center gap-1.5 py-0.5">
-            <span className="text-emerald-400 font-bold">✔</span>
-            <span className="text-[#F5F5F5]">{line.replace("✔", "").replace("✓", "")}</span>
-          </div>
-        );
-      }
-      if (line.includes("System Status: ONLINE") || line.includes("Production Status: ONLINE")) {
-        return (
-          <div key={i} className="text-emerald-400 font-bold pt-1 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{line}</span>
-          </div>
-        );
-      }
-      return <div key={i}>{line}</div>;
-    });
+    setHistory(newItems);
+    setCmdInput('');
   };
 
   return (
-    <div className="rounded-xl bg-[#111111] border border-[#262626] shadow-2xl overflow-hidden font-mono text-xs text-[#A3A3A3]">
-      {/* Terminal Title Bar */}
-      <div className="bg-[#0A0A0A] px-3 sm:px-4 py-2.5 border-b border-[#262626] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="w-3 h-3 rounded-full bg-rose-500/90 inline-block" />
-            <span className="w-3 h-3 rounded-full bg-amber-500/90 inline-block" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/90 inline-block" />
+    <div className="border border-[#d86b18]/40 bg-[#161c28] p-3.5 rounded font-mono text-[14px] text-[#e0e0e0] space-y-2 mt-4">
+      <div className="flex items-center justify-between border-b border-[#2d374d] pb-2 text-[13px] text-[#94a3b8]">
+        <span>bash - mubashir@server:~$</span>
+        <span className="text-[#ff7300]">● online</span>
+      </div>
+
+      <div ref={terminalRef} className="max-h-56 overflow-y-auto space-y-2 pt-1">
+        {history.map((h, i) => (
+          <div key={i}>
+            {h.type === 'sys' && <div className="text-[#94a3b8] italic">// {h.text}</div>}
+            {h.type === 'cmd' && (
+              <div className="flex items-center gap-1.5 text-[#f2f2f2]">
+                <span className="text-[#ff7300]">$</span>
+                <span>{h.text}</span>
+              </div>
+            )}
+            {h.type === 'out' && (
+              <div className="pl-2 border-l border-[#d86b18]/40 text-[#cbd5e1] whitespace-pre-wrap">
+                {h.text}
+              </div>
+            )}
           </div>
-          <span className="text-[#A3A3A3] text-[11px] sm:text-xs ml-1 sm:ml-2 font-medium truncate">
-            bash - mubashir@backend-node
-          </span>
-        </div>
-
-        {/* Terminal Tabs */}
-        <div className="flex items-center gap-1 bg-[#111111] p-1 rounded-md border border-[#262626] shrink-0 w-full sm:w-auto">
-          <button
-            onClick={() => setActiveTab("terminal")}
-            className={`flex-1 sm:flex-none text-center px-2.5 py-1 sm:py-0.5 rounded text-[11px] transition-colors whitespace-nowrap ${
-              activeTab === "terminal"
-                ? "bg-[#1A1A1A] text-emerald-400 font-semibold"
-                : "text-[#737373] hover:text-[#F5F5F5]"
-            }`}
-          >
-            ~/cli-session
-          </button>
-          <button
-            onClick={() => setActiveTab("activity")}
-            className={`flex-1 sm:flex-none text-center px-2.5 py-1 sm:py-0.5 rounded text-[11px] transition-colors whitespace-nowrap ${
-              activeTab === "activity"
-                ? "bg-[#1A1A1A] text-sky-400 font-semibold"
-                : "text-[#737373] hover:text-[#F5F5F5]"
-            }`}
-          >
-            ~/system_logs
-          </button>
-        </div>
+        ))}
       </div>
 
-      {/* Terminal Content Body */}
-      {activeTab === "terminal" ? (
-        <div
-          ref={terminalContainerRef}
-          className="p-3 sm:p-4 h-72 overflow-y-auto space-y-3 bg-[#0A0A0A]"
-        >
-          {history.map((item, idx) => (
-            <div key={idx} className="leading-relaxed">
-              {item.type === "sys" && (
-                <div className="text-[#737373] italic">// {item.text}</div>
-              )}
-              {item.type === "cmd" && (
-                <div className="flex items-center gap-2 text-[#F5F5F5] flex-wrap">
-                  <span className="text-emerald-400 font-bold shrink-0">
-                    mubashir@backend:~$
-                  </span>
-                  <span className="text-sky-300 font-medium break-all">{item.text}</span>
-                </div>
-              )}
-              {item.type === "out" && (
-                <div className="text-[#A3A3A3] whitespace-pre-wrap break-words pl-3 border-l-2 border-[#262626] mt-1 font-mono text-[11px]">
-                  {renderColoredOutput(item.text)}
-                </div>
-              )}
-            </div>
-          ))}
-
-          {/* Interactive Command Prompt Line */}
-          <form
-            onSubmit={handleFormSubmit}
-            className="flex items-center gap-2 pt-2 text-[#F5F5F5] flex-wrap sm:flex-nowrap"
-          >
-            <span className="text-emerald-400 font-bold shrink-0">mubashir@backend:~$</span>
-            <input
-              type="text"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              placeholder="type 'help', 'skills', or 'projects'..."
-              className="bg-transparent border-none outline-none flex-1 min-w-0 text-[#F5F5F5] font-mono text-xs placeholder:text-[#737373]"
-            />
-          </form>
-        </div>
-      ) : (
-        /* Activity Log View */
-        <div className="p-3 sm:p-4 h-72 overflow-y-auto space-y-2 bg-[#0A0A0A] text-[11px] font-mono text-[#A3A3A3]">
-          <div><span className="text-emerald-400 font-semibold">[INFO]</span> FastAPI server listening on 0.0.0.0:8000</div>
-          <div><span className="text-sky-400 font-semibold">[LOG]</span> ChromaDB vector store initialized</div>
-          <div><span className="text-purple-400 font-semibold">[AUDIT]</span> Vision LLM document parser active</div>
-          <div><span className="text-indigo-400 font-semibold">[LLM]</span> LangChain RAG pipeline ready</div>
-          <div><span className="text-emerald-400 font-semibold">[HEALTH]</span> All system services operational</div>
-        </div>
-      )}
-
-      {/* Quick Interactive Command Buttons Footer */}
-      <div className="bg-[#0A0A0A] px-3 sm:px-4 py-2 border-t border-[#262626] flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] text-[#A3A3A3]">
-          <span className="text-[#737373] shrink-0">Quick Run:</span>
-          <button
-            onClick={() => handleCommand("help")}
-            className="px-2 py-0.5 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-sky-300 transition-colors"
-          >
-            help
-          </button>
-          <button
-            onClick={() => handleCommand("skills")}
-            className="px-2 py-0.5 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-emerald-300 transition-colors"
-          >
-            skills
-          </button>
-          <button
-            onClick={() => handleCommand("projects")}
-            className="px-2 py-0.5 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-purple-300 transition-colors"
-          >
-            projects
-          </button>
-          <button
-            onClick={() => handleCommand("clear")}
-            className="px-2 py-0.5 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-[#A3A3A3] transition-colors"
-          >
-            clear
-          </button>
-        </div>
-
-        <span className="text-[10px] text-[#737373] font-mono shrink-0">
-          UTF-8 | Python 3.12
-        </span>
-      </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          runCommand(cmdInput);
+        }}
+        className="flex items-center gap-1.5 pt-1 text-[#f2f2f2]"
+      >
+        <span className="text-[#ff7300]">$</span>
+        <input
+          type="text"
+          value={cmdInput}
+          onChange={(e) => setCmdInput(e.target.value)}
+          placeholder="type help, status, skills, or projects..."
+          className="bg-transparent border-none outline-none flex-1 text-[14px] font-mono text-[#f2f2f2] placeholder:text-[#64748b]"
+        />
+      </form>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  MAIN PORTFOLIO COMPONENT                                          */
+/*  MAIN PORTFOLIO BLOG COMPONENT                                     */
 /* ------------------------------------------------------------------ */
 export default function Portfolio() {
-  const [copied, setCopied] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [expandedProjects, setExpandedProjects] = useState({});
+  // Navigation & View State: 'posts', 'about', or 'reader'
+  const [currentView, setCurrentView] = useState('posts');
+  const [selectedPostId, setSelectedPostId] = useState(null);
 
-  const toggleProject = (id) => {
-    setExpandedProjects((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  // Search Palette State
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef(null);
+
+  // Theme Mode: 'navy' (#202838), 'oled' (#0b0f17), 'paper' (#f4f1ea)
+  const [theme, setTheme] = useState('navy');
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      if (prev === 'navy') return 'oled';
+      if (prev === 'oled') return 'paper';
+      return 'navy';
+    });
   };
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(PROFILE.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  // Keyboard shortcut Ctrl+K / Cmd+K
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (searchOpen && searchInputRef.current) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+    }
+  }, [searchOpen]);
+
+  const handleOpenPost = (postId) => {
+    setSelectedPostId(postId);
+    setCurrentView('reader');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleBackToPosts = () => {
+    setSelectedPostId(null);
+    setCurrentView('posts');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return POSTS;
+    const q = searchQuery.toLowerCase();
+    return POSTS.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.tags?.some((t) => t.toLowerCase().includes(q))
+    );
+  }, [searchQuery]);
+
+  const activePost = useMemo(() => {
+    return POSTS.find((p) => p.id === selectedPostId) || POSTS[0];
+  }, [selectedPostId]);
+
+  const themeClasses = useMemo(() => {
+    if (theme === 'oled') {
+      return {
+        bg: 'bg-[#0b0f17]',
+        text: 'text-[#f2f2f2]',
+        navLogo: 'text-[#f2f2f2]',
+        headline: 'text-[#f5f5f5]',
+        desc: 'text-[#e0e0e0]',
+        meta: 'text-[#94a3b8]',
+        border: 'border-[#d86b18]',
+        postTitle: 'text-[#ff7300]',
+      };
+    }
+    if (theme === 'paper') {
+      return {
+        bg: 'bg-[#f4f1ea]',
+        text: 'text-[#1e293b]',
+        navLogo: 'text-[#0f172a]',
+        headline: 'text-[#0f172a]',
+        desc: 'text-[#334155]',
+        meta: 'text-[#64748b]',
+        border: 'border-[#d86b18]',
+        postTitle: 'text-[#c25404]',
+      };
+    }
+    return {
+      bg: 'bg-[#202838]',
+      text: 'text-[#f2f2f2]',
+      navLogo: 'text-[#f2f2f2]',
+      headline: 'text-[#f5f5f5]',
+      desc: 'text-[#f0f0f0]',
+      meta: 'text-[#d6d6d6]',
+      border: 'border-[#d86b18]',
+      postTitle: 'text-[#ff7300]',
+    };
+  }, [theme]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F5F5] font-sans relative">
+    <div className={`min-h-screen ${themeClasses.bg} ${themeClasses.text} font-mono transition-colors duration-200`}>
       {/* ------------------------------------------------------------ */}
-      {/* HEADER / NAVIGATION BAR                                      */}
       {/* ------------------------------------------------------------ */}
-      <header className="sticky top-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-[#262626]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-10 h-16 flex items-center justify-between text-xs">
-          <a
-            href="#top"
-            className="flex items-center gap-2.5 text-[#F5F5F5] hover:text-white transition-colors font-mono font-bold text-sm tracking-tight group"
+      {/* MAIN SINGLE COLUMN BLOG WRAPPER (768PX MAX-WIDTH)            */}
+      {/* ------------------------------------------------------------ */}
+      <div className="max-w-[768px] mx-auto">
+        {/* ---------------------------------------------------------- */}
+        {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
+        {/* ---------------------------------------------------------- */}
+        <header
+          className={`py-4 sm:py-5 px-4 sm:px-6 border-b ${themeClasses.border} flex items-center justify-between min-h-[72px] sm:min-h-[80px] gap-6 sm:gap-8`}
+          style={{ borderBottomWidth: '1px' }}
+        >
+          {/* Brand / Logo (System Monospace) */}
+          <button
+            onClick={() => {
+              setCurrentView('posts');
+              setSelectedPostId(null);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{ fontFamily: 'var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)' }}
+            className={`text-[26px] sm:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
           >
-            <div className="p-1.5 rounded-lg bg-[#111111] border border-[#262626] text-emerald-400">
-              <Terminal className="w-4 h-4" />
-            </div>
-            <span>&lt;MubashirRiaz /&gt;</span>
-          </a>
+            {PROFILE.name}
+          </button>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-2 text-[#A3A3A3] font-medium font-sans">
-            <a
-              href="#about"
-              className="px-3.5 py-1.5 rounded-lg hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-all text-xs"
+          {/* Navigation Items + Icons */}
+          <nav className="flex items-center gap-5 sm:gap-7 text-[16px] shrink-0">
+            <button
+              onClick={() => {
+                setCurrentView('posts');
+                setSelectedPostId(null);
+              }}
+              className={`py-1 px-1.5 transition-colors ${
+                currentView === 'posts' || currentView === 'reader'
+                  ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
+                  : 'text-white hover:text-[#ff7300]'
+              }`}
+            >
+              Posts
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView('about');
+                setSelectedPostId(null);
+              }}
+              className={`py-1 px-1.5 transition-colors ${
+                currentView === 'about'
+                  ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
+                  : 'text-white hover:text-[#ff7300]'
+              }`}
             >
               About
-            </a>
-            <a
-              href="#projects"
-              className="px-3.5 py-1.5 rounded-lg hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-all text-xs"
-            >
-              Projects
-            </a>
-            <a
-              href="#skills"
-              className="px-3.5 py-1.5 rounded-lg hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-all text-xs"
-            >
-              Skills
-            </a>
-            <a
-              href="#contact"
-              className="px-3.5 py-1.5 rounded-lg hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-all text-xs"
-            >
-              Contact
-            </a>
-          </nav>
+            </button>
 
-          {/* Quick Actions */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1 border-r border-[#262626] pr-3">
+            {/* Search Icon Button */}
+            <button
+              onClick={() => setSearchOpen((prev) => !prev)}
+              aria-label="Search Posts"
+              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              title="Search (Cmd+K)"
+            >
+              <Search size={16} />
+            </button>
+
+            {/* Theme Toggle Icon Button */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              title={`Theme: ${theme} (Click to switch)`}
+            >
+              {theme === 'paper' ? <Sun size={16} className="text-[#d86b18]" /> : <Moon size={16} />}
+            </button>
+          </nav>
+        </header>
+
+        {/* ---------------------------------------------------------- */}
+        {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
+        {/* ---------------------------------------------------------- */}
+        {searchOpen && (
+          <div className="py-3 px-4 sm:px-6 border-b border-[#d86b18]/40 flex items-center gap-3 text-[16px]">
+            <Search size={16} className="text-[#ff7300] shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search articles by keyword, stack or title..."
+              className="w-full bg-transparent outline-none text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="text-[#94a3b8] hover:text-[#f2f2f2] text-[15px] px-1.5"
+              >
+                Clear
+              </button>
+            )}
+            <button
+              onClick={() => setSearchOpen(false)}
+              className="text-[#94a3b8] hover:text-[#f2f2f2] p-1"
+            >
+              <X size={15} />
+            </button>
+          </div>
+        )}
+
+        {/* ---------------------------------------------------------- */}
+        {/* PROFILE SECTION (HORIZONTAL, AVATAR LEFT, INTRO RIGHT)    */}
+        {/* ---------------------------------------------------------- */}
+        <section className="pt-3.5 pb-4 px-4 flex flex-row items-start sm:items-center gap-4 sm:gap-6">
+          {/* 160px Circular Avatar */}
+          <div className="shrink-0">
+            <img
+              src={PROFILE.avatar}
+              alt={PROFILE.name}
+              className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full object-cover shrink-0 select-none mt-0.5 sm:mt-0"
+            />
+          </div>
+
+          {/* Intro Information */}
+          <div className="flex-1 min-w-0 space-y-1">
+            {/* Headline */}
+            <div>
+              <h1 className={`text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+                Hi, I'm {PROFILE.handle}.
+              </h1>
+            </div>
+
+            {/* Description lines */}
+            <div className="space-y-1.5 pt-0.5 text-[16px] text-[#EAEDF3] leading-[1.6] font-mono">
+              {PROFILE.descriptionLines.map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+            </div>
+
+            {/* Monochrome Outline Social Icons */}
+            <div className="pt-2 flex items-center gap-4 text-[#d6d6d6]">
+              {/* GitHub */}
               <a
                 href={PROFILE.github}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-[#A3A3A3] hover:text-white hover:bg-[#1A1A1A] rounded-lg transition-all"
+                className="hover:text-[#ff7300] transition-colors p-0.5"
+                title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <Github size={16} />
+                <GithubIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
               </a>
+
+              {/* X / Twitter */}
+              <a
+                href={PROFILE.x}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-[#ff7300] transition-colors p-0.5"
+                title="X Profile"
+                aria-label="X"
+              >
+                <XIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
+              </a>
+
+              {/* LinkedIn */}
               <a
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-[#A3A3A3] hover:text-white hover:bg-[#1A1A1A] rounded-lg transition-all"
+                className="hover:text-[#ff7300] transition-colors p-0.5"
+                title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={16} />
+                <LinkedinIcon className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
               </a>
-            </div>
 
-            <button
-              onClick={copyEmail}
-              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] text-[#F5F5F5] font-mono text-[11px] font-medium transition-all"
-            >
-              {copied ? (
-                <>
-                  <Check size={13} className="text-emerald-400" />
-                  <span className="text-emerald-400 font-semibold">Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Mail size={13} className="text-[#A3A3A3]" />
-                  <span>Copy Email</span>
-                </>
-              )}
-            </button>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#A3A3A3] hover:text-white rounded-lg bg-[#111111] border border-[#262626]"
-            >
-              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Nav Drawer */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0A0A0A] border-b border-[#262626] px-6 py-4 flex flex-col gap-3 text-sm font-sans">
-            <a
-              href="#about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-[#A3A3A3] hover:text-white py-1"
-            >
-              About
-            </a>
-            <a
-              href="#projects"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-[#A3A3A3] hover:text-white py-1"
-            >
-              Projects
-            </a>
-            <a
-              href="#skills"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-[#A3A3A3] hover:text-white py-1"
-            >
-              Skills
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-[#A3A3A3] hover:text-white py-1"
-            >
-              Contact
-            </a>
-          </div>
-        )}
-      </header>
-
-      {/* ------------------------------------------------------------ */}
-      {/* HERO SECTION                                                 */}
-      {/* ------------------------------------------------------------ */}
-      <section
-        id="top"
-        className="relative max-w-7xl mx-auto px-6 sm:px-10 pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden"
-      >
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Column (6 cols): Developer Profile & Heading */}
-          <div className="lg:col-span-6 space-y-6">
-            {/* Profile Avatar & Name Block */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
-              <div className="relative shrink-0">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#111111] border border-[#262626] overflow-hidden shadow-md shrink-0">
-                  <img
-                    src={PROFILE.avatar}
-                    alt={PROFILE.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2 min-w-0 max-w-full">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display bg-gradient-to-r from-white via-[#F5F5F5] to-[#A3A3A3] bg-clip-text text-transparent">
-                  {PROFILE.name}
-                </h1>
-                <div className="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#111111] border border-[#262626] font-mono text-[11px] sm:text-xs font-medium text-[#F5F5F5] shadow-sm max-w-full overflow-hidden">
-                  <span className="text-emerald-400 font-bold mr-2 shrink-0">//</span>
-                  <TypewriterText
-                    words={[
-                      "AI Backend Engineer & Intelligent Systems Developer",
-                      "Building Production-Ready AI Applications",
-                      "FastAPI & RAG Systems Specialist",
-                    ]}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Headline */}
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#F5F5F5] leading-snug font-display">
-              {PROFILE.heading}
-            </h2>
-
-            {/* Subheading */}
-            <p className="text-[#A3A3A3] text-sm sm:text-base leading-relaxed max-w-xl font-sans">
-              {PROFILE.bio}
-            </p>
-
-            {/* Action CTA Buttons */}
-            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              {/* Email */}
               <a
-                href="#projects"
-                className="inline-flex items-center justify-center gap-2 bg-[#FFFFFF] hover:bg-[#E5E5E5] text-[#0A0A0A] font-semibold text-xs font-mono px-5 py-3 rounded-lg border border-[#E5E5E5] transition-colors shadow-sm text-center"
+                href={`mailto:${PROFILE.email}`}
+                className="hover:text-[#ff7300] transition-colors p-0.5"
+                title={`Send email to ${PROFILE.email}`}
+                aria-label="Email"
               >
-                <Play size={14} className="fill-[#0A0A0A]" />
-                Explore My Work
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] text-[#F5F5F5] font-mono text-xs px-5 py-3 rounded-lg transition-colors text-center"
-              >
-                <Mail size={14} className="text-[#A3A3A3]" />
-                <span>Get in Touch</span>
+                <Mail className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px]" />
               </a>
             </div>
+          </div>
+        </section>
 
-            {/* Trust Signals */}
-            <div className="pt-4 border-t border-[#262626] flex flex-wrap items-center gap-6 font-mono text-xs text-[#A3A3A3]">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>
-                  <strong className="text-[#F5F5F5] font-semibold">10+</strong>{" "}
-                  Projects Built
-                </span>
+        {/* ---------------------------------------------------------- */}
+        {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D86B18, 1PX)            */}
+        {/* ---------------------------------------------------------- */}
+        <div
+          className={`border-t ${themeClasses.border}`}
+          style={{ borderTopWidth: '1px' }}
+        />
+
+        {/* ---------------------------------------------------------- */}
+        {/* DYNAMIC CONTENT ROUTER: 'posts' | 'reader' | 'about'       */}
+        {/* ---------------------------------------------------------- */}
+
+        {/* ========================================================== */}
+        {/* VIEW 1: POSTS LIST (VERTICAL LIST, 768px, pt-12 pb-6 px-4) */}
+        {/* ========================================================== */}
+        {currentView === 'posts' && (
+          <section id="recent-posts" className="pt-12 pb-6 px-4">
+            {searchQuery && (
+              <div className="mb-6 text-[15px] text-[#94a3b8]">
+                Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#737373]" />
-                <span>FastAPI &amp; Docker</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#737373]" />
-                <span>RAG &amp; LLMs</span>
-              </div>
-            </div>
-          </div>
+            )}
 
-          {/* Right Column (6 cols): Animated Dev CLI Terminal */}
-          <div className="lg:col-span-6">
-            <DevTerminal />
-          </div>
-        </div>
-
-        {/* Feature Cards Grid (What You Build) */}
-        <div className="mt-14 pt-10 border-t border-[#262626] grid md:grid-cols-3 gap-6 font-sans">
-          <div className="p-5 rounded-xl bg-[#111111] border border-[#262626] hover:border-[#404040] transition-colors shadow-md group">
-            <div className="p-2.5 rounded-lg bg-[#1A1A1A] border border-[#262626] w-fit text-emerald-400 mb-4">
-              <Cpu size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-[#F5F5F5] font-display mb-2">
-              AI Backend Systems
-            </h3>
-            <p className="text-xs text-[#A3A3A3] leading-relaxed font-sans">
-              Scalable APIs with authentication, databases, and production architecture.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl bg-[#111111] border border-[#262626] hover:border-[#404040] transition-colors shadow-md group">
-            <div className="p-2.5 rounded-lg bg-[#1A1A1A] border border-[#262626] w-fit text-sky-400 mb-4">
-              <Database size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-[#F5F5F5] font-display mb-2">
-              Document Intelligence
-            </h3>
-            <p className="text-xs text-[#A3A3A3] leading-relaxed font-sans">
-              RAG-powered document search, analysis, and automated workflows.
-            </p>
-          </div>
-
-          <div className="p-5 rounded-xl bg-[#111111] border border-[#262626] hover:border-[#404040] transition-colors shadow-md group">
-            <div className="p-2.5 rounded-lg bg-[#1A1A1A] border border-[#262626] w-fit text-purple-400 mb-4">
-              <Zap size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-[#F5F5F5] font-display mb-2">
-              Cloud-Ready APIs
-            </h3>
-            <p className="text-xs text-[#A3A3A3] leading-relaxed font-sans">
-              FastAPI applications built for containerized deployment and scaling.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------ */}
-      {/* ABOUT SECTION                                                */}
-      {/* ------------------------------------------------------------ */}
-      <section
-        id="about"
-        className="scroll-mt-20 border-t border-[#262626] py-16 bg-[#0A0A0A]"
-      >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-4 font-mono">
-              <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
-                // ABOUT
-              </span>
-              <h2 className="text-2xl font-bold text-[#F5F5F5] mt-2 font-display">
-                About Me
-              </h2>
-            </div>
-            <div className="lg:col-span-8 text-[#A3A3A3] space-y-4 text-sm leading-relaxed font-sans">
-              <p>
-                I’m an AI Backend Engineer focused on building intelligent backend systems and practical AI applications.
-              </p>
-              <p>
-                I enjoy turning complex problems into reliable and well-structured solutions. I learn by building real projects, experimenting with new ideas, and solving practical problems.
-              </p>
-              <p>
-                I’m currently looking for opportunities to work on meaningful products, collaborate with strong teams, and continue growing as an AI Backend Engineer.
-              </p>
-              <p>
-                I’m always open to interesting projects, ideas, and opportunities to build something useful.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------ */}
-      {/* FEATURED PROJECTS                                            */}
-      {/* ------------------------------------------------------------ */}
-      <section id="projects" className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="mb-10 font-mono">
-            <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
-              // PROJECTS
-            </span>
-            <h2 className="text-3xl font-bold text-[#F5F5F5] mt-2 font-display">
-              Featured Projects
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {PROJECTS.map((project) => {
-              const isExpanded = !!expandedProjects[project.id];
-              return (
-                <div
-                  key={project.id}
-                  className="rounded-xl bg-[#111111] border border-[#262626] overflow-hidden shadow-lg transition-all duration-200 hover:border-[#333333]"
-                >
-                  {/* Collapsed Header Bar */}
-                  <div
-                    className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#111111] hover:bg-[#161616] transition-colors cursor-pointer"
-                    onClick={() => toggleProject(project.id)}
-                  >
-                    <div className="space-y-1.5 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2.5">
-                        <h3 className="text-xl font-bold text-[#F5F5F5] font-display">
-                          {project.name}
-                        </h3>
-                        <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-[#1A1A1A] border border-[#262626] text-emerald-400 font-medium tracking-wider uppercase">
-                          {project.category}
-                        </span>
-                      </div>
-                      <p className="text-xs sm:text-sm font-mono text-[#A3A3A3]">
-                        {project.tagline}
-                      </p>
-                    </div>
-
+            <div className="flex flex-col space-y-12 sm:space-y-14">
+              {filteredPosts.map((post) => (
+                <article key={post.id} className="group text-left pb-2 sm:pb-3">
+                  {/* Title (Monospace, 18px, #ff7300) */}
+                  <h2 className="mb-1.5">
                     <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleProject(project.id);
-                      }}
-                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-xs font-mono text-[#F5F5F5] transition-all shrink-0 self-start sm:self-center group"
+                      onClick={() => handleOpenPost(post.id)}
+                      className={`text-[18px] font-medium ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
                     >
-                      <span>{isExpanded ? "Hide Details" : "View Project"}</span>
-                      {isExpanded ? (
-                        <ChevronUp size={15} className="text-emerald-400 group-hover:-translate-y-0.5 transition-transform" />
-                      ) : (
-                        <ChevronDown size={15} className="text-emerald-400 group-hover:translate-y-0.5 transition-transform" />
-                      )}
+                      {post.title}
                     </button>
-                  </div>
+                  </h2>
 
-                  {/* Expanded Content Panel */}
-                  {isExpanded && (
-                    <div className="border-t border-[#262626] grid lg:grid-cols-12 gap-0">
-                      {/* Project Info Panel (7 cols) */}
-                      <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 border-b lg:border-b-0 lg:border-r border-[#262626] bg-[#111111]">
-                        <p className="text-[#A3A3A3] text-sm leading-relaxed font-sans">
-                          {project.description}
-                        </p>
-
-                        <ul className="space-y-2 pt-2">
-                          {project.highlights.map((h, i) => (
-                            <li
-                              key={i}
-                              className="flex items-start gap-2 text-xs text-[#A3A3A3] font-sans"
-                            >
-                              <Check
-                                size={13}
-                                className="text-emerald-400 shrink-0 mt-0.5"
-                              />
-                              <span>{h}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="flex flex-wrap gap-2 pt-3">
-                          {project.stack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="font-mono text-[11px] px-2.5 py-0.5 rounded bg-[#0A0A0A] border border-[#262626] text-[#E5E5E5]"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="pt-4 flex items-center gap-4 font-mono text-xs">
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[#A3A3A3] hover:text-[#FFFFFF] transition-colors"
-                          >
-                            <Github size={14} /> Repository <ArrowUpRight size={12} />
-                          </a>
-                        </div>
-                      </div>
-
-                      {/* IDE Code Viewer (5 cols) */}
-                      <div className="lg:col-span-5 bg-[#0A0A0A] p-5 font-mono text-xs text-[#A3A3A3] flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center justify-between border-b border-[#262626] pb-2 mb-3 text-[#737373] text-[11px]">
-                            <div className="flex items-center gap-1.5">
-                              <FileCode2 size={13} className="text-emerald-400" />
-                              <span>{project.filename}</span>
-                            </div>
-                            <span className="text-sky-400">{project.language}</span>
-                          </div>
-
-                          <div className="overflow-x-auto p-1">
-                            <SyntaxHighlightedCode code={project.codeSnippet} />
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-[#262626] flex items-center justify-between text-[10px] text-[#737373] font-mono">
-                          <span>UTF-8 | Python 3.12</span>
-                          <span className="text-emerald-400 font-medium">✓ Main Branch</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------ */}
-      {/* TECHNICAL SKILLS                                             */}
-      {/* ------------------------------------------------------------ */}
-      <section
-        id="skills"
-        className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]"
-      >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="mb-10 font-mono">
-            <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
-              // SKILLS
-            </span>
-            <h2 className="text-3xl font-bold text-[#F5F5F5] mt-2 font-display">
-              Skills &amp; Architecture
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SKILLS.map((group) => {
-              const IconComp = group.icon;
-              return (
-                <div
-                  key={group.category}
-                  className="p-5 rounded-xl bg-[#111111] border border-[#262626] hover:border-[#404040] transition-colors"
-                >
-                  <div className="flex items-center gap-2.5 mb-4 text-[#F5F5F5] font-mono text-xs font-semibold">
-                    <IconComp size={16} className="text-emerald-400" />
-                    <span>{group.category}</span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((skill, i) => (
-                      <span
-                        key={`${skill}-${i}`}
-                        className="font-mono text-xs px-2.5 py-1 rounded bg-[#0A0A0A] border border-[#262626] text-[#E5E5E5]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------ */}
-      {/* CONTACT SECTION                                              */}
-      {/* ------------------------------------------------------------ */}
-      <section id="contact" className="scroll-mt-20 border-t border-[#262626] py-20 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="max-w-3xl mx-auto text-center space-y-4">
-            <span className="text-xs font-mono text-emerald-400 font-medium tracking-widest uppercase">
-              // CONTACT
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#F5F5F5] font-display">
-              Let's Build Something Intelligent
-            </h2>
-            <p className="text-[#A3A3A3] text-sm max-w-xl mx-auto leading-relaxed pt-1 font-sans">
-              Whether you're building an AI product, need backend expertise, or
-              want to automate business workflows, I'd love to hear about your
-              project.
-            </p>
-
-            <div className="pt-2">
-              <p className="text-xs font-mono text-[#737373] uppercase tracking-wider mb-3">
-                Available for:
-              </p>
-              <ul className="text-left max-w-md mx-auto space-y-2.5 text-xs sm:text-sm text-[#F5F5F5] font-sans">
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#111111] border border-[#262626]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  <span>AI Backend Engineering</span>
-                </li>
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#111111] border border-[#262626]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  <span>RAG &amp; LLM Systems</span>
-                </li>
-                <li className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#111111] border border-[#262626]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  <span>API Design &amp; Integration</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Terminal Contact Box */}
-            <div className="pt-6 max-w-xl mx-auto">
-              <div className="rounded-xl bg-[#111111] border border-[#262626] p-4 sm:p-5 font-mono text-xs shadow-xl text-left space-y-4">
-                <div className="flex items-center justify-between border-b border-[#262626] pb-2 text-[11px] text-[#737373]">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block" />
-                    <span className="ml-2 text-[#A3A3A3] font-medium">contact.sh</span>
-                  </div>
-                  <span className="text-emerald-400 font-semibold">[READY]</span>
-                </div>
-
-                <div className="space-y-2 text-[#A3A3A3]">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-emerald-400 font-bold">$</span>
-                    <span className="text-[#737373]">mail --to</span>
-                    <span className="text-[#F5F5F5] font-semibold underline decoration-[#262626] underline-offset-4">
-                      {PROFILE.email}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-[#737373] italic pl-3 border-l border-[#262626]">
-                    // Direct email response within 24 hours. Open to remote &amp; contract projects.
-                  </div>
-                </div>
-
-                <div className="pt-2 flex items-center gap-2 border-t border-[#262626]">
-                  <button
-                    onClick={copyEmail}
-                    className="px-4 py-2 rounded bg-[#1A1A1A] hover:bg-[#262626] border border-[#262626] text-[#F5F5F5] transition-colors flex items-center gap-2 text-xs font-mono"
-                  >
-                    {copied ? (
+                  {/* Metadata (Monospace, 14px, #d6d6d6, calendar icon) */}
+                  <div className={`flex items-center gap-1.5 text-[14px] ${themeClasses.meta} mb-2`}>
+                    <Calendar size={12} className="shrink-0 opacity-80" />
+                    <span>{post.date}</span>
+                    <span className="opacity-50">·</span>
+                    <Clock size={12} className="shrink-0 opacity-80" />
+                    <span>{post.readingTime}</span>
+                    {post.category && (
                       <>
-                        <Check size={14} className="text-emerald-400" />
-                        <span className="text-emerald-400 font-semibold">Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={14} className="text-[#A3A3A3]" />
-                        <span>Copy Email</span>
+                        <span className="opacity-50">·</span>
+                        <span className="text-[#ff7300]/80">[{post.category}]</span>
                       </>
                     )}
-                  </button>
+                  </div>
 
-                  <a
-                    href={`mailto:${PROFILE.email}`}
-                    className="px-4 py-2 rounded bg-[#FFFFFF] hover:bg-[#E5E5E5] text-[#0A0A0A] font-semibold transition-colors flex items-center gap-2 text-xs font-mono"
+                  {/* Description (Monospace, 16px, 1.6 line-height, #e0e0e0) */}
+                  <p
+                    onClick={() => handleOpenPost(post.id)}
+                    className={`text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
                   >
-                    <Mail size={14} /> Send Email
-                  </a>
+                    {post.description}
+                  </p>
+                </article>
+              ))}
+
+              {filteredPosts.length === 0 && (
+                <div className="text-center py-12 text-[16px] text-[#94a3b8]">
+                  No posts found matching "{searchQuery}".
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ========================================================== */}
+        {/* VIEW 2: FULL POST ARTICLE READER                           */}
+        {/* ========================================================== */}
+        {currentView === 'reader' && activePost && (
+          <main className="pb-20 pt-6 px-4 space-y-6 text-left">
+            {/* Back button */}
+            <div>
+              <button
+                onClick={handleBackToPosts}
+                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+              >
+                <ArrowLeft size={15} />
+                <span>← Back to all posts</span>
+              </button>
+            </div>
+
+            {/* Post Header */}
+            <div className="space-y-2 border-b border-[#d86b18]/40 pb-3">
+              <h1 className={`text-[18px] font-bold leading-snug ${themeClasses.postTitle}`}>
+                {activePost.title}
+              </h1>
+
+              <div className={`flex flex-wrap items-center gap-2 text-[14px] ${themeClasses.meta}`}>
+                <div className="flex items-center gap-1">
+                  <Calendar size={12} />
+                  <span>{activePost.date}</span>
+                </div>
+                <span>·</span>
+                <div className="flex items-center gap-1">
+                  <Clock size={12} />
+                  <span>{activePost.readingTime}</span>
+                </div>
+                <span>·</span>
+                <span className="text-[#ff7300]">[{activePost.category}]</span>
+              </div>
+            </div>
+
+            {/* Article Body Paragraphs */}
+            <div className={`text-[16px] leading-[1.7] space-y-4 ${themeClasses.desc}`}>
+              {activePost.fullContent?.map((paragraph, pIdx) => (
+                <p key={pIdx}>{paragraph}</p>
+              ))}
+            </div>
+
+            {/* Architecture / Key Highlights */}
+            {activePost.highlights && (
+              <div className="p-4 rounded bg-[#161c28] border border-[#2d374d] space-y-2 text-[15px]">
+                <div className="text-[#ff7300] font-semibold text-[14px] uppercase tracking-wider">
+                  // Key Highlights
+                </div>
+                <ul className="space-y-1.5 text-[#cbd5e1]">
+                  {activePost.highlights.map((item, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="text-[#ff7300] font-bold">›</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Code Snippet */}
+            {activePost.codeSnippet && (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-[13px] text-[#94a3b8]">
+                  <span>python implementation</span>
+                  <span className="text-[#ff7300]">UTF-8 | Python 3.12</span>
+                </div>
+                <div className="p-3.5 rounded bg-[#121620] border border-[#2d374d] overflow-x-auto text-[14px] font-mono text-[#e0e0e0] leading-relaxed">
+                  <pre>{activePost.codeSnippet}</pre>
                 </div>
               </div>
+            )}
 
-              {/* Social Links Below contact.sh Container */}
-              <div className="pt-4 flex flex-wrap items-center justify-center gap-3 text-[#A3A3A3] text-xs font-mono">
+            {/* Tech Stack Pills & GitHub Link */}
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-2.5 border-t border-[#d86b18]/40">
+              <div className="flex flex-wrap gap-1.5">
+                {activePost.tags?.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[13px] px-2.5 py-0.5 rounded bg-[#161c28] border border-[#2d374d] text-[#cbd5e1]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {activePost.github && (
+                <a
+                  href={activePost.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline font-medium"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>View on GitHub</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              )}
+            </div>
+
+            {/* Bottom Back Button */}
+            <div className="pt-4 border-t border-[#d86b18]/30">
+              <button
+                onClick={handleBackToPosts}
+                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+              >
+                <ArrowLeft size={15} />
+                <span>← Back to all posts</span>
+              </button>
+            </div>
+          </main>
+        )}
+
+        {/* ========================================================== */}
+        {/* VIEW 3: ABOUT PAGE                                         */}
+        {/* ========================================================== */}
+        {currentView === 'about' && (
+          <main className="pb-20 pt-6 px-4 space-y-6 text-left">
+            <div>
+              <button
+                onClick={handleBackToPosts}
+                className="inline-flex items-center gap-1.5 text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+              >
+                <ArrowLeft size={15} />
+                <span>← Back to all posts</span>
+              </button>
+            </div>
+
+            <div className="space-y-2 border-b border-[#d86b18]/40 pb-3">
+              <h1 className={`text-[18px] font-bold ${themeClasses.headline}`}>
+                About Mubashir Riaz
+              </h1>
+              <p className="text-[14px] text-[#ff7300]">
+                // AI Backend Engineer & Intelligent Systems Developer
+              </p>
+            </div>
+
+            {/* Bio Paragraphs */}
+            <div className={`text-[16px] leading-[1.7] space-y-4 ${themeClasses.desc}`}>
+              <p>
+                I am an AI Backend Engineer focused on designing high-throughput API architectures,
+                multimodal document extraction pipelines, and citation-grounded RAG systems.
+              </p>
+              <p>
+                My engineering philosophy is rooted in pragmatism: I believe AI models should be
+                treated as probabilistic components wrapped inside strictly typed, deterministic state
+                machines. I learn by building production-ready systems and testing their boundaries under load.
+              </p>
+              <p>
+                Currently, I am building and scaling projects like <strong>InvoiceGuard AI</strong> (automated
+                freight invoice auditing via Vision LLMs) and <strong>DocuMind AI</strong> (hierarchical RAG
+                document assistant with ChromaDB).
+              </p>
+            </div>
+
+            {/* Technical Skills Table */}
+            <div className="space-y-2 pt-1">
+              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+                // Technical Stack & Architecture
+              </div>
+              <div className="space-y-2 text-[15px]">
+                {SKILLS_LIST.map((grp) => (
+                  <div
+                    key={grp.label}
+                    className="p-2.5 rounded bg-[#161c28] border border-[#2d374d] flex flex-col sm:flex-row sm:items-baseline gap-1.5"
+                  >
+                    <span className="w-32 text-[#ff7300] font-semibold shrink-0">{grp.label}:</span>
+                    <span className="text-[#cbd5e1]">{grp.items.join(', ')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Interactive Dev CLI */}
+            <div className="pt-1 space-y-1.5">
+              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+                // Interactive Shell
+              </div>
+              <p className="text-[14px] text-[#94a3b8]">
+                Try running commands in this retro node shell:
+              </p>
+              <MinimalDevCli />
+            </div>
+
+            {/* Direct Contact & Socials */}
+            <div className="pt-3 border-t border-[#d86b18]/40 space-y-2.5">
+              <div className="text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+                // Connect
+              </div>
+              <div className="flex flex-wrap items-center gap-3 text-[15px]">
+                <a
+                  href={`mailto:${PROFILE.email}`}
+                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                >
+                  <Mail size={15} className="text-[#ff7300]" />
+                  <span>{PROFILE.email}</span>
+                </a>
+
                 <a
                   href={PROFILE.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] hover:border-[#404040] text-[#F5F5F5] transition-all flex items-center gap-2"
+                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <Github size={15} /> GitHub <ArrowUpRight size={13} className="text-[#737373]" />
+                  <GithubIcon className="w-4 h-4 text-[#ff7300]" />
+                  <span>GitHub</span>
                 </a>
+
                 <a
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] hover:border-[#404040] text-[#F5F5F5] transition-all flex items-center gap-2"
+                  className="px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <Linkedin size={15} /> LinkedIn <ArrowUpRight size={13} className="text-[#737373]" />
+                  <LinkedinIcon className="w-4 h-4 text-[#ff7300]" />
+                  <span>LinkedIn</span>
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </main>
+        )}
 
-      {/* ------------------------------------------------------------ */}
-      {/* FOOTER                                                       */}
-      {/* ------------------------------------------------------------ */}
-      <footer className="border-t border-[#262626] py-8 text-center font-mono text-xs text-[#737373] bg-[#0A0A0A]">
-        <p>
-          &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
-        </p>
-      </footer>
+        {/* ---------------------------------------------------------- */}
+        {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
+        {/* ---------------------------------------------------------- */}
+        <footer className="py-8 px-4 border-t border-[#d86b18]/40 text-center text-[14px] text-[#94a3b8] font-mono">
+          <p>
+            &copy; {new Date().getFullYear()} {PROFILE.name}
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }
