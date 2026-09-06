@@ -700,11 +700,11 @@ export default function Portfolio() {
                 Hi, I'm {PROFILE.handle}.
               </h1>
               <span
-                className="text-[#ff7300] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5"
+                className="text-[#ff7300] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5 group"
                 title="RSS Feed"
                 aria-label="RSS Feed"
               >
-                <Rss size={17} className="stroke-[2.5]" />
+                <Rss size={17} className="stroke-[2.5] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </span>
             </div>
 
@@ -722,11 +722,11 @@ export default function Portfolio() {
                 href={PROFILE.github}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#ff7300] transition-colors p-0.5"
+                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
                 title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-[24px] h-[24px]" />
+                <GithubIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
 
               {/* X / Twitter */}
@@ -734,11 +734,11 @@ export default function Portfolio() {
                 href={PROFILE.x}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#ff7300] transition-colors p-0.5"
+                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
                 title="X Profile"
                 aria-label="X"
               >
-                <XIcon className="w-[24px] h-[24px]" />
+                <XIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
 
               {/* LinkedIn */}
@@ -746,21 +746,21 @@ export default function Portfolio() {
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#ff7300] transition-colors p-0.5"
+                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
                 title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-[24px] h-[24px]" />
+                <LinkedinIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
 
               {/* Email */}
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="hover:text-[#ff7300] transition-colors p-0.5"
+                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
                 title={`Send email to ${PROFILE.email}`}
                 aria-label="Email"
               >
-                <Mail className="w-[24px] h-[24px]" />
+                <Mail className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
             </div>
           </div>
@@ -930,9 +930,9 @@ export default function Portfolio() {
                   href={activePost.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline font-medium"
+                  className="group inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline font-medium"
                 >
-                  <GithubIcon className="w-4 h-4" />
+                  <GithubIcon className="w-4 h-4 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>View on GitHub</span>
                   <ArrowUpRight size={14} />
                 </a>
@@ -1031,9 +1031,9 @@ export default function Portfolio() {
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
                 >
-                  <Mail size={15} className="text-[#ff7300] shrink-0" />
+                  <Mail size={15} className="text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span className="break-all">{PROFILE.email}</span>
                 </a>
 
@@ -1041,9 +1041,9 @@ export default function Portfolio() {
                   href={PROFILE.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0" />
+                  <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>GitHub</span>
                 </a>
 
@@ -1051,9 +1051,9 @@ export default function Portfolio() {
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
-                  <LinkedinIcon className="w-4 h-4 text-[#ff7300] shrink-0" />
+                  <LinkedinIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>LinkedIn</span>
                 </a>
               </div>
