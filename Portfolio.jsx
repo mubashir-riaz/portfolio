@@ -25,6 +25,7 @@ const PROFILE = {
   github: 'https://github.com/mubashir-riaz',
   linkedin: 'https://www.linkedin.com/in/mubashir-riaz-51a881424/',
   x: 'https://x.com',
+  bluesky: 'https://bsky.app',
   descriptionLines: [
     'AI Backend Engineer building intelligent systems.',
     'Every commit lands on GitHub for you to fork & remix.',
@@ -264,6 +265,14 @@ function LinkedinIcon({ className = 'w-[18px] h-[18px]' }) {
   );
 }
 
+function BlueskyIcon({ className = 'w-[18px] h-[18px]' }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026" />
+    </svg>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /*  MINIMAL TERMINAL COMPONENT (ABOUT VIEW)                           */
 /* ------------------------------------------------------------------ */
@@ -456,11 +465,11 @@ export default function Portfolio() {
       return {
         bg: 'bg-[#0b0f17]',
         text: 'text-[#f2f2f2]',
-        navLogo: 'text-[#f2f2f2]',
+        navLogo: 'text-[#f5f5f5]',
         headline: 'text-[#f5f5f5]',
         desc: 'text-[#e0e0e0]',
         meta: 'text-[#94a3b8]',
-        border: 'border-[#d86b18]',
+        border: 'border-[#d66b18]',
         postTitle: 'text-[#ff7300]',
       };
     }
@@ -472,18 +481,18 @@ export default function Portfolio() {
         headline: 'text-[#0f172a]',
         desc: 'text-[#334155]',
         meta: 'text-[#64748b]',
-        border: 'border-[#d86b18]',
+        border: 'border-[#d66b18]',
         postTitle: 'text-[#c25404]',
       };
     }
     return {
       bg: 'bg-[#202838]',
       text: 'text-[#f2f2f2]',
-      navLogo: 'text-[#f2f2f2]',
+      navLogo: 'text-[#f5f5f5]',
       headline: 'text-[#f5f5f5]',
-      desc: 'text-[#f0f0f0]',
-      meta: 'text-[#d6d6d6]',
-      border: 'border-[#d86b18]',
+      desc: 'text-[#f1f1f1]',
+      meta: 'text-[#d7d9df]',
+      border: 'border-[#d66b18]',
       postTitle: 'text-[#ff7300]',
     };
   }, [theme]);
@@ -499,7 +508,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className="px-4 sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
+          className="pl-[5px] pr-[10px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
           {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
           <button
@@ -524,7 +533,7 @@ export default function Portfolio() {
               }}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'posts' || currentView === 'reader'
-                  ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
+                  ? 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
               }`}
             >
@@ -538,7 +547,7 @@ export default function Portfolio() {
               }}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'about'
-                  ? 'text-[#ff7300] font-semibold underline decoration-[#d86b18] underline-offset-4'
+                  ? 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4'
                   : 'text-white hover:text-[#ff7300]'
               }`}
             >
@@ -562,7 +571,7 @@ export default function Portfolio() {
               className="text-white hover:text-[#ff7300] transition-colors p-1.5"
               title={`Theme: ${theme} (Click to switch)`}
             >
-              {theme === 'paper' ? <Sun size={16} className="text-[#d86b18]" /> : <Moon size={16} />}
+              {theme === 'paper' ? <Sun size={16} className="text-[#d66b18]" /> : <Moon size={16} />}
             </button>
           </nav>
 
@@ -583,7 +592,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* NAVBAR ORANGE HORIZONTAL DIVIDER                           */}
         {/* ---------------------------------------------------------- */}
-        <div className="px-4 sm:px-6">
+        <div className="pl-[5px] pr-[10px] sm:px-6">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -592,7 +601,7 @@ export default function Portfolio() {
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
-          <div className="sm:hidden border-b border-[#d86b18]/40 bg-[#161c28] px-4 py-3.5 space-y-3 font-mono text-[15px]">
+          <div className="sm:hidden border-b border-[#d66b18]/40 bg-[#161c28] pl-[5px] pr-[10px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]">
             <div className="flex flex-col space-y-2">
               <button
                 onClick={() => {
@@ -641,7 +650,7 @@ export default function Portfolio() {
                 onClick={toggleTheme}
                 className="flex items-center gap-2 text-[#cbd5e1] hover:text-[#ff7300] py-1"
               >
-                {theme === 'paper' ? <Sun size={15} className="text-[#d86b18]" /> : <Moon size={15} />}
+                {theme === 'paper' ? <Sun size={15} className="text-[#d66b18]" /> : <Moon size={15} />}
                 <span className="capitalize">{theme}</span>
               </button>
             </div>
@@ -652,7 +661,7 @@ export default function Portfolio() {
         {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
-          <div className="py-2.5 sm:py-3 px-3.5 sm:px-6 border-b border-[#d86b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+          <div className="py-2.5 sm:py-3 pl-[5px] pr-[10px] sm:px-6 border-b border-[#d66b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
             <Search size={15} className="text-[#ff7300] shrink-0" />
             <input
               ref={searchInputRef}
@@ -680,27 +689,27 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* PROFILE SECTION: LEFT ALIGNED WITH THE ORANGE LINE         */}
+        {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] px-4 sm:px-6 flex flex-col items-start text-left sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
-          {/* Circular Avatar */}
-          <div className="shrink-0 mb-[20px] sm:mb-0 self-start">
+        <section className="pt-[24px] pb-[23px] pl-[5px] pr-[10px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
+          <div className="shrink-0 mb-[25px] sm:mb-0">
             <img
               src={PROFILE.avatar}
               alt={PROFILE.name}
-              className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
+              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
             />
           </div>
 
           {/* Intro Information */}
-          <div className="flex-1 min-w-0 flex flex-col items-start text-left">
+          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
             {/* Headline with RSS badge */}
-            <div className="flex items-center justify-start gap-2">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
               <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm {PROFILE.handle}.
               </h1>
               <span
-                className="text-[#ff7300] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5 group"
+                className="text-[#ff6900] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5 group"
                 title="RSS Feed"
                 aria-label="RSS Feed"
               >
@@ -709,14 +718,14 @@ export default function Portfolio() {
             </div>
 
             {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
-            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono max-w-[440px] sm:max-w-none">
+            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0">
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
             {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
@@ -740,6 +749,20 @@ export default function Portfolio() {
               >
                 <XIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
+
+              {/* Bluesky */}
+              {PROFILE.bluesky && (
+                <a
+                  href={PROFILE.bluesky}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
+                  title="Bluesky Profile"
+                  aria-label="Bluesky"
+                >
+                  <BlueskyIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                </a>
+              )}
 
               {/* LinkedIn */}
               <a
@@ -767,9 +790,9 @@ export default function Portfolio() {
         </section>
 
         {/* ---------------------------------------------------------- */}
-        {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D86B18, 1PX)            */}
+        {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D66B18, 1PX)            */}
         {/* ---------------------------------------------------------- */}
-        <div className="px-4 sm:px-6">
+        <div className="pl-[5px] pr-[10px] sm:px-6">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -781,10 +804,10 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
 
         {/* ========================================================== */}
-        {/* VIEW 1: POSTS LIST (VERTICAL LIST, 768px, pt-12 pb-6 px-4) */}
+        {/* VIEW 1: POSTS LIST (VERTICAL LIST, pt-[83px] pb-[40px])     */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-10 sm:pt-14 md:pt-[83px] pb-10 px-4 sm:px-6">
+          <section id="recent-posts" className="pt-[83px] pb-[40px] pl-[5px] pr-[10px] sm:px-6">
             {searchQuery && (
               <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
@@ -842,7 +865,7 @@ export default function Portfolio() {
         {/* VIEW 2: FULL POST ARTICLE READER                           */}
         {/* ========================================================== */}
         {currentView === 'reader' && activePost && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-[5px] pr-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
             {/* Back button */}
             <div>
               <button
@@ -956,7 +979,7 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-3.5 sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-[5px] pr-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
             <div>
               <button
                 onClick={handleBackToPosts}
@@ -967,7 +990,7 @@ export default function Portfolio() {
               </button>
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d86b18]/40 pb-3">
+            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d66b18]/40 pb-3">
               <h1 className={`text-[17px] sm:text-[20px] font-bold ${themeClasses.headline}`}>
                 About Mubashir Riaz
               </h1>
@@ -1024,14 +1047,14 @@ export default function Portfolio() {
             </div>
 
             {/* Direct Contact & Socials */}
-            <div className="pt-3 border-t border-[#d86b18]/40 space-y-2.5">
+            <div className="pt-3 border-t border-[#d66b18]/40 space-y-2.5">
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 // Connect
               </div>
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
                 >
                   <Mail size={15} className="text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span className="break-all">{PROFILE.email}</span>
@@ -1041,17 +1064,29 @@ export default function Portfolio() {
                   href={PROFILE.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
                   <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>GitHub</span>
                 </a>
 
+                {PROFILE.bluesky && (
+                  <a
+                    href={PROFILE.bluesky}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  >
+                    <BlueskyIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                    <span>Bluesky</span>
+                  </a>
+                )}
+
                 <a
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d86b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
+                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
                 >
                   <LinkedinIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>LinkedIn</span>
@@ -1064,7 +1099,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className="py-6 sm:py-8 px-4 border-t border-[#d86b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
+        <footer className="py-6 sm:py-8 pl-[5px] pr-[10px] sm:px-6 border-t border-[#d66b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
