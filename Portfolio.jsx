@@ -25,7 +25,6 @@ const PROFILE = {
   github: 'https://github.com/mubashir-riaz',
   linkedin: 'https://www.linkedin.com/in/mubashir-riaz-51a881424/',
   x: 'https://x.com',
-  bluesky: 'https://bsky.app',
   descriptionLines: [
     'AI Backend Engineer building intelligent systems.',
     'Every commit lands on GitHub for you to fork & remix.',
@@ -261,14 +260,6 @@ function LinkedinIcon({ className = 'w-[18px] h-[18px]' }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-    </svg>
-  );
-}
-
-function BlueskyIcon({ className = 'w-[18px] h-[18px]' }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026" />
     </svg>
   );
 }
@@ -750,20 +741,6 @@ export default function Portfolio() {
                 <XIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
               </a>
 
-              {/* Bluesky */}
-              {PROFILE.bluesky && (
-                <a
-                  href={PROFILE.bluesky}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
-                  title="Bluesky Profile"
-                  aria-label="Bluesky"
-                >
-                  <BlueskyIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
-                </a>
-              )}
-
               {/* LinkedIn */}
               <a
                 href={PROFILE.linkedin}
@@ -1069,18 +1046,6 @@ export default function Portfolio() {
                   <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>GitHub</span>
                 </a>
-
-                {PROFILE.bluesky && (
-                  <a
-                    href={PROFILE.bluesky}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
-                  >
-                    <BlueskyIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
-                    <span>Bluesky</span>
-                  </a>
-                )}
 
                 <a
                   href={PROFILE.linkedin}
