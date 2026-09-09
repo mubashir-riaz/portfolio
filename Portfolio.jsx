@@ -493,7 +493,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className="pl-[5px] pr-[10px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
+          className="px-[10px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
           {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
           <button
@@ -577,7 +577,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* NAVBAR ORANGE HORIZONTAL DIVIDER                           */}
         {/* ---------------------------------------------------------- */}
-        <div className="pl-[5px] pr-[10px] sm:px-6">
+        <div className="px-[10px] sm:px-6">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -586,7 +586,7 @@ export default function Portfolio() {
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
-          <div className="sm:hidden border-b border-[#d66b18]/40 bg-[#161c28] pl-[5px] pr-[10px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]">
+          <div className="sm:hidden border-b border-[#d66b18]/40 bg-[#161c28] px-[10px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]">
             <div className="flex flex-col space-y-2">
               <button
                 onClick={() => {
@@ -647,7 +647,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
           <div>
-            <div className="py-2.5 sm:py-3 pl-[5px] pr-[10px] sm:px-6 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+            <div className="py-2.5 sm:py-3 px-[10px] sm:px-6 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
               <Search size={15} className="text-[#ff7300] shrink-0" />
               <input
                 ref={searchInputRef}
@@ -672,7 +672,7 @@ export default function Portfolio() {
                 <X size={15} />
               </button>
             </div>
-            <div className="pl-[5px] pr-[10px] sm:px-6">
+            <div className="px-[10px] sm:px-6">
               <div
                 className={`border-t ${themeClasses.border}`}
                 style={{ borderTopWidth: '1px' }}
@@ -684,7 +684,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] pl-[5px] pr-[10px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+        <section className="pt-[24px] pb-[23px] px-[10px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
           {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
           <div className="shrink-0 mb-[25px] sm:mb-0">
             <img
@@ -771,7 +771,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D66B18, 1PX)            */}
         {/* ---------------------------------------------------------- */}
-        <div className="pl-[5px] pr-[10px] sm:px-6">
+        <div className="px-[10px] sm:px-6">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -786,7 +786,7 @@ export default function Portfolio() {
         {/* VIEW 1: POSTS LIST (VERTICAL LIST, pt-[83px] pb-[40px])     */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-[83px] pb-[40px] pl-[5px] pr-[10px] sm:px-6">
+          <section id="recent-posts" className="pt-[83px] pb-[40px] px-[10px] sm:px-6">
             {searchQuery && (
               <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
@@ -841,7 +841,7 @@ export default function Portfolio() {
         {/* VIEW 2: FULL POST ARTICLE READER                           */}
         {/* ========================================================== */}
         {currentView === 'reader' && activePost && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-[5px] pr-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
             {/* Back button */}
             <div>
               <button
@@ -950,7 +950,7 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 pl-[5px] pr-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[10px] sm:px-6 space-y-5 sm:space-y-6 text-left">
             <div>
               <button
                 onClick={handleBackToPosts}
@@ -1058,7 +1058,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className="py-6 sm:py-8 pl-[5px] pr-[10px] sm:px-6 border-t border-[#d66b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
+        <footer className="py-6 sm:py-8 px-[10px] sm:px-6 border-t border-[#d66b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
