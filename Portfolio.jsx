@@ -4,7 +4,6 @@ import {
   Sun,
   Moon,
   Calendar,
-  Clock,
   ArrowLeft,
   ArrowUpRight,
   X,
@@ -40,7 +39,6 @@ const POSTS = [
     id: 'invoice-guard',
     title: 'Building InvoiceGuard: Multi-Modal Freight Auditing with Vision LLMs',
     date: '24 Feb, 2026',
-    readingTime: '5 min read',
     category: 'AI Auditing Platform',
     description:
       'How we automated freight rate verification, contract invoice parsing, and dispute generation using FastAPI and multimodal Vision LLMs.',
@@ -79,7 +77,6 @@ const POSTS = [
     id: 'docu-mind',
     title: 'DocuMind: Zero-Hallucination Document Assistant with ChromaDB & RAG',
     date: '18 Jan, 2026',
-    readingTime: '7 min read',
     category: 'Vector RAG Search',
     description:
       'Deep dive into multi-format document chunking, semantic vector embeddings with ChromaDB, and citation-grounded generation using Llama 3.3.',
@@ -120,7 +117,6 @@ const POSTS = [
     id: 'inference-speed',
     title: 'Shipping at Inference-Speed: Designing Low-Latency FastAPI Pipelines',
     date: '28 Dec, 2025',
-    readingTime: '12 min read',
     category: 'AI Infrastructure',
     description:
       'Why async streaming endpoints, background worker queues, and Redis caching transform LLM response times for high-concurrency systems.',
@@ -157,7 +153,6 @@ async def stream_inference(req: PromptRequest):
     id: 'agentic-engineering',
     title: 'Agentic Engineering: The No-BS Way to Build Reliable AI Workflows',
     date: '17 Nov, 2025',
-    readingTime: '9 min read',
     category: 'Agent Systems',
     description:
       'Moving beyond naive prompt chaining: implementing Pydantic validation, structured outputs, deterministic state machines, and graceful fallback handling.',
@@ -193,7 +188,6 @@ class ProductionAgentController:
     id: 'production-vector-search',
     title: 'Production Vector Search: Pitfalls in Chunking and Retrieval Quality',
     date: '05 Oct, 2025',
-    readingTime: '6 min read',
     category: 'Vector Search',
     description:
       'Why top-k similarity often fails on tabular data and how hybrid retrieval with metadata filtering eliminates irrelevant context.',
@@ -652,30 +646,38 @@ export default function Portfolio() {
         {/* INLINE SEARCH INPUT (WHEN ACTIVATED)                       */}
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
-          <div className="py-2.5 sm:py-3 pl-[5px] pr-[10px] sm:px-6 border-b border-[#d66b18]/40 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
-            <Search size={15} className="text-[#ff7300] shrink-0" />
-            <input
-              ref={searchInputRef}
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search articles by keyword, stack or title..."
-              className="w-full bg-transparent outline-none text-[13.5px] sm:text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
-            />
-            {searchQuery && (
+          <div>
+            <div className="py-2.5 sm:py-3 pl-[5px] pr-[10px] sm:px-6 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+              <Search size={15} className="text-[#ff7300] shrink-0" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles by keyword, stack or title..."
+                className="w-full bg-transparent outline-none text-[13.5px] sm:text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="text-[#94a3b8] hover:text-[#f2f2f2] text-[13px] sm:text-[15px] px-1.5 shrink-0"
+                >
+                  Clear
+                </button>
+              )}
               <button
-                onClick={() => setSearchQuery('')}
-                className="text-[#94a3b8] hover:text-[#f2f2f2] text-[13px] sm:text-[15px] px-1.5 shrink-0"
+                onClick={() => setSearchOpen(false)}
+                className="text-[#94a3b8] hover:text-[#f2f2f2] p-1 shrink-0"
               >
-                Clear
+                <X size={15} />
               </button>
-            )}
-            <button
-              onClick={() => setSearchOpen(false)}
-              className="text-[#94a3b8] hover:text-[#f2f2f2] p-1 shrink-0"
-            >
-              <X size={15} />
-            </button>
+            </div>
+            <div className="pl-[5px] pr-[10px] sm:px-6">
+              <div
+                className={`border-t ${themeClasses.border}`}
+                style={{ borderTopWidth: '1px' }}
+              />
+            </div>
           </div>
         )}
 
@@ -808,9 +810,6 @@ export default function Portfolio() {
                   <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] ${themeClasses.meta} mb-2`}>
                     <Calendar size={11} className="shrink-0 opacity-80" />
                     <span>{post.date}</span>
-                    <span className="opacity-50">·</span>
-                    <Clock size={11} className="shrink-0 opacity-80" />
-                    <span>{post.readingTime}</span>
                     {post.category && (
                       <>
                         <span className="opacity-50">·</span>
@@ -864,11 +863,6 @@ export default function Portfolio() {
                 <div className="flex items-center gap-1">
                   <Calendar size={12} />
                   <span>{activePost.date}</span>
-                </div>
-                <span>·</span>
-                <div className="flex items-center gap-1">
-                  <Clock size={12} />
-                  <span>{activePost.readingTime}</span>
                 </div>
                 <span>·</span>
                 <span className="text-[#ff7300]">[{activePost.category}]</span>
