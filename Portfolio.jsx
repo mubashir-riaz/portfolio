@@ -258,116 +258,6 @@ function LinkedinIcon({ className = 'w-[18px] h-[18px]' }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  MINIMAL TERMINAL COMPONENT (ABOUT VIEW)                           */
-/* ------------------------------------------------------------------ */
-function MinimalDevCli() {
-  const [history, setHistory] = useState([
-    { type: 'sys', text: 'Mubashir Riaz Terminal [v2.4] - Type help for commands' },
-    { type: 'cmd', text: 'status' },
-    { type: 'out', text: '✔ FastAPI Engine: ONLINE\n✔ ChromaDB Vector Store: READY\n✔ Redis Cache: CONNECTED\n✔ Focus: AI Agents & Production Backends' },
-  ]);
-  const [cmdInput, setCmdInput] = useState('');
-  const terminalRef = useRef(null);
-
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [history]);
-
-  const runCommand = (cmd) => {
-    const raw = cmd.trim();
-    if (!raw) return;
-
-    const lower = raw.toLowerCase();
-    const newItems = [...history, { type: 'cmd', text: raw }];
-
-    if (lower === 'clear') {
-      setHistory([]);
-      setCmdInput('');
-      return;
-    } else if (lower === 'help') {
-      newItems.push({
-        type: 'out',
-        text: 'Available commands:\n  status   - Backend architecture and services health\n  skills   - Core AI, API, and database stack\n  projects - Production highlights\n  contact  - Direct contact links\n  clear    - Clear console',
-      });
-    } else if (lower === 'status') {
-      newItems.push({
-        type: 'out',
-        text: 'SYSTEM STATUS: All backend microservices operational.\nFastAPI: 0.0.0.0:8000 | Latency: 42ms | Error Rate: 0.00%',
-      });
-    } else if (lower === 'skills') {
-      newItems.push({
-        type: 'out',
-        text: 'STACK: Python, FastAPI, Pydantic, LangChain, ChromaDB, PostgreSQL, Redis, Docker, AWS, React.',
-      });
-    } else if (lower === 'projects') {
-      newItems.push({
-        type: 'out',
-        text: '1. InvoiceGuard AI (Freight Auditing with Vision LLMs)\n2. DocuMind AI (RAG with ChromaDB & Llama 3.3)',
-      });
-    } else if (lower === 'contact') {
-      newItems.push({
-        type: 'out',
-        text: `Email: ${PROFILE.email}\nGitHub: ${PROFILE.github}\nLinkedIn: ${PROFILE.linkedin}`,
-      });
-    } else {
-      newItems.push({
-        type: 'out',
-        text: `bash: ${raw}: command not found. Type 'help' for available commands.`,
-      });
-    }
-
-    setHistory(newItems);
-    setCmdInput('');
-  };
-
-  return (
-    <div className="border border-[#d86b18]/40 bg-[#161c28] p-3 sm:p-3.5 rounded font-mono text-[13px] sm:text-[14px] text-[#e0e0e0] space-y-2 mt-3 sm:mt-4">
-      <div className="flex items-center justify-between border-b border-[#2d374d] pb-2 text-[12px] sm:text-[13px] text-[#94a3b8]">
-        <span className="truncate mr-2">bash - mubashir@server:~$</span>
-        <span className="text-[#ff7300] shrink-0">● online</span>
-      </div>
-
-      <div ref={terminalRef} className="max-h-56 overflow-y-auto space-y-2 pt-1 text-[12.5px] sm:text-[13.5px]">
-        {history.map((h, i) => (
-          <div key={i}>
-            {h.type === 'sys' && <div className="text-[#94a3b8] italic">// {h.text}</div>}
-            {h.type === 'cmd' && (
-              <div className="flex items-center gap-1.5 text-[#f2f2f2]">
-                <span className="text-[#ff7300]">$</span>
-                <span className="break-all">{h.text}</span>
-              </div>
-            )}
-            {h.type === 'out' && (
-              <div className="pl-2 border-l border-[#d86b18]/40 text-[#cbd5e1] whitespace-pre-wrap break-words">
-                {h.text}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          runCommand(cmdInput);
-        }}
-        className="flex items-center gap-1.5 pt-1 text-[#f2f2f2]"
-      >
-        <span className="text-[#ff7300]">$</span>
-        <input
-          type="text"
-          value={cmdInput}
-          onChange={(e) => setCmdInput(e.target.value)}
-          placeholder="type help, status, skills..."
-          className="bg-transparent border-none outline-none flex-1 text-[12.5px] sm:text-[14px] font-mono text-[#f2f2f2] placeholder:text-[#64748b] min-w-0"
-        />
-      </form>
-    </div>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  MAIN PORTFOLIO BLOG COMPONENT                                     */
@@ -962,7 +852,7 @@ export default function Portfolio() {
             </div>
 
             <div className="space-y-1.5 sm:space-y-2 border-b border-[#d66b18]/40 pb-3">
-              <h1 className={`text-[17px] sm:text-[20px] font-bold ${themeClasses.headline}`}>
+              <h1 className={`text-[24px] sm:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
                 About
               </h1>
               <p className="text-[13px] sm:text-[14px] text-[#ff7300]">
@@ -1004,17 +894,6 @@ export default function Portfolio() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Interactive Dev CLI */}
-            <div className="pt-1 space-y-1.5">
-              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
-                Interactive Shell
-              </div>
-              <p className="text-[13px] sm:text-[14px] text-[#94a3b8]">
-                Try running commands in this retro node shell:
-              </p>
-              <MinimalDevCli />
             </div>
 
             {/* Direct Contact & Socials */}
