@@ -251,28 +251,189 @@ const TECH_STACK = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  CUSTOM INLINE ICONS FOR PIXEL-PERFECT FIDELITY                    */
+/*  MONOCHROME SVG BRAND ICONS (OUTLINE / STROKE STYLE)              */
 /* ------------------------------------------------------------------ */
-function GithubIcon({ className = 'w-[18px] h-[18px]' }) {
+export function GithubIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
   return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
     </svg>
   );
 }
 
-function XIcon({ className = 'w-[18px] h-[18px]' }) {
+export function XIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
   return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+      <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
     </svg>
   );
 }
 
-function LinkedinIcon({ className = 'w-[18px] h-[18px]' }) {
+export function LinkedinIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
   return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M8 11v5" />
+      <path d="M8 8v.01" />
+      <path d="M12 16v-5" />
+      <path d="M16 16v-3a2 2 0 1 0 -4 0" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+    </svg>
+  );
+}
+
+export function TwitterIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+    </svg>
+  );
+}
+
+export function InstagramIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
+export function YoutubeIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+      <polygon points="10 15 15 12 10 9 10 15" />
+    </svg>
+  );
+}
+
+export function DiscordIcon({
+  className = 'w-[18px] h-[18px]',
+  size,
+  strokeWidth = 2,
+  ...props
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M18.5 5.5a14.86 14.86 0 0 0-3.64-1.13.07.07 0 0 0-.08.04 10.27 10.27 0 0 0-.45.92 13.8 13.8 0 0 0-4.66 0 10.27 10.27 0 0 0-.45-.92.07.07 0 0 0-.08-.04 14.86 14.86 0 0 0-3.64 1.13.06.06 0 0 0-.03.02C2.7 10.2 2.05 14.73 2.45 19.2a.08.08 0 0 0 .03.06 15.02 15.02 0 0 0 4.54 2.3.07.07 0 0 0 .08-.03c.35-.48.66-.99.93-1.52a.07.07 0 0 0-.04-.1 9.87 9.87 0 0 1-1.4-.67.07.07 0 0 1 0-.12c.09-.07.19-.14.28-.21a.07.07 0 0 1 .07-.01c2.97 1.36 6.19 1.36 9.12 0a.07.07 0 0 1 .07.01c.09.07.19.14.28.21a.07.07 0 0 1 0 .12c-.44.25-.91.48-1.4.67a.07.07 0 0 0-.04.1c.27.53.58 1.04.93 1.52a.07.07 0 0 0 .08.03 15.02 15.02 0 0 0 4.54-2.3.08.08 0 0 0 .03-.06c.49-5.18-.84-9.67-3.15-13.66a.06.06 0 0 0-.03-.02z" />
+      <circle cx="8.5" cy="12" r="1.5" />
+      <circle cx="15.5" cy="12" r="1.5" />
     </svg>
   );
 }
@@ -389,35 +550,35 @@ export default function Portfolio() {
     return {
       bg: 'bg-[#202838]',
       text: 'text-[#f2f2f2]',
-      navLogo: 'text-[#f5f5f5] hover:text-[#ff7300]',
-      navLinkActive: 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4',
-      navLinkInactive: 'text-white hover:text-[#ff7300]',
-      navIcon: 'text-white hover:text-[#ff7300]',
-      border: 'border-[#d66b18]',
-      borderMuted: 'border-[#d66b18]/40',
+      navLogo: 'text-[#f5f5f5] hover:text-[#38bdf8]',
+      navLinkActive: 'text-[#38bdf8] font-semibold underline decoration-[#0284c7] underline-offset-4',
+      navLinkInactive: 'text-white hover:text-[#38bdf8]',
+      navIcon: 'text-white hover:text-[#38bdf8]',
+      border: 'border-[#0ea5e9]/50',
+      borderMuted: 'border-[#0ea5e9]/25',
       headline: 'text-[#f5f5f5]',
-      rssIcon: 'text-[#ff6900] hover:text-[#ff8822]',
+      rssIcon: 'text-[#38bdf8] hover:text-[#7dd3fc]',
       profileDesc: 'text-[#f1f1f1]',
-      socialIcon: 'text-[#d5d8df] hover:text-[#ff7300]',
-      postTitle: 'text-[#ff7300]',
+      socialIcon: 'text-[#d5d8df] hover:text-[#38bdf8]',
+      postTitle: 'text-[#38bdf8]',
       meta: 'text-[#d7d9df]',
-      metaAccent: 'text-[#ff7300]/80',
+      metaAccent: 'text-[#38bdf8]/80',
       desc: 'text-[#f1f1f1]',
-      accentText: 'text-[#ff7300]',
-      accentLink: 'text-[#ff7300] hover:underline',
+      accentText: 'text-[#38bdf8]',
+      accentLink: 'text-[#38bdf8] hover:underline',
       cardBg: 'bg-[#161c28] border-[#2d374d]',
       codeBox: 'bg-[#121620] border-[#2d374d] text-[#e0e0e0]',
       tagPill: 'bg-[#161c28] border-[#2d374d] text-[#cbd5e1]',
-      contactBtn: 'bg-[#161c28] border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2]',
-      contactIcon: 'text-[#ff7300]',
-      mobileDrawer: 'bg-[#161c28] border-[#d66b18]/40',
-      mobileItemActive: 'text-[#ff7300] font-semibold bg-[#202838]',
-      mobileItemInactive: 'text-[#f2f2f2] hover:text-[#ff7300]',
-      mobileSubText: 'text-[#cbd5e1] hover:text-[#ff7300]',
-      searchIcon: 'text-[#ff7300]',
+      contactBtn: 'bg-[#161c28] border-[#2d374d] hover:border-[#38bdf8] text-[#f2f2f2]',
+      contactIcon: 'text-[#38bdf8]',
+      mobileDrawer: 'bg-[#161c28] border-[#0ea5e9]/25',
+      mobileItemActive: 'text-[#38bdf8] font-semibold bg-[#202838]',
+      mobileItemInactive: 'text-[#f2f2f2] hover:text-[#38bdf8]',
+      mobileSubText: 'text-[#cbd5e1] hover:text-[#38bdf8]',
+      searchIcon: 'text-[#38bdf8]',
       searchInput: 'text-[#f2f2f2] placeholder:text-[#94a3b8]',
       searchClear: 'text-[#94a3b8] hover:text-[#f2f2f2]',
-      footer: 'border-[#d66b18]/40 text-[#94a3b8]',
+      footer: 'border-[#0ea5e9]/25 text-[#94a3b8]',
     };
   }, [theme]);
 
@@ -461,7 +622,7 @@ export default function Portfolio() {
                   : themeClasses.navLinkInactive
               }`}
             >
-              Posts
+              Home
             </button>
 
             <button
@@ -483,7 +644,7 @@ export default function Portfolio() {
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-label="Search Posts"
               className={`${themeClasses.navIcon} transition-colors p-1.5`}
-              title="Search (Cmd+K)"
+              title="Search"
             >
               <Search size={16} />
             </button>
@@ -539,7 +700,7 @@ export default function Portfolio() {
                     : themeClasses.mobileItemInactive
                 }`}
               >
-                Posts
+                Home
               </button>
 
               <button
@@ -567,7 +728,7 @@ export default function Portfolio() {
                 className={`flex items-center gap-2 ${themeClasses.mobileSubText} py-1`}
               >
                 <Search size={15} />
-                <span>Search (Cmd+K)</span>
+                <span>Search</span>
               </button>
 
               <button
@@ -639,7 +800,7 @@ export default function Portfolio() {
             {/* Headline with RSS badge */}
             <div className="flex items-center justify-center sm:justify-start gap-2">
               <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                Hi, I'm {PROFILE.handle}.
+                Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
               </h1>
               <span
                 className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
@@ -657,18 +818,22 @@ export default function Portfolio() {
               ))}
             </div>
 
-            {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4">
+            {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
                 target="_blank"
                 rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
+                <GithubIcon
+                  size={28}
+                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                  strokeWidth={2}
+                />
               </a>
 
               {/* X / Twitter */}
@@ -676,11 +841,15 @@ export default function Portfolio() {
                 href={PROFILE.x}
                 target="_blank"
                 rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="X Profile"
                 aria-label="X"
               >
-                <XIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
+                <XIcon
+                  size={28}
+                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                  strokeWidth={2}
+                />
               </a>
 
               {/* LinkedIn */}
@@ -688,21 +857,29 @@ export default function Portfolio() {
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
+                <LinkedinIcon
+                  size={28}
+                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                  strokeWidth={2}
+                />
               </a>
 
               {/* Email */}
               <a
                 href={`mailto:${PROFILE.email}`}
-                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title={`Send email to ${PROFILE.email}`}
                 aria-label="Email"
               >
-                <Mail className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
+                <Mail
+                  size={28}
+                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                  strokeWidth={2}
+                />
               </a>
             </div>
           </div>
@@ -853,9 +1030,13 @@ export default function Portfolio() {
                   rel="noreferrer"
                   className={`group inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} font-medium`}
                 >
-                  <GithubIcon className="w-4 h-4 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                  <GithubIcon
+                    size={16}
+                    className="w-4 h-4 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
                   <span>View on GitHub</span>
-                  <ArrowUpRight size={14} />
+                  <ArrowUpRight size={14} className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               )}
             </div>
@@ -935,8 +1116,51 @@ export default function Portfolio() {
                   href={`mailto:${PROFILE.email}`}
                   className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2 break-all`}
                 >
-                  <Mail size={15} className={`${themeClasses.contactIcon} shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12`} />
+                  <Mail
+                    size={15}
+                    className={`${themeClasses.contactIcon} shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6`}
+                    strokeWidth={2}
+                  />
                   <span className="break-all">{PROFILE.email}</span>
+                </a>
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
+                >
+                  <GithubIcon
+                    size={15}
+                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href={PROFILE.x}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
+                >
+                  <XIcon
+                    size={15}
+                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                  <span>X</span>
+                </a>
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
+                >
+                  <LinkedinIcon
+                    size={15}
+                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                  <span>LinkedIn</span>
                 </a>
               </div>
             </div>
