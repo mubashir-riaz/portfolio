@@ -963,10 +963,10 @@ export default function Portfolio() {
 
             <div className="space-y-1.5 sm:space-y-2 border-b border-[#d66b18]/40 pb-3">
               <h1 className={`text-[17px] sm:text-[20px] font-bold ${themeClasses.headline}`}>
-                About Mubashir Riaz
+                About
               </h1>
               <p className="text-[13px] sm:text-[14px] text-[#ff7300]">
-                // AI Backend Engineer & Intelligent Systems Developer
+                AI Backend Engineer & Intelligent Systems Developer
               </p>
             </div>
 
@@ -991,7 +991,7 @@ export default function Portfolio() {
             {/* Technical Skills Table */}
             <div className="space-y-2 pt-1">
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
-                // Technical Stack & Architecture
+                Technical Stack & Architecture
               </div>
               <div className="space-y-2 text-[13px] sm:text-[15px]">
                 {SKILLS_LIST.map((grp) => (
@@ -1009,7 +1009,7 @@ export default function Portfolio() {
             {/* Interactive Dev CLI */}
             <div className="pt-1 space-y-1.5">
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
-                // Interactive Shell
+                Interactive Shell
               </div>
               <p className="text-[13px] sm:text-[14px] text-[#94a3b8]">
                 Try running commands in this retro node shell:
@@ -1020,7 +1020,7 @@ export default function Portfolio() {
             {/* Direct Contact & Socials */}
             <div className="pt-3 border-t border-[#d66b18]/40 space-y-2.5">
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
-                // Connect
+                Connect
               </div>
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
                 <a
