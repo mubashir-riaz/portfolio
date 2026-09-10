@@ -353,25 +353,71 @@ export default function Portfolio() {
   const themeClasses = useMemo(() => {
     if (theme === 'paper') {
       return {
-        bg: 'bg-[#f4f1ea]',
-        text: 'text-[#1e293b]',
-        navLogo: 'text-[#0f172a]',
-        headline: 'text-[#0f172a]',
-        desc: 'text-[#334155]',
-        meta: 'text-[#64748b]',
-        border: 'border-[#d66b18]',
-        postTitle: 'text-[#c25404]',
+        bg: 'bg-[#ffffff]',
+        text: 'text-[#111827]',
+        navLogo: 'text-[#111827] hover:text-[#0077b5]',
+        navLinkActive: 'text-[#0077b5] font-semibold underline decoration-[#0077b5] underline-offset-4',
+        navLinkInactive: 'text-[#111111] hover:text-[#0077b5]',
+        navIcon: 'text-[#222222] hover:text-[#0077b5]',
+        border: 'border-[#e5e5e5]',
+        borderMuted: 'border-[#e5e5e5]',
+        headline: 'text-[#111827]',
+        rssIcon: 'text-[#0077b5] hover:text-[#005a8c]',
+        profileDesc: 'text-[#111827]',
+        socialIcon: 'text-[#4b4b4b] hover:text-[#0077b5]',
+        postTitle: 'text-[#0077b5]',
+        meta: 'text-[#555555]',
+        metaAccent: 'text-[#0077b5]',
+        desc: 'text-[#555555]',
+        accentText: 'text-[#0077b5]',
+        accentLink: 'text-[#0077b5] hover:underline',
+        cardBg: 'bg-[#f9fafb] border-[#e5e5e5]',
+        codeBox: 'bg-[#f3f4f6] border-[#e5e5e5] text-[#1e293b]',
+        tagPill: 'bg-[#f3f4f6] border-[#e5e5e5] text-[#555555]',
+        contactBtn: 'bg-[#ffffff] border-[#e5e5e5] hover:border-[#0077b5] text-[#111827]',
+        contactIcon: 'text-[#0077b5]',
+        mobileDrawer: 'bg-[#ffffff] border-[#e5e5e5]',
+        mobileItemActive: 'text-[#0077b5] font-semibold bg-[#f3f4f6]',
+        mobileItemInactive: 'text-[#111111] hover:text-[#0077b5]',
+        mobileSubText: 'text-[#444444] hover:text-[#0077b5]',
+        searchIcon: 'text-[#0077b5]',
+        searchInput: 'text-[#111827] placeholder:text-[#9ca3af]',
+        searchClear: 'text-[#555555] hover:text-[#111827]',
+        footer: 'border-[#e5e5e5] text-[#555555]',
       };
     }
     return {
       bg: 'bg-[#202838]',
       text: 'text-[#f2f2f2]',
-      navLogo: 'text-[#f5f5f5]',
-      headline: 'text-[#f5f5f5]',
-      desc: 'text-[#f1f1f1]',
-      meta: 'text-[#d7d9df]',
+      navLogo: 'text-[#f5f5f5] hover:text-[#ff7300]',
+      navLinkActive: 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4',
+      navLinkInactive: 'text-white hover:text-[#ff7300]',
+      navIcon: 'text-white hover:text-[#ff7300]',
       border: 'border-[#d66b18]',
+      borderMuted: 'border-[#d66b18]/40',
+      headline: 'text-[#f5f5f5]',
+      rssIcon: 'text-[#ff6900] hover:text-[#ff8822]',
+      profileDesc: 'text-[#f1f1f1]',
+      socialIcon: 'text-[#d5d8df] hover:text-[#ff7300]',
       postTitle: 'text-[#ff7300]',
+      meta: 'text-[#d7d9df]',
+      metaAccent: 'text-[#ff7300]/80',
+      desc: 'text-[#f1f1f1]',
+      accentText: 'text-[#ff7300]',
+      accentLink: 'text-[#ff7300] hover:underline',
+      cardBg: 'bg-[#161c28] border-[#2d374d]',
+      codeBox: 'bg-[#121620] border-[#2d374d] text-[#e0e0e0]',
+      tagPill: 'bg-[#161c28] border-[#2d374d] text-[#cbd5e1]',
+      contactBtn: 'bg-[#161c28] border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2]',
+      contactIcon: 'text-[#ff7300]',
+      mobileDrawer: 'bg-[#161c28] border-[#d66b18]/40',
+      mobileItemActive: 'text-[#ff7300] font-semibold bg-[#202838]',
+      mobileItemInactive: 'text-[#f2f2f2] hover:text-[#ff7300]',
+      mobileSubText: 'text-[#cbd5e1] hover:text-[#ff7300]',
+      searchIcon: 'text-[#ff7300]',
+      searchInput: 'text-[#f2f2f2] placeholder:text-[#94a3b8]',
+      searchClear: 'text-[#94a3b8] hover:text-[#f2f2f2]',
+      footer: 'border-[#d66b18]/40 text-[#94a3b8]',
     };
   }, [theme]);
 
@@ -388,7 +434,7 @@ export default function Portfolio() {
         <header
           className="px-[18px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
-          {/* Brand / Logo (System Monospace, 20px on mobile, bold #f5f5f5) */}
+          {/* Brand / Logo (System Monospace, 20px on mobile, bold) */}
           <button
             onClick={() => {
               setCurrentView('posts');
@@ -397,7 +443,7 @@ export default function Portfolio() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             style={{ fontFamily: 'var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)' }}
-            className={`text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} hover:text-[#ff7300] transition-colors leading-none text-left`}
+            className={`text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left`}
           >
             {PROFILE.name}
           </button>
@@ -411,8 +457,8 @@ export default function Portfolio() {
               }}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'posts' || currentView === 'reader'
-                  ? 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4'
-                  : 'text-white hover:text-[#ff7300]'
+                  ? themeClasses.navLinkActive
+                  : themeClasses.navLinkInactive
               }`}
             >
               Posts
@@ -425,8 +471,8 @@ export default function Portfolio() {
               }}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'about'
-                  ? 'text-[#ff7300] font-semibold underline decoration-[#d66b18] underline-offset-4'
-                  : 'text-white hover:text-[#ff7300]'
+                  ? themeClasses.navLinkActive
+                  : themeClasses.navLinkInactive
               }`}
             >
               About
@@ -436,7 +482,7 @@ export default function Portfolio() {
             <button
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-label="Search Posts"
-              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              className={`${themeClasses.navIcon} transition-colors p-1.5`}
               title="Search (Cmd+K)"
             >
               <Search size={16} />
@@ -446,18 +492,18 @@ export default function Portfolio() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="text-white hover:text-[#ff7300] transition-colors p-1.5"
+              className={`${themeClasses.navIcon} transition-colors p-1.5`}
               title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
             >
-              {theme === 'paper' ? <Sun size={16} className="text-[#d66b18]" /> : <Moon size={16} />}
+              {theme === 'paper' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
           </nav>
 
-          {/* Mobile Menu Hamburger Button (Only on Mobile, 19px, #e5e7eb) */}
+          {/* Mobile Menu Hamburger Button (Only on Mobile, 19px) */}
           <button
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
-            className="sm:hidden text-[#e5e7eb] hover:text-[#ff7300] p-1.5 transition-colors flex items-center justify-center focus:outline-none"
+            className={`sm:hidden ${themeClasses.navIcon} p-1.5 transition-colors flex items-center justify-center focus:outline-none`}
           >
             {mobileMenuOpen ? (
               <X size={19} strokeWidth={2} />
@@ -468,7 +514,7 @@ export default function Portfolio() {
         </header>
 
         {/* ---------------------------------------------------------- */}
-        {/* NAVBAR ORANGE HORIZONTAL DIVIDER                           */}
+        {/* NAVBAR HORIZONTAL DIVIDER                                  */}
         {/* ---------------------------------------------------------- */}
         <div className="px-[18px] sm:px-6">
           <div
@@ -479,7 +525,7 @@ export default function Portfolio() {
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
-          <div className="sm:hidden border-b border-[#d66b18]/40 bg-[#161c28] px-[18px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]">
+          <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[18px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]`}>
             <div className="flex flex-col space-y-2">
               <button
                 onClick={() => {
@@ -489,11 +535,11 @@ export default function Portfolio() {
                 }}
                 className={`text-left py-1.5 px-2 rounded transition-colors ${
                   currentView === 'posts' || currentView === 'reader'
-                    ? 'text-[#ff7300] font-semibold bg-[#202838]'
-                    : 'text-[#f2f2f2] hover:text-[#ff7300]'
+                    ? themeClasses.mobileItemActive
+                    : themeClasses.mobileItemInactive
                 }`}
               >
-                // Posts
+                Posts
               </button>
 
               <button
@@ -504,21 +550,21 @@ export default function Portfolio() {
                 }}
                 className={`text-left py-1.5 px-2 rounded transition-colors ${
                   currentView === 'about'
-                    ? 'text-[#ff7300] font-semibold bg-[#202838]'
-                    : 'text-[#f2f2f2] hover:text-[#ff7300]'
+                    ? themeClasses.mobileItemActive
+                    : themeClasses.mobileItemInactive
                 }`}
               >
-                // About
+                About
               </button>
             </div>
 
-            <div className="pt-2 border-t border-[#2d374d] flex items-center justify-between px-2 text-[14px]">
+            <div className={`pt-2 border-t ${themeClasses.borderMuted} flex items-center justify-between px-2 text-[14px]`}>
               <button
                 onClick={() => {
                   setSearchOpen(true);
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center gap-2 text-[#cbd5e1] hover:text-[#ff7300] py-1"
+                className={`flex items-center gap-2 ${themeClasses.mobileSubText} py-1`}
               >
                 <Search size={15} />
                 <span>Search (Cmd+K)</span>
@@ -527,10 +573,10 @@ export default function Portfolio() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle Theme"
-                className="flex items-center text-[#cbd5e1] hover:text-[#ff7300] py-1 px-1"
+                className={`flex items-center ${themeClasses.mobileSubText} py-1 px-1`}
                 title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
               >
-                {theme === 'paper' ? <Sun size={16} className="text-[#d66b18]" /> : <Moon size={16} />}
+                {theme === 'paper' ? <Sun size={16} /> : <Moon size={16} />}
               </button>
             </div>
           </div>
@@ -542,26 +588,26 @@ export default function Portfolio() {
         {searchOpen && (
           <div>
             <div className="py-2.5 sm:py-3 px-[18px] sm:px-6 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
-              <Search size={15} className="text-[#ff7300] shrink-0" />
+              <Search size={15} className={`${themeClasses.searchIcon} shrink-0`} />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search articles by keyword, stack or title..."
-                className="w-full bg-transparent outline-none text-[13.5px] sm:text-[16px] font-mono text-[#f2f2f2] placeholder:text-[#94a3b8]"
+                className={`w-full bg-transparent outline-none text-[13.5px] sm:text-[16px] font-mono ${themeClasses.searchInput}`}
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="text-[#94a3b8] hover:text-[#f2f2f2] text-[13px] sm:text-[15px] px-1.5 shrink-0"
+                  className={`${themeClasses.searchClear} text-[13px] sm:text-[15px] px-1.5 shrink-0`}
                 >
                   Clear
                 </button>
               )}
               <button
                 onClick={() => setSearchOpen(false)}
-                className="text-[#94a3b8] hover:text-[#f2f2f2] p-1 shrink-0"
+                className={`${themeClasses.searchClear} p-1 shrink-0`}
               >
                 <X size={15} />
               </button>
@@ -596,33 +642,33 @@ export default function Portfolio() {
                 Hi, I'm {PROFILE.handle}.
               </h1>
               <span
-                className="text-[#ff6900] hover:text-[#ff8822] cursor-pointer inline-flex items-center ml-0.5 group"
+                className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
                 title="RSS Feed"
                 aria-label="RSS Feed"
               >
-                <Rss size={17} className="stroke-[2.5] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                <Rss size={17} className="stroke-[2.5]" />
               </span>
             </div>
 
             {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
-            <div className="mt-3 space-y-0 text-[14px] sm:text-[16px] text-[#f1f1f1] leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0">
+            <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
               {PROFILE.descriptionLines.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
             </div>
 
             {/* Minimal Monochrome Outline Social Icons (gap 15px, margin-top 18px, 24px) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4 text-[#d5d8df]">
+            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-[15px] sm:gap-4">
               {/* GitHub */}
               <a
                 href={PROFILE.github}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
+                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="GitHub Profile"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                <GithubIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
               </a>
 
               {/* X / Twitter */}
@@ -630,11 +676,11 @@ export default function Portfolio() {
                 href={PROFILE.x}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
+                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="X Profile"
                 aria-label="X"
               >
-                <XIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                <XIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
               </a>
 
               {/* LinkedIn */}
@@ -642,28 +688,28 @@ export default function Portfolio() {
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
+                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title="LinkedIn Profile"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                <LinkedinIcon className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
               </a>
 
               {/* Email */}
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="group inline-flex items-center justify-center hover:text-[#ff7300] transition-colors p-0.5"
+                className={`group inline-flex items-center justify-center w-8 h-8 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
                 title={`Send email to ${PROFILE.email}`}
                 aria-label="Email"
               >
-                <Mail className="w-[24px] h-[24px] transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                <Mail className="w-[24px] h-[24px] pointer-events-none transition-transform duration-200 ease-out origin-center group-hover:rotate-12 group-hover:scale-105" />
               </a>
             </div>
           </div>
         </section>
 
         {/* ---------------------------------------------------------- */}
-        {/* ORANGE HORIZONTAL DIVIDER (COLOR: #D66B18, 1PX)            */}
+        {/* HORIZONTAL DIVIDER                                          */}
         {/* ---------------------------------------------------------- */}
         <div className="px-[18px] sm:px-6">
           <div
@@ -700,19 +746,19 @@ export default function Portfolio() {
                     </button>
                   </h2>
 
-                  {/* Metadata (Monospace, 11px-12px, #d7d9df, calendar icon) */}
+                  {/* Metadata (Monospace, 11px-12px, calendar icon) */}
                   <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] ${themeClasses.meta} mb-2`}>
                     <Calendar size={11} className="shrink-0 opacity-80" />
                     <span>{post.date}</span>
                     {post.category && (
                       <>
                         <span className="opacity-50">·</span>
-                        <span className="text-[#ff7300]/80">[{post.category}]</span>
+                        <span className={themeClasses.metaAccent}>[{post.category}]</span>
                       </>
                     )}
                   </div>
 
-                  {/* Description (Monospace, 16px, 1.6 line-height, #e0e0e0) */}
+                  {/* Description (Monospace, 16px, 1.6 line-height) */}
                   <p
                     onClick={() => handleOpenPost(post.id)}
                     className={`text-[14px] sm:text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
@@ -723,7 +769,7 @@ export default function Portfolio() {
               ))}
 
               {filteredPosts.length === 0 && (
-                <div className="text-center py-12 text-[14px] sm:text-[16px] text-[#94a3b8]">
+                <div className={`text-center py-12 text-[14px] sm:text-[16px] ${themeClasses.meta}`}>
                   No posts found matching "{searchQuery}".
                 </div>
               )}
@@ -740,7 +786,7 @@ export default function Portfolio() {
             <div>
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
                 <span>Back to all posts</span>
@@ -748,7 +794,7 @@ export default function Portfolio() {
             </div>
 
             {/* Post Header */}
-            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d86b18]/40 pb-3">
+            <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
               <h1 className={`text-[17px] sm:text-[19px] md:text-[21px] font-bold leading-snug ${themeClasses.postTitle}`}>
                 {activePost.title}
               </h1>
@@ -759,7 +805,7 @@ export default function Portfolio() {
                   <span>{activePost.date}</span>
                 </div>
                 <span>·</span>
-                <span className="text-[#ff7300]">[{activePost.category}]</span>
+                <span className={themeClasses.metaAccent}>[{activePost.category}]</span>
               </div>
             </div>
 
@@ -772,14 +818,14 @@ export default function Portfolio() {
 
             {/* Architecture / Key Highlights */}
             {activePost.highlights && (
-              <div className="p-3 sm:p-4 rounded bg-[#161c28] border border-[#2d374d] space-y-2 text-[13.5px] sm:text-[15px]">
-                <div className="text-[#ff7300] font-semibold text-[13px] sm:text-[14px] uppercase tracking-wider">
-                  // Key Highlights
+              <div className="space-y-2 text-[13.5px] sm:text-[15px] pt-1">
+                <div className={`${themeClasses.accentText} font-semibold text-[13px] sm:text-[14px] uppercase tracking-wider`}>
+                  Key Highlights
                 </div>
-                <ul className="space-y-1.5 text-[#cbd5e1]">
+                <ul className={`space-y-1.5 ${themeClasses.desc}`}>
                   {activePost.highlights.map((item, i) => (
                     <li key={i} className="flex items-start gap-1.5">
-                      <span className="text-[#ff7300] font-bold">›</span>
+                      <span className={`${themeClasses.accentText} font-bold`}>›</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -787,26 +833,13 @@ export default function Portfolio() {
               </div>
             )}
 
-            {/* Code Snippet */}
-            {activePost.codeSnippet && (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[12px] sm:text-[13px] text-[#94a3b8]">
-                  <span>python implementation</span>
-                  <span className="text-[#ff7300]">UTF-8 | Python 3.12</span>
-                </div>
-                <div className="p-3 sm:p-3.5 rounded bg-[#121620] border border-[#2d374d] overflow-x-auto text-[12px] sm:text-[14px] font-mono text-[#e0e0e0] leading-relaxed">
-                  <pre>{activePost.codeSnippet}</pre>
-                </div>
-              </div>
-            )}
-
             {/* Tech Stack Pills & GitHub Link */}
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-2.5 border-t border-[#d86b18]/40">
+            <div className={`pt-2 flex flex-wrap items-center justify-between gap-2.5 border-t ${themeClasses.borderMuted}`}>
               <div className="flex flex-wrap gap-1.5">
                 {activePost.tags?.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[12px] sm:text-[13px] px-2 sm:px-2.5 py-0.5 rounded bg-[#161c28] border border-[#2d374d] text-[#cbd5e1]"
+                    className={`text-[12px] sm:text-[13px] px-2 sm:px-2.5 py-0.5 rounded ${themeClasses.tagPill}`}
                   >
                     {tag}
                   </span>
@@ -818,7 +851,7 @@ export default function Portfolio() {
                   href={activePost.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline font-medium"
+                  className={`group inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} font-medium`}
                 >
                   <GithubIcon className="w-4 h-4 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span>View on GitHub</span>
@@ -828,10 +861,10 @@ export default function Portfolio() {
             </div>
 
             {/* Bottom Back Button */}
-            <div className="pt-4 border-t border-[#d86b18]/30">
+            <div className={`pt-4 border-t ${themeClasses.borderMuted}`}>
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
                 <span>Back to all posts</span>
@@ -848,18 +881,18 @@ export default function Portfolio() {
             <div>
               <button
                 onClick={handleBackToPosts}
-                className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
+                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
                 <span>Back to all posts</span>
               </button>
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2 border-b border-[#d66b18]/40 pb-3">
+            <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
               <h1 className={`text-[24px] sm:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
                 About
               </h1>
-              <p className="text-[13px] sm:text-[14px] text-[#ff7300]">
+              <p className={`text-[13px] sm:text-[14px] ${themeClasses.accentText}`}>
                 AI Backend Engineer & Intelligent Systems Developer
               </p>
             </div>
@@ -884,7 +917,7 @@ export default function Portfolio() {
 
             {/* Technical Stack & Architecture */}
             <div className="space-y-2 pt-1">
-              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
                 Technical Stack & Architecture
               </div>
               <p className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
@@ -893,16 +926,16 @@ export default function Portfolio() {
             </div>
 
             {/* Direct Contact & Socials */}
-            <div className="pt-3 border-t border-[#d66b18]/40 space-y-2.5">
-              <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
+            <div className={`pt-3 border-t ${themeClasses.borderMuted} space-y-2.5`}>
+              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
                 Connect
               </div>
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2 break-all"
+                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2 break-all`}
                 >
-                  <Mail size={15} className="text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
+                  <Mail size={15} className={`${themeClasses.contactIcon} shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12`} />
                   <span className="break-all">{PROFILE.email}</span>
                 </a>
               </div>
@@ -913,7 +946,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className="py-6 sm:py-8 px-[18px] sm:px-6 border-t border-[#d66b18]/40 text-center text-[13px] sm:text-[14px] text-[#94a3b8] font-mono">
+        <footer className={`py-6 sm:py-8 px-[18px] sm:px-6 border-t ${themeClasses.footer} text-center text-[13px] sm:text-[14px] font-mono`}>
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
