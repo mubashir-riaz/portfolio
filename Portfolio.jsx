@@ -222,13 +222,24 @@ reranked = cross_encoder.rank(
 ];
 
 /* ------------------------------------------------------------------ */
-/*  SKILLS & CAPABILITIES                                             */
+/*  SKILLS & TECH STACK                                               */
 /* ------------------------------------------------------------------ */
-const SKILLS_LIST = [
-  { label: 'Languages', items: ['Python', 'JavaScript', 'SQL', 'Bash', 'HTML', 'CSS'] },
-  { label: 'AI & Backend', items: ['FastAPI', 'Pydantic', 'LangChain', 'LLM Agents', 'RAG', 'REST APIs', 'Uvicorn'] },
-  { label: 'Data & Vector', items: ['ChromaDB', 'PostgreSQL', 'Redis', 'Semantic Search', 'Vector Embeddings'] },
-  { label: 'DevOps & Cloud', items: ['Docker', 'Git', 'GitHub Actions', 'AWS', 'Linux / Bash'] },
+const TECH_STACK = [
+  'Python',
+  'FastAPI',
+  'Pydantic',
+  'LangChain',
+  'LLM Agents',
+  'RAG',
+  'ChromaDB',
+  'PostgreSQL',
+  'Redis',
+  'Docker',
+  'AWS',
+  'JavaScript',
+  'SQL',
+  'Git',
+  'Linux',
 ];
 
 /* ------------------------------------------------------------------ */
@@ -883,14 +894,9 @@ export default function Portfolio() {
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 Technical Stack & Architecture
               </div>
-              <div className={`space-y-1.5 sm:space-y-2 text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
-                {SKILLS_LIST.map((grp) => (
-                  <p key={grp.label}>
-                    <span className="text-[#ff7300] font-semibold">{grp.label}: </span>
-                    <span className="text-[#cbd5e1]">{grp.items.join(', ')}</span>
-                  </p>
-                ))}
-              </div>
+              <p className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
+                {TECH_STACK.join(', ')}
+              </p>
             </div>
 
             {/* Direct Contact & Socials */}
