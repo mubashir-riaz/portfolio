@@ -739,7 +739,7 @@ export default function Portfolio() {
                 className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
-                <span>← Back to all posts</span>
+                <span>Back to all posts</span>
               </button>
             </div>
 
@@ -830,7 +830,7 @@ export default function Portfolio() {
                 className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
-                <span>← Back to all posts</span>
+                <span>Back to all posts</span>
               </button>
             </div>
           </main>
@@ -847,7 +847,7 @@ export default function Portfolio() {
                 className="inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] text-[#ff7300] hover:underline cursor-pointer"
               >
                 <ArrowLeft size={15} />
-                <span>← Back to all posts</span>
+                <span>Back to all posts</span>
               </button>
             </div>
 
@@ -878,20 +878,17 @@ export default function Portfolio() {
               </p>
             </div>
 
-            {/* Technical Skills Table */}
+            {/* Technical Stack & Architecture */}
             <div className="space-y-2 pt-1">
               <div className="text-[13px] sm:text-[14px] text-[#ff7300] font-semibold uppercase tracking-wider">
                 Technical Stack & Architecture
               </div>
-              <div className="space-y-2 text-[13px] sm:text-[15px]">
+              <div className={`space-y-1.5 sm:space-y-2 text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
                 {SKILLS_LIST.map((grp) => (
-                  <div
-                    key={grp.label}
-                    className="p-2.5 rounded bg-[#161c28] border border-[#2d374d] flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-1.5"
-                  >
-                    <span className="sm:w-32 text-[#ff7300] font-semibold shrink-0">{grp.label}:</span>
+                  <p key={grp.label}>
+                    <span className="text-[#ff7300] font-semibold">{grp.label}: </span>
                     <span className="text-[#cbd5e1]">{grp.items.join(', ')}</span>
-                  </div>
+                  </p>
                 ))}
               </div>
             </div>
