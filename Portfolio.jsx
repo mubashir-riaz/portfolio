@@ -226,19 +226,27 @@ reranked = cross_encoder.rank(
 /* ------------------------------------------------------------------ */
 const TECH_STACK = [
   'Python',
+  'JavaScript',
+  'SQL',
+  'Bash',
+  'HTML',
+  'CSS',
   'FastAPI',
   'Pydantic',
   'LangChain',
   'LLM Agents',
   'RAG',
+  'REST APIs',
+  'Uvicorn',
   'ChromaDB',
   'PostgreSQL',
   'Redis',
+  'Semantic Search',
+  'Vector Embeddings',
   'Docker',
-  'AWS',
-  'JavaScript',
-  'SQL',
   'Git',
+  'GitHub Actions',
+  'AWS',
   'Linux',
 ];
 
@@ -911,26 +919,6 @@ export default function Portfolio() {
                 >
                   <Mail size={15} className="text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
                   <span className="break-all">{PROFILE.email}</span>
-                </a>
-
-                <a
-                  href={PROFILE.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
-                >
-                  <GithubIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
-                  <span>GitHub</span>
-                </a>
-
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group px-2.5 sm:px-3 py-1.5 rounded bg-[#161c28] border border-[#2d374d] hover:border-[#d66b18] text-[#f2f2f2] transition-colors flex items-center gap-2"
-                >
-                  <LinkedinIcon className="w-4 h-4 text-[#ff7300] shrink-0 transition-transform duration-200 ease-in-out origin-center group-hover:rotate-12" />
-                  <span>LinkedIn</span>
                 </a>
               </div>
             </div>
