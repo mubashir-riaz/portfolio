@@ -294,15 +294,11 @@ export default function Portfolio() {
   // Mobile Navigation Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Theme Mode: 'navy' (#202838), 'oled' (#0b0f17), 'paper' (#f4f1ea)
+  // Theme Mode: 'navy' (normal #202838) and 'paper' (white #f4f1ea)
   const [theme, setTheme] = useState('navy');
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      if (prev === 'navy') return 'oled';
-      if (prev === 'oled') return 'paper';
-      return 'navy';
-    });
+    setTheme((prev) => (prev === 'navy' ? 'paper' : 'navy'));
   };
 
   // Keyboard shortcut Ctrl+K / Cmd+K
@@ -355,18 +351,6 @@ export default function Portfolio() {
   }, [selectedPostId]);
 
   const themeClasses = useMemo(() => {
-    if (theme === 'oled') {
-      return {
-        bg: 'bg-[#0b0f17]',
-        text: 'text-[#f2f2f2]',
-        navLogo: 'text-[#f5f5f5]',
-        headline: 'text-[#f5f5f5]',
-        desc: 'text-[#e0e0e0]',
-        meta: 'text-[#94a3b8]',
-        border: 'border-[#d66b18]',
-        postTitle: 'text-[#ff7300]',
-      };
-    }
     if (theme === 'paper') {
       return {
         bg: 'bg-[#f4f1ea]',
@@ -463,7 +447,7 @@ export default function Portfolio() {
               onClick={toggleTheme}
               aria-label="Toggle Theme"
               className="text-white hover:text-[#ff7300] transition-colors p-1.5"
-              title={`Theme: ${theme} (Click to switch)`}
+              title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
             >
               {theme === 'paper' ? <Sun size={16} className="text-[#d66b18]" /> : <Moon size={16} />}
             </button>
@@ -542,10 +526,11 @@ export default function Portfolio() {
 
               <button
                 onClick={toggleTheme}
-                className="flex items-center gap-2 text-[#cbd5e1] hover:text-[#ff7300] py-1"
+                aria-label="Toggle Theme"
+                className="flex items-center text-[#cbd5e1] hover:text-[#ff7300] py-1 px-1"
+                title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
               >
-                {theme === 'paper' ? <Sun size={15} className="text-[#d66b18]" /> : <Moon size={15} />}
-                <span className="capitalize">{theme}</span>
+                {theme === 'paper' ? <Sun size={16} className="text-[#d66b18]" /> : <Moon size={16} />}
               </button>
             </div>
           </div>
