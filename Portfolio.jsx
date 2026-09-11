@@ -30,7 +30,6 @@ const PROFILE = {
   ],
 };
 
-
 /* ------------------------------------------------------------------ */
 /*  POSTS / WRITING / ARTICLES DATA                                   */
 /* ------------------------------------------------------------------ */
@@ -544,7 +543,7 @@ export default function Portfolio() {
         searchIcon: 'text-[#0077b5]',
         searchInput: 'text-[#111827] placeholder:text-[#9ca3af]',
         searchClear: 'text-[#555555] hover:text-[#111827]',
-        footer: 'border-[#e5e5e5] text-[#555555]',
+        footer: 'text-[#555555]',
       };
     }
     return {
@@ -578,7 +577,7 @@ export default function Portfolio() {
       searchIcon: 'text-[#38bdf8]',
       searchInput: 'text-[#f2f2f2] placeholder:text-[#94a3b8]',
       searchClear: 'text-[#94a3b8] hover:text-[#f2f2f2]',
-      footer: 'border-[#0ea5e9]/25 text-[#94a3b8]',
+      footer: 'text-[#94a3b8]',
     };
   }, [theme]);
 
@@ -595,7 +594,7 @@ export default function Portfolio() {
         <header
           className="px-[18px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
-          {/* Brand / Logo (System Monospace, 20px on mobile, bold) */}
+          {/* Brand / Logo (IBM Plex Mono, Straight 'M' | \ / |, Industrial High-Precision Aesthetic) */}
           <button
             onClick={() => {
               setCurrentView('posts');
@@ -603,14 +602,14 @@ export default function Portfolio() {
               setMobileMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            style={{ fontFamily: 'var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)' }}
-            className={`text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left`}
+            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            className={`font-mono text-[20px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left`}
           >
             {PROFILE.name}
           </button>
 
           {/* Desktop Navigation Items + Icons (Hidden on Mobile) */}
-          <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[16px] shrink-0">
+          <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[17px] shrink-0">
             <button
               onClick={() => {
                 setCurrentView('posts');
@@ -646,7 +645,7 @@ export default function Portfolio() {
               className={`${themeClasses.navIcon} transition-colors p-1.5`}
               title="Search"
             >
-              <Search size={16} />
+              <Search size={17} />
             </button>
 
             {/* Theme Toggle Icon Button */}
@@ -656,7 +655,7 @@ export default function Portfolio() {
               className={`${themeClasses.navIcon} transition-colors p-1.5`}
               title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
             >
-              {theme === 'paper' ? <Sun size={16} /> : <Moon size={16} />}
+              {theme === 'paper' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
           </nav>
 
@@ -799,7 +798,7 @@ export default function Portfolio() {
           <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
             {/* Headline with RSS badge */}
             <div className="flex items-center justify-center sm:justify-start gap-2">
-              <h1 className={`text-[21px] sm:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+              <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                 Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
               </h1>
               <span
@@ -923,14 +922,14 @@ export default function Portfolio() {
                     </button>
                   </h2>
 
-                  {/* Metadata (Monospace, 11px-12px, calendar icon) */}
-                  <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] ${themeClasses.meta} mb-2`}>
-                    <Calendar size={11} className="shrink-0 opacity-80" />
+                  {/* Metadata (Monospace, 11px-12px, calendar icon, italic) */}
+                  <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] italic ${themeClasses.meta} mb-2`}>
+                    <Calendar size={11} className="shrink-0 opacity-80 not-italic" />
                     <span>{post.date}</span>
                     {post.category && (
                       <>
                         <span className="opacity-50">·</span>
-                        <span className={themeClasses.metaAccent}>[{post.category}]</span>
+                        <span className={themeClasses.metaAccent}>{post.category}</span>
                       </>
                     )}
                   </div>
@@ -966,7 +965,7 @@ export default function Portfolio() {
                 className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
-                <span>Back to all posts</span>
+                <span>Back to home</span>
               </button>
             </div>
 
@@ -976,13 +975,13 @@ export default function Portfolio() {
                 {activePost.title}
               </h1>
 
-              <div className={`flex flex-wrap items-center gap-1.5 sm:gap-2 text-[12px] sm:text-[14px] ${themeClasses.meta}`}>
+              <div className={`flex flex-wrap items-center gap-1.5 sm:gap-2 text-[12px] sm:text-[14px] italic ${themeClasses.meta}`}>
                 <div className="flex items-center gap-1">
-                  <Calendar size={12} />
+                  <Calendar size={12} className="not-italic" />
                   <span>{activePost.date}</span>
                 </div>
                 <span>·</span>
-                <span className={themeClasses.metaAccent}>[{activePost.category}]</span>
+                <span className={themeClasses.metaAccent}>{activePost.category}</span>
               </div>
             </div>
 
@@ -1048,7 +1047,7 @@ export default function Portfolio() {
                 className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
-                <span>Back to all posts</span>
+                <span>Back to home</span>
               </button>
             </div>
           </main>
@@ -1065,7 +1064,7 @@ export default function Portfolio() {
                 className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
               >
                 <ArrowLeft size={15} />
-                <span>Back to all posts</span>
+                <span>Back to home</span>
               </button>
             </div>
 
@@ -1106,61 +1105,22 @@ export default function Portfolio() {
               </p>
             </div>
 
-            {/* Direct Contact & Socials */}
-            <div className={`pt-3 border-t ${themeClasses.borderMuted} space-y-2.5`}>
+            {/* Direct Contact */}
+            <div className={`pt-3 border-t ${themeClasses.borderMuted} space-y-2`}>
               <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
                 Connect
               </div>
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-[13px] sm:text-[15px]">
+              <div>
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2 break-all`}
+                  className={`group inline-flex items-center gap-2 text-[14px] sm:text-[16px] ${themeClasses.text} hover:opacity-80 transition-opacity break-all`}
                 >
                   <Mail
-                    size={15}
+                    size={16}
                     className={`${themeClasses.contactIcon} shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6`}
                     strokeWidth={2}
                   />
-                  <span className="break-all">{PROFILE.email}</span>
-                </a>
-                <a
-                  href={PROFILE.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
-                >
-                  <GithubIcon
-                    size={15}
-                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                    strokeWidth={2}
-                  />
-                  <span>GitHub</span>
-                </a>
-                <a
-                  href={PROFILE.x}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
-                >
-                  <XIcon
-                    size={15}
-                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                    strokeWidth={2}
-                  />
-                  <span>X</span>
-                </a>
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`group px-2.5 sm:px-3 py-1.5 rounded ${themeClasses.contactBtn} transition-colors flex items-center gap-2`}
-                >
-                  <LinkedinIcon
-                    size={15}
-                    className="w-[15px] h-[15px] shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                    strokeWidth={2}
-                  />
-                  <span>LinkedIn</span>
+                  <span>{PROFILE.email}</span>
                 </a>
               </div>
             </div>
@@ -1168,9 +1128,19 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
+        {/* FOOTER HORIZONTAL DIVIDER                                  */}
+        {/* ---------------------------------------------------------- */}
+        <div className="px-[18px] sm:px-6">
+          <div
+            className={`border-t ${themeClasses.border}`}
+            style={{ borderTopWidth: '1px' }}
+          />
+        </div>
+
+        {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className={`py-6 sm:py-8 px-[18px] sm:px-6 border-t ${themeClasses.footer} text-center text-[13px] sm:text-[14px] font-mono`}>
+        <footer className={`py-6 sm:py-8 px-[18px] sm:px-6 text-center text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
