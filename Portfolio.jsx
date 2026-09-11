@@ -23,7 +23,6 @@ const PROFILE = {
   avatar: '/profile.jpeg',
   github: 'https://github.com/mubashir-riaz',
   linkedin: 'https://www.linkedin.com/in/mubashir-riaz-51a881424/',
-  x: 'https://x.com',
   descriptionLines: [
     'AI Backend Engineer building intelligent systems.',
     'Every commit lands on GitHub for you to fork & remix.',
@@ -835,21 +834,6 @@ export default function Portfolio() {
                 />
               </a>
 
-              {/* X / Twitter */}
-              <a
-                href={PROFILE.x}
-                target="_blank"
-                rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title="X Profile"
-                aria-label="X"
-              >
-                <XIcon
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
 
               {/* LinkedIn */}
               <a
