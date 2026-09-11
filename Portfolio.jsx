@@ -1105,6 +1105,16 @@ export default function Portfolio() {
               </p>
             </div>
 
+            {/* Education */}
+            <div className="space-y-2 pt-1">
+              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
+                Education
+              </div>
+              <div className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
+                <p>Bachelor of Science in Computer Science</p>
+              </div>
+            </div>
+
             {/* Direct Contact */}
             <div className={`pt-3 border-t ${themeClasses.borderMuted} space-y-2`}>
               <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
