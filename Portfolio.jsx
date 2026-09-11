@@ -441,8 +441,16 @@ export function DiscordIcon({
 /*  MAIN PORTFOLIO BLOG COMPONENT                                     */
 /* ------------------------------------------------------------------ */
 export default function Portfolio() {
-  // Navigation & View State: 'posts', 'about', or 'reader'
-  const [currentView, setCurrentView] = useState('posts');
+  // Determine initial view from pathname (/work or /)
+  const getInitialView = () => {
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/work')) {
+      return 'work';
+    }
+    return 'posts';
+  };
+
+  // Navigation & View State: 'posts', 'about', 'reader', or 'work'
+  const [currentView, setCurrentView] = useState(getInitialView);
   const [selectedPostId, setSelectedPostId] = useState(null);
 
   // Search Palette State
@@ -481,16 +489,55 @@ export default function Portfolio() {
     }
   }, [searchOpen]);
 
-  const handleOpenPost = (postId) => {
-    setSelectedPostId(postId);
-    setCurrentView('reader');
+  const navigateTo = (path, viewName) => {
+    if (typeof window !== 'undefined' && window.location.pathname !== path) {
+      window.history.pushState({}, '', path);
+    }
+    setCurrentView(viewName);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleBackToPosts = () => {
+  // Browser back/forward navigation sync
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path.startsWith('/work')) {
+        setCurrentView('work');
+        setSelectedPostId(null);
+      } else {
+        setCurrentView('posts');
+        setSelectedPostId(null);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleGoHome = () => {
     setSelectedPostId(null);
-    setCurrentView('posts');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+    navigateTo('/', 'posts');
+  };
+
+  const handleGoAbout = () => {
+    setSelectedPostId(null);
+    setMobileMenuOpen(false);
+    navigateTo('/', 'about');
+  };
+
+  const handleGoWork = () => {
+    setSelectedPostId(null);
+    setMobileMenuOpen(false);
+    navigateTo('/work', 'work');
+  };
+
+  const handleOpenPost = (postId) => {
+    setSelectedPostId(postId);
+    navigateTo('/', 'reader');
+  };
+
+  const handleBackToPosts = () => {
+    handleGoHome();
   };
 
   const filteredPosts = useMemo(() => {
@@ -595,12 +642,7 @@ export default function Portfolio() {
         >
           {/* Brand / Logo (IBM Plex Mono, Straight 'M' | \ / |, Industrial High-Precision Aesthetic) */}
           <button
-            onClick={() => {
-              setCurrentView('posts');
-              setSelectedPostId(null);
-              setMobileMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={handleGoHome}
             style={{ fontFamily: "'IBM Plex Mono', monospace" }}
             className={`font-mono text-[20px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left`}
           >
@@ -610,10 +652,7 @@ export default function Portfolio() {
           {/* Desktop Navigation Items + Icons (Hidden on Mobile) */}
           <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[17px] shrink-0">
             <button
-              onClick={() => {
-                setCurrentView('posts');
-                setSelectedPostId(null);
-              }}
+              onClick={handleGoHome}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'posts' || currentView === 'reader'
                   ? themeClasses.navLinkActive
@@ -624,10 +663,7 @@ export default function Portfolio() {
             </button>
 
             <button
-              onClick={() => {
-                setCurrentView('about');
-                setSelectedPostId(null);
-              }}
+              onClick={handleGoAbout}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'about'
                   ? themeClasses.navLinkActive
@@ -687,11 +723,7 @@ export default function Portfolio() {
           <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[18px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]`}>
             <div className="flex flex-col space-y-2">
               <button
-                onClick={() => {
-                  setCurrentView('posts');
-                  setSelectedPostId(null);
-                  setMobileMenuOpen(false);
-                }}
+                onClick={handleGoHome}
                 className={`text-left py-1.5 px-2 rounded transition-colors ${
                   currentView === 'posts' || currentView === 'reader'
                     ? themeClasses.mobileItemActive
@@ -702,11 +734,7 @@ export default function Portfolio() {
               </button>
 
               <button
-                onClick={() => {
-                  setCurrentView('about');
-                  setSelectedPostId(null);
-                  setMobileMenuOpen(false);
-                }}
+                onClick={handleGoAbout}
                 className={`text-left py-1.5 px-2 rounded transition-colors ${
                   currentView === 'about'
                     ? themeClasses.mobileItemActive
@@ -783,100 +811,103 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] px-[18px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
-          {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
-          <div className="shrink-0 mb-[25px] sm:mb-0">
-            <img
-              src={PROFILE.avatar}
-              alt={PROFILE.name}
-              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
-            />
-          </div>
-
-          {/* Intro Information */}
-          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
-            {/* Headline with RSS badge */}
-            <div className="flex items-center justify-center sm:justify-start gap-2">
-              <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
-              </h1>
-              <span
-                className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
-                title="RSS Feed"
-                aria-label="RSS Feed"
-              >
-                <Rss size={17} className="stroke-[2.5]" />
-              </span>
-            </div>
-
-            {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
-            <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
-              {PROFILE.descriptionLines.map((line, idx) => (
-                <p key={idx}>{line}</p>
-              ))}
-            </div>
-
-            {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
-              {/* GitHub */}
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title="GitHub Profile"
-                aria-label="GitHub"
-              >
-                <GithubIcon
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
+        {currentView !== 'work' && (
+          <>
+            <section className="pt-[24px] pb-[23px] px-[18px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+              {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
+              <div className="shrink-0 mb-[25px] sm:mb-0">
+                <img
+                  src={PROFILE.avatar}
+                  alt={PROFILE.name}
+                  className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
                 />
-              </a>
+              </div>
 
+              {/* Intro Information */}
+              <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
+                {/* Headline with RSS badge */}
+                <div className="flex items-center justify-center sm:justify-start gap-2">
+                  <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+                    Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
+                  </h1>
+                  <span
+                    className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
+                    title="RSS Feed"
+                    aria-label="RSS Feed"
+                  >
+                    <Rss size={17} className="stroke-[2.5]" />
+                  </span>
+                </div>
 
-              {/* LinkedIn */}
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title="LinkedIn Profile"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
+                {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
+                <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
+                  {PROFILE.descriptionLines.map((line, idx) => (
+                    <p key={idx}>{line}</p>
+                  ))}
+                </div>
 
-              {/* Email */}
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title={`Send email to ${PROFILE.email}`}
-                aria-label="Email"
-              >
-                <Mail
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
+                {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
+                <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
+                  {/* GitHub */}
+                  <a
+                    href={PROFILE.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                    title="GitHub Profile"
+                    aria-label="GitHub"
+                  >
+                    <GithubIcon
+                      size={28}
+                      className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                      strokeWidth={2}
+                    />
+                  </a>
+
+                  {/* LinkedIn */}
+                  <a
+                    href={PROFILE.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                    title="LinkedIn Profile"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedinIcon
+                      size={28}
+                      className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                      strokeWidth={2}
+                    />
+                  </a>
+
+                  {/* Email */}
+                  <a
+                    href={`mailto:${PROFILE.email}`}
+                    className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                    title={`Send email to ${PROFILE.email}`}
+                    aria-label="Email"
+                  >
+                    <Mail
+                      size={28}
+                      className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                      strokeWidth={2}
+                    />
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            {/* ---------------------------------------------------------- */}
+            {/* HORIZONTAL DIVIDER                                          */}
+            {/* ---------------------------------------------------------- */}
+            <div className="px-[18px] sm:px-6">
+              <div
+                className={`border-t ${themeClasses.border}`}
+                style={{ borderTopWidth: '1px' }}
+              />
             </div>
-          </div>
-        </section>
-
-        {/* ---------------------------------------------------------- */}
-        {/* HORIZONTAL DIVIDER                                          */}
-        {/* ---------------------------------------------------------- */}
-        <div className="px-[18px] sm:px-6">
-          <div
-            className={`border-t ${themeClasses.border}`}
-            style={{ borderTopWidth: '1px' }}
-          />
-        </div>
+          </>
+        )}
 
         {/* ---------------------------------------------------------- */}
         {/* DYNAMIC CONTENT ROUTER: 'posts' | 'reader' | 'about'       */}
@@ -1104,7 +1135,7 @@ export default function Portfolio() {
               <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
                 Connect
               </div>
-              <div>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <a
                   href={`mailto:${PROFILE.email}`}
                   className={`group inline-flex items-center gap-2 text-[14px] sm:text-[16px] ${themeClasses.text} hover:opacity-80 transition-opacity break-all`}
@@ -1116,7 +1147,64 @@ export default function Portfolio() {
                   />
                   <span>{PROFILE.email}</span>
                 </a>
+
+                <a
+                  href="/work"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleGoWork();
+                  }}
+                  className={`inline-flex items-center gap-1 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
+                >
+                  <span>lets connect</span>
+                  <ArrowUpRight size={14} />
+                </a>
               </div>
+            </div>
+          </main>
+        )}
+
+        {/* ========================================================== */}
+        {/* VIEW 4: WORK / PENDING PAGE (/work)                        */}
+        {/* ========================================================== */}
+        {currentView === 'work' && (
+          <main className="min-h-[50vh] flex flex-col justify-center py-12 sm:py-20 px-[18px] sm:px-6 text-left space-y-6">
+            <div>
+              <button
+                onClick={handleGoHome}
+                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
+              >
+                <ArrowLeft size={15} />
+                <span>Back to home</span>
+              </button>
+            </div>
+
+            <div className={`space-y-2 border-b ${themeClasses.borderMuted} pb-4`}>
+              <div className={`text-[12px] sm:text-[13px] ${themeClasses.accentText} uppercase tracking-wider font-semibold`}>
+                // Work In Progress
+              </div>
+              <h1 className={`text-[24px] sm:text-[32px] font-bold tracking-tight ${themeClasses.headline}`}>
+                Under Construction
+              </h1>
+            </div>
+
+            <div className={`text-[14px] sm:text-[16px] leading-[1.7] space-y-3 ${themeClasses.desc}`}>
+              <p>
+                This page is currently under construction. Exciting new projects, case studies, and engineering breakdowns will be published here soon.
+              </p>
+              <p className="text-[13px] sm:text-[14px] opacity-75">
+                Check back soon or feel free to reach out via email in the meantime.
+              </p>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href={`mailto:${PROFILE.email}?subject=Let's%20Connect`}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded ${themeClasses.contactBtn} text-[13.5px] sm:text-[14px] transition-colors cursor-pointer`}
+              >
+                <Mail size={15} className={themeClasses.contactIcon} />
+                <span>Get in touch via email</span>
+              </a>
             </div>
           </main>
         )}
