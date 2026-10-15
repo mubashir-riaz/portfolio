@@ -605,7 +605,7 @@ export default function Portfolio() {
         {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
         {/* ---------------------------------------------------------- */}
         <header
-          className="px-[18px] sm:px-6 flex items-center justify-between h-[59px] sm:h-[72px]"
+          className="px-[22px] sm:px-8 flex items-center justify-between h-[59px] sm:h-[72px]"
         >
           {/* Brand / Logo (IBM Plex Mono, Straight 'M' | \ / |, Industrial High-Precision Aesthetic) */}
           <button
@@ -678,7 +678,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* NAVBAR HORIZONTAL DIVIDER                                  */}
         {/* ---------------------------------------------------------- */}
-        <div className="px-[18px] sm:px-6">
+        <div className="px-[22px] sm:px-8">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -687,7 +687,7 @@ export default function Portfolio() {
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
-          <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[18px] sm:px-6 py-3.5 space-y-3 font-mono text-[15px]`}>
+          <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[22px] sm:px-8 py-3.5 space-y-3 font-mono text-[15px]`}>
             <div className="flex flex-col space-y-2">
               <button
                 onClick={handleGoHome}
@@ -741,7 +741,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {searchOpen && (
           <div>
-            <div className="py-2.5 sm:py-3 px-[18px] sm:px-6 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
+            <div className="py-2.5 sm:py-3 px-[22px] sm:px-8 flex items-center gap-2.5 sm:gap-3 text-[14px] sm:text-[16px]">
               <Search size={15} className={`${themeClasses.searchIcon} shrink-0`} />
               <input
                 ref={searchInputRef}
@@ -766,7 +766,7 @@ export default function Portfolio() {
                 <X size={15} />
               </button>
             </div>
-            <div className="px-[18px] sm:px-6">
+            <div className="px-[22px] sm:px-8">
               <div
                 className={`border-t ${themeClasses.border}`}
                 style={{ borderTopWidth: '1px' }}
@@ -787,7 +787,7 @@ export default function Portfolio() {
             transition: 'max-height 0.45s ease, opacity 0.35s ease',
           }}
         >
-          <section className="pt-[24px] pb-[23px] px-[18px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          <section className="pt-[24px] pb-[23px] px-[22px] sm:px-8 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
             {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
             <div className="shrink-0 mb-[25px] sm:mb-0">
               <img
@@ -874,7 +874,7 @@ export default function Portfolio() {
           {/* -------------------------------------------------------- */}
           {/* HORIZONTAL DIVIDER (inside transition wrapper)           */}
           {/* -------------------------------------------------------- */}
-          <div className="px-[18px] sm:px-6">
+          <div className="px-[22px] sm:px-8">
             <div
               className={`border-t ${themeClasses.border}`}
               style={{ borderTopWidth: '1px' }}
@@ -890,7 +890,7 @@ export default function Portfolio() {
         {/* VIEW 1: POSTS LIST (VERTICAL LIST, pt-[83px] pb-[40px])     */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-[83px] pb-[40px] px-[18px] sm:px-6">
+          <section id="recent-posts" className="pt-[83px] pb-[40px] px-[22px] sm:px-8">
             {searchQuery && (
               <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
                 Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
@@ -945,7 +945,7 @@ export default function Portfolio() {
         {/* VIEW 2: FULL POST ARTICLE READER                           */}
         {/* ========================================================== */}
         {currentView === 'reader' && activePost && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[18px] sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[22px] sm:px-8 space-y-5 sm:space-y-6 text-left">
             {/* Back button */}
             <div>
               <button
@@ -1045,7 +1045,7 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[18px] sm:px-6 space-y-5 sm:space-y-6 text-left">
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[22px] sm:px-8 space-y-5 sm:space-y-6 text-left">
             <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
               <h1 className={`text-[24px] sm:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
                 About
@@ -1126,7 +1126,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER HORIZONTAL DIVIDER                                  */}
         {/* ---------------------------------------------------------- */}
-        <div className="px-[18px] sm:px-6">
+        <div className="px-[22px] sm:px-8">
           <div
             className={`border-t ${themeClasses.border}`}
             style={{ borderTopWidth: '1px' }}
@@ -1136,7 +1136,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className={`py-6 sm:py-8 px-[18px] sm:px-6 text-center text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
+        <footer className={`py-6 sm:py-8 px-[22px] sm:px-8 text-center text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
           <p>
             &copy; {new Date().getFullYear()} {PROFILE.name}
           </p>
