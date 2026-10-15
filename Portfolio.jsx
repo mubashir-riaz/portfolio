@@ -777,99 +777,109 @@ export default function Portfolio() {
 
         {/* ---------------------------------------------------------- */}
         {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
+        {/* Hidden with smooth transition when viewing About or Reader  */}
         {/* ---------------------------------------------------------- */}
-        <section className="pt-[24px] pb-[23px] px-[18px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
-          {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
-          <div className="shrink-0 mb-[25px] sm:mb-0">
-            <img
-              src={PROFILE.avatar}
-              alt={PROFILE.name}
-              className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
+        <div
+          style={{
+            maxHeight: currentView === 'posts' ? '500px' : '0px',
+            opacity: currentView === 'posts' ? 1 : 0,
+            overflow: 'hidden',
+            transition: 'max-height 0.45s ease, opacity 0.35s ease',
+          }}
+        >
+          <section className="pt-[24px] pb-[23px] px-[18px] sm:px-6 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+            {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
+            <div className="shrink-0 mb-[25px] sm:mb-0">
+              <img
+                src={PROFILE.avatar}
+                alt={PROFILE.name}
+                className="w-[160px] h-[160px] rounded-full object-cover shrink-0 select-none shadow-none"
+              />
+            </div>
+
+            {/* Intro Information */}
+            <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
+              {/* Headline with RSS badge */}
+              <div className="flex items-center justify-center sm:justify-start gap-2">
+                <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+                  Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
+                </h1>
+                <span
+                  className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
+                  title="RSS Feed"
+                  aria-label="RSS Feed"
+                >
+                  <Rss size={17} className="stroke-[2.5]" />
+                </span>
+              </div>
+
+              {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
+              <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
+                {PROFILE.descriptionLines.map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
+              </div>
+
+              {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
+              <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
+                {/* GitHub */}
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title="GitHub Profile"
+                  aria-label="GitHub"
+                >
+                  <GithubIcon
+                    size={28}
+                    className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title="LinkedIn Profile"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinIcon
+                    size={28}
+                    className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${PROFILE.email}`}
+                  className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title={`Send email to ${PROFILE.email}`}
+                  aria-label="Email"
+                >
+                  <Mail
+                    size={28}
+                    className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* -------------------------------------------------------- */}
+          {/* HORIZONTAL DIVIDER (inside transition wrapper)           */}
+          {/* -------------------------------------------------------- */}
+          <div className="px-[18px] sm:px-6">
+            <div
+              className={`border-t ${themeClasses.border}`}
+              style={{ borderTopWidth: '1px' }}
             />
           </div>
-
-          {/* Intro Information */}
-          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
-            {/* Headline with RSS badge */}
-            <div className="flex items-center justify-center sm:justify-start gap-2">
-              <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
-              </h1>
-              <span
-                className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
-                title="RSS Feed"
-                aria-label="RSS Feed"
-              >
-                <Rss size={17} className="stroke-[2.5]" />
-              </span>
-            </div>
-
-            {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
-            <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
-              {PROFILE.descriptionLines.map((line, idx) => (
-                <p key={idx}>{line}</p>
-              ))}
-            </div>
-
-            {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
-            <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
-              {/* GitHub */}
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title="GitHub Profile"
-                aria-label="GitHub"
-              >
-                <GithubIcon
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title="LinkedIn Profile"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
-
-              {/* Email */}
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className={`group inline-flex items-center justify-center w-9 h-9 rounded transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
-                title={`Send email to ${PROFILE.email}`}
-                aria-label="Email"
-              >
-                <Mail
-                  size={28}
-                  className="w-[28px] h-[28px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
-                  strokeWidth={2}
-                />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------------------------------------------------- */}
-        {/* HORIZONTAL DIVIDER                                          */}
-        {/* ---------------------------------------------------------- */}
-        <div className="px-[18px] sm:px-6">
-          <div
-            className={`border-t ${themeClasses.border}`}
-            style={{ borderTopWidth: '1px' }}
-          />
         </div>
 
         {/* ---------------------------------------------------------- */}
