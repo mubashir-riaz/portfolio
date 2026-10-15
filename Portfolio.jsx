@@ -1046,16 +1046,6 @@ export default function Portfolio() {
         {/* ========================================================== */}
         {currentView === 'about' && (
           <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[18px] sm:px-6 space-y-5 sm:space-y-6 text-left">
-            <div>
-              <button
-                onClick={handleBackToPosts}
-                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
-              >
-                <ArrowLeft size={15} />
-                <span>Back to home</span>
-              </button>
-            </div>
-
             <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
               <h1 className={`text-[24px] sm:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
                 About
