@@ -787,7 +787,7 @@ export default function Portfolio() {
             transition: 'max-height 0.45s ease, opacity 0.35s ease',
           }}
         >
-          <section className="pt-[24px] pb-[23px] px-[22px] sm:px-8 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-8 sm:py-8">
+          <section className="pt-[24px] pb-[23px] px-[22px] sm:px-8 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-10 sm:py-9">
             {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
             <div className="shrink-0 mb-[25px] sm:mb-0">
               <img
