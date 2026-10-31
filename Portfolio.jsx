@@ -11,6 +11,7 @@ import {
   Menu,
   Rss,
 } from 'lucide-react';
+import { GitHubCalendar } from 'react-github-calendar';
 
 /* ------------------------------------------------------------------ */
 /*  PROFILE DATA                                                      */
@@ -21,7 +22,8 @@ const PROFILE = {
   role: 'AI Backend Engineer & Intelligent Systems Developer',
   email: 'mubashiriaz10@gmail.com',
   avatar: '/profile.jpeg',
-  github: 'https://github.com/mubashir-riaz',
+  github: 'https://github.com/mubashir-riaz', // <-- PUT YOUR GITHUB REFERENCE / PROFILE LINK HERE
+  githubUsername: 'mubashir-riaz', // <-- PUT YOUR GITHUB USERNAME FOR CONTRIBUTIONS HERE
   linkedin: 'https://www.linkedin.com/in/mubashir-riaz-51a881424/',
   descriptionLines: [
     'AI Backend Engineer building intelligent systems.',
@@ -1051,6 +1053,25 @@ export default function Portfolio() {
                   treated as probabilistic components wrapped inside strictly typed, deterministic state
                   machines. I learn by building production-ready systems and testing their boundaries under load.
                 </p>
+              </div>
+            </div>
+
+            {/* GitHub Activity Section */}
+            <div className={`mt-10 sm:mt-12 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted}`}>
+              <h2 className={`text-[16px] sm:text-[18px] font-semibold ${themeClasses.headline} mb-4`}>
+                GitHub Activity
+              </h2>
+
+              <div className="github-calendar-responsive w-full overflow-hidden">
+                <GitHubCalendar
+                  username={PROFILE.githubUsername} /* <-- PUT YOUR GITHUB USERNAME HERE (defined in PROFILE.githubUsername) */
+                  colorScheme={theme === 'paper' ? 'light' : 'dark'}
+                  fontSize={12}
+                  blockSize={12}
+                  blockMargin={3}
+                  showTotalCount={false}
+                  showColorLegend={false}
+                />
               </div>
             </div>
           </main>
