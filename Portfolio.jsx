@@ -619,17 +619,6 @@ export default function Portfolio() {
           {/* Desktop Navigation Items + Icons (Hidden on Mobile) */}
           <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[17px] shrink-0">
             <button
-              onClick={handleGoHome}
-              className={`py-1 px-1.5 transition-colors ${
-                currentView === 'posts' || currentView === 'reader'
-                  ? themeClasses.navLinkActive
-                  : themeClasses.navLinkInactive
-              }`}
-            >
-              Home
-            </button>
-
-            <button
               onClick={handleGoAbout}
               className={`py-1 px-1.5 transition-colors ${
                 currentView === 'about'
@@ -689,17 +678,6 @@ export default function Portfolio() {
         {mobileMenuOpen && (
           <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[22px] sm:px-8 py-3.5 space-y-3 font-mono text-[15px]`}>
             <div className="flex flex-col space-y-2">
-              <button
-                onClick={handleGoHome}
-                className={`text-left py-1.5 px-2 rounded transition-colors ${
-                  currentView === 'posts' || currentView === 'reader'
-                    ? themeClasses.mobileItemActive
-                    : themeClasses.mobileItemInactive
-                }`}
-              >
-                Home
-              </button>
-
               <button
                 onClick={handleGoAbout}
                 className={`text-left py-1.5 px-2 rounded transition-colors ${
@@ -950,10 +928,11 @@ export default function Portfolio() {
             <div>
               <button
                 onClick={handleBackToPosts}
-                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
+                aria-label="Back to home"
+                title="Back to home"
+                className={`inline-flex items-center ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
               >
-                <ArrowLeft size={15} />
-                <span>Back to home</span>
+                <ArrowLeft size={19} />
               </button>
             </div>
 
@@ -1032,10 +1011,11 @@ export default function Portfolio() {
             <div className={`pt-4 border-t ${themeClasses.borderMuted}`}>
               <button
                 onClick={handleBackToPosts}
-                className={`inline-flex items-center gap-1.5 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink} cursor-pointer`}
+                aria-label="Back to home"
+                title="Back to home"
+                className={`inline-flex items-center ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
               >
-                <ArrowLeft size={15} />
-                <span>Back to home</span>
+                <ArrowLeft size={19} />
               </button>
             </div>
           </main>
