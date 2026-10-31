@@ -1025,79 +1025,32 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[22px] sm:px-8 space-y-5 sm:space-y-6 text-left">
-            <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
-              <h1 className={`text-[24px] sm:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
-                About
-              </h1>
-              <p className={`text-[13px] sm:text-[14px] ${themeClasses.accentText}`}>
-                AI Backend Engineer & Intelligent Systems Developer
-              </p>
-            </div>
+          <main className="pb-16 sm:pb-20 pt-5 sm:pt-7 px-[22px] sm:px-8 text-left">
+            <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.headline} mb-5 sm:mb-7`}>
+              About
+            </h1>
 
-            {/* Bio Paragraphs */}
-            <div className={`text-[14px] sm:text-[16px] leading-[1.7] space-y-3.5 sm:space-y-4 ${themeClasses.desc}`}>
-              <p>
-                I am an AI Backend Engineer focused on designing high-throughput API architectures,
-                multimodal document extraction pipelines, and citation-grounded RAG systems.
-              </p>
-              <p>
-                My engineering philosophy is rooted in pragmatism: I believe AI models should be
-                treated as probabilistic components wrapped inside strictly typed, deterministic state
-                machines. I learn by building production-ready systems and testing their boundaries under load.
-              </p>
-              <p>
-                Currently, I am building and scaling projects like <strong>InvoiceGuard AI</strong> (automated
-                freight invoice auditing via Vision LLMs) and <strong>DocuMind AI</strong> (hierarchical RAG
-                document assistant with ChromaDB).
-              </p>
-            </div>
-
-            {/* Technical Stack & Architecture */}
-            <div className="space-y-2 pt-1">
-              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
-                Technical Stack & Architecture
+            <div className="flex flex-row items-start gap-4 sm:gap-8 md:gap-10">
+              {/* Left Column: Portrait Photograph */}
+              <div className="shrink-0">
+                <img
+                  src={PROFILE.avatar}
+                  alt={PROFILE.name}
+                  className="w-[105px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[3/4] object-cover rounded-md select-none"
+                />
               </div>
-              <p className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
-                {TECH_STACK.join(', ')}
-              </p>
-            </div>
 
-            {/* Education */}
-            <div className="space-y-2 pt-1">
-              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
-                Education
-              </div>
-              <div className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
-                <p>Bachelor of Science in Computer Science</p>
-              </div>
-            </div>
-
-            {/* Direct Contact */}
-            <div className={`pt-3 border-t ${themeClasses.borderMuted} space-y-2`}>
-              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
-                Connect
-              </div>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                <a
-                  href={`mailto:${PROFILE.email}`}
-                  className={`group inline-flex items-center gap-2 text-[14px] sm:text-[16px] ${themeClasses.text} hover:opacity-80 transition-opacity break-all`}
-                >
-                  <Mail
-                    size={16}
-                    className={`${themeClasses.contactIcon} shrink-0 transition-transform duration-300 ease-out origin-center group-hover:rotate-6`}
-                    strokeWidth={2}
-                  />
-                  <span>{PROFILE.email}</span>
-                </a>
-
-                <a
-                  href="/work"
-                  className={`inline-flex items-center gap-1 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink}`}
-                >
-                  <span>lets connect</span>
-                  <ArrowUpRight size={14} />
-                </a>
+              {/* Right Column: Editorial Paragraphs */}
+              <div className={`flex-1 min-w-0 max-w-[540px] space-y-3 sm:space-y-4 text-[13px] xs:text-[14px] sm:text-[15.5px] leading-[1.7] sm:leading-[1.75] font-mono ${themeClasses.desc}`}>
+                <p>
+                  I am an AI Backend Engineer focused on designing high-throughput API architectures,
+                  multimodal document extraction pipelines, and citation-grounded RAG systems.
+                </p>
+                <p>
+                  My engineering philosophy is rooted in pragmatism: I believe AI models should be
+                  treated as probabilistic components wrapped inside strictly typed, deterministic state
+                  machines. I learn by building production-ready systems and testing their boundaries under load.
+                </p>
               </div>
             </div>
           </main>
