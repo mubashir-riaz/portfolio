@@ -251,7 +251,7 @@ const TECH_STACK = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  MONOCHROME SVG BRAND ICONS (OUTLINE / STROKE STYLE)              */
+/*  MONOCHROME SVG BRAND ICONS                                        */
 /* ------------------------------------------------------------------ */
 export function GithubIcon({
   className = 'w-[18px] h-[18px]',
@@ -274,32 +274,6 @@ export function GithubIcon({
       {...props}
     >
       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-    </svg>
-  );
-}
-
-export function XIcon({
-  className = 'w-[18px] h-[18px]',
-  size,
-  strokeWidth = 2,
-  ...props
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-      <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
     </svg>
   );
 }
@@ -333,112 +307,6 @@ export function LinkedinIcon({
   );
 }
 
-export function TwitterIcon({
-  className = 'w-[18px] h-[18px]',
-  size,
-  strokeWidth = 2,
-  ...props
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-    </svg>
-  );
-}
-
-export function InstagramIcon({
-  className = 'w-[18px] h-[18px]',
-  size,
-  strokeWidth = 2,
-  ...props
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
-export function YoutubeIcon({
-  className = 'w-[18px] h-[18px]',
-  size,
-  strokeWidth = 2,
-  ...props
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <polygon points="10 15 15 12 10 9 10 15" />
-    </svg>
-  );
-}
-
-export function DiscordIcon({
-  className = 'w-[18px] h-[18px]',
-  size,
-  strokeWidth = 2,
-  ...props
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <path d="M18.5 5.5a14.86 14.86 0 0 0-3.64-1.13.07.07 0 0 0-.08.04 10.27 10.27 0 0 0-.45.92 13.8 13.8 0 0 0-4.66 0 10.27 10.27 0 0 0-.45-.92.07.07 0 0 0-.08-.04 14.86 14.86 0 0 0-3.64 1.13.06.06 0 0 0-.03.02C2.7 10.2 2.05 14.73 2.45 19.2a.08.08 0 0 0 .03.06 15.02 15.02 0 0 0 4.54 2.3.07.07 0 0 0 .08-.03c.35-.48.66-.99.93-1.52a.07.07 0 0 0-.04-.1 9.87 9.87 0 0 1-1.4-.67.07.07 0 0 1 0-.12c.09-.07.19-.14.28-.21a.07.07 0 0 1 .07-.01c2.97 1.36 6.19 1.36 9.12 0a.07.07 0 0 1 .07.01c.09.07.19.14.28.21a.07.07 0 0 1 0 .12c-.44.25-.91.48-1.4.67a.07.07 0 0 0-.04.1c.27.53.58 1.04.93 1.52a.07.07 0 0 0 .08.03 15.02 15.02 0 0 0 4.54-2.3.08.08 0 0 0 .03-.06c.49-5.18-.84-9.67-3.15-13.66a.06.06 0 0 0-.03-.02z" />
-      <circle cx="8.5" cy="12" r="1.5" />
-      <circle cx="15.5" cy="12" r="1.5" />
-    </svg>
-  );
-}
-
-
 /* ------------------------------------------------------------------ */
 /*  MAIN PORTFOLIO BLOG COMPONENT                                     */
 /* ------------------------------------------------------------------ */
@@ -455,7 +323,7 @@ export default function Portfolio() {
   // Mobile Navigation Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Theme Mode: 'navy' (normal #202838) and 'paper' (white #f4f1ea)
+  // Theme Mode: 'navy' (normal #202838) and 'paper' (white #ffffff)
   const [theme, setTheme] = useState('navy');
 
   const toggleTheme = () => {
@@ -599,30 +467,27 @@ export default function Portfolio() {
   return (
     <div className={`min-h-screen ${themeClasses.bg} ${themeClasses.text} font-mono transition-colors duration-200`}>
       {/* ------------------------------------------------------------ */}
-      {/* ------------------------------------------------------------ */}
-      {/* MAIN SINGLE COLUMN BLOG WRAPPER (768PX MAX-WIDTH)            */}
+      {/* MAIN SINGLE COLUMN BLOG WRAPPER (900PX MAX-WIDTH)            */}
       {/* ------------------------------------------------------------ */}
       <div className="max-w-[900px] mx-auto">
         {/* ---------------------------------------------------------- */}
-        {/* HEADER BAR (BORDER-BOTTOM: 1PX #D86B18)                    */}
+        {/* HEADER BAR                                                 */}
         {/* ---------------------------------------------------------- */}
-        <header
-          className="px-[22px] sm:px-8 flex items-center justify-between h-[59px] sm:h-[72px]"
-        >
-          {/* Brand / Logo (IBM Plex Mono, Straight 'M' | \ / |, Industrial High-Precision Aesthetic) */}
+        <header className="px-[22px] sm:px-8 flex items-center justify-between h-[59px] sm:h-[72px]">
+          {/* Brand / Logo */}
           <button
             onClick={handleGoHome}
             style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-            className={`font-mono text-[20px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left`}
+            className={`font-mono text-[20px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left cursor-pointer`}
           >
             {PROFILE.name}
           </button>
 
-          {/* Desktop Navigation Items + Icons (Hidden on Mobile) */}
+          {/* Desktop Navigation Items + Icons */}
           <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[17px] shrink-0">
             <button
               onClick={handleGoAbout}
-              className={`py-1 px-1.5 transition-colors ${
+              className={`py-1 px-1.5 transition-colors cursor-pointer ${
                 currentView === 'about'
                   ? themeClasses.navLinkActive
                   : themeClasses.navLinkInactive
@@ -635,7 +500,7 @@ export default function Portfolio() {
             <button
               onClick={() => setSearchOpen((prev) => !prev)}
               aria-label="Search Posts"
-              className={`${themeClasses.navIcon} transition-colors p-1.5`}
+              className={`${themeClasses.navIcon} transition-colors p-1.5 cursor-pointer`}
               title="Search"
             >
               <Search size={17} />
@@ -645,18 +510,18 @@ export default function Portfolio() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className={`${themeClasses.navIcon} transition-colors p-1.5`}
+              className={`${themeClasses.navIcon} transition-colors p-1.5 cursor-pointer`}
               title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
             >
               {theme === 'paper' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
           </nav>
 
-          {/* Mobile Menu Hamburger Button (Only on Mobile, 19px) */}
+          {/* Mobile Menu Hamburger Button */}
           <button
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
-            className={`sm:hidden ${themeClasses.navIcon} p-1.5 transition-colors flex items-center justify-center focus:outline-none`}
+            className={`sm:hidden ${themeClasses.navIcon} p-1.5 transition-colors flex items-center justify-center focus:outline-none cursor-pointer`}
           >
             {mobileMenuOpen ? (
               <X size={19} strokeWidth={2} />
@@ -682,7 +547,7 @@ export default function Portfolio() {
             <div className="flex flex-col space-y-2">
               <button
                 onClick={handleGoAbout}
-                className={`text-left py-1.5 px-2 rounded transition-colors ${
+                className={`text-left py-1.5 px-2 rounded transition-colors cursor-pointer ${
                   currentView === 'about'
                     ? themeClasses.mobileItemActive
                     : themeClasses.mobileItemInactive
@@ -698,7 +563,7 @@ export default function Portfolio() {
                   setSearchOpen(true);
                   setMobileMenuOpen(false);
                 }}
-                className={`flex items-center gap-2 ${themeClasses.mobileSubText} py-1`}
+                className={`flex items-center gap-2 ${themeClasses.mobileSubText} py-1 cursor-pointer`}
               >
                 <Search size={15} />
                 <span>Search</span>
@@ -707,7 +572,7 @@ export default function Portfolio() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle Theme"
-                className={`flex items-center ${themeClasses.mobileSubText} py-1 px-1`}
+                className={`flex items-center ${themeClasses.mobileSubText} py-1 px-1 cursor-pointer`}
                 title={theme === 'paper' ? 'Switch to Normal Theme' : 'Switch to White Theme'}
               >
                 {theme === 'paper' ? <Sun size={16} /> : <Moon size={16} />}
@@ -734,14 +599,14 @@ export default function Portfolio() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className={`${themeClasses.searchClear} text-[13px] sm:text-[15px] px-1.5 shrink-0`}
+                  className={`${themeClasses.searchClear} text-[13px] sm:text-[15px] px-1.5 shrink-0 cursor-pointer`}
                 >
                   Clear
                 </button>
               )}
               <button
                 onClick={() => setSearchOpen(false)}
-                className={`${themeClasses.searchClear} p-1 shrink-0`}
+                className={`${themeClasses.searchClear} p-1 shrink-0 cursor-pointer`}
               >
                 <X size={15} />
               </button>
@@ -756,8 +621,8 @@ export default function Portfolio() {
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* PROFILE SECTION: VERTICAL CENTERED ON MOBILE, ROW DESKTOP  */}
-        {/* Hidden with smooth transition when viewing About or Reader  */}
+        {/* PROFILE SECTION                                            */}
+        {/* Hidden with smooth transition when viewing About or Reader */}
         {/* ---------------------------------------------------------- */}
         <div
           style={{
@@ -768,7 +633,7 @@ export default function Portfolio() {
           }}
         >
           <section className="pt-[24px] pb-[23px] px-[22px] sm:px-8 flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left sm:gap-10 sm:py-9">
-            {/* Centered Circular Avatar (160px, margin-bottom: 25px on mobile) */}
+            {/* Centered Circular Avatar */}
             <div className="shrink-0 mb-[25px] sm:mb-0">
               <img
                 src={PROFILE.avatar}
@@ -793,14 +658,14 @@ export default function Portfolio() {
                 </span>
               </div>
 
-              {/* Description lines (Monospace, 14px, line-height 1.7, max-w-[440px]) */}
+              {/* Description lines */}
               <div className={`mt-3 space-y-0 text-[14px] sm:text-[16px] ${themeClasses.profileDesc} leading-[1.7] font-mono max-w-[440px] sm:max-w-none text-center sm:text-left mx-auto sm:mx-0`}>
                 {PROFILE.descriptionLines.map((line, idx) => (
                   <p key={idx}>{line}</p>
                 ))}
               </div>
 
-              {/* Minimal Monochrome Outline Social Icons (tighter gap, smooth right tilt on hover) */}
+              {/* Minimal Monochrome Outline Social Icons */}
               <div className="mt-[18px] sm:mt-4 flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
                 {/* GitHub */}
                 <a
@@ -851,9 +716,7 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* -------------------------------------------------------- */}
-          {/* HORIZONTAL DIVIDER (inside transition wrapper)           */}
-          {/* -------------------------------------------------------- */}
+          {/* Horizontal Divider inside Hero transition wrapper */}
           <div className="px-[22px] sm:px-8">
             <div
               className={`border-t ${themeClasses.border}`}
@@ -867,7 +730,7 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
 
         {/* ========================================================== */}
-        {/* VIEW 1: POSTS LIST (VERTICAL LIST, pt-[83px] pb-[40px])     */}
+        {/* VIEW 1: POSTS LIST                                         */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
           <section id="recent-posts" className="pt-[83px] pb-[40px] px-[22px] sm:px-8">
@@ -880,7 +743,7 @@ export default function Portfolio() {
             <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
               {filteredPosts.map((post) => (
                 <article key={post.id} className="group text-left pb-2 sm:pb-3">
-                  {/* Title (Monospace, 16px, #ff7300) */}
+                  {/* Title */}
                   <h2 className="mb-1.5">
                     <button
                       onClick={() => handleOpenPost(post.id)}
@@ -890,7 +753,7 @@ export default function Portfolio() {
                     </button>
                   </h2>
 
-                  {/* Metadata (Monospace, 11px-12px, calendar icon, italic) */}
+                  {/* Metadata */}
                   <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] italic ${themeClasses.meta} mb-2`}>
                     <Calendar size={11} className="shrink-0 opacity-80 not-italic" />
                     <span>{post.date}</span>
@@ -902,7 +765,7 @@ export default function Portfolio() {
                     )}
                   </div>
 
-                  {/* Description (Monospace, 16px, 1.6 line-height) */}
+                  {/* Description */}
                   <p
                     onClick={() => handleOpenPost(post.id)}
                     className={`text-[14px] sm:text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
@@ -1027,11 +890,12 @@ export default function Portfolio() {
         {/* VIEW 3: ABOUT PAGE                                         */}
         {/* ========================================================== */}
         {currentView === 'about' && (
-          <main className="pb-16 sm:pb-20 pt-5 sm:pt-7 px-[22px] sm:px-8 text-left">
+          <main className="pb-6 sm:pb-8 pt-5 sm:pt-7 px-[22px] sm:px-8 text-left">
             <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.headline} mb-5 sm:mb-7`}>
               About
             </h1>
 
+            {/* Two-Column Editorial Layout: Photo Left, Text Right */}
             <div className="flex flex-row items-start gap-4 sm:gap-8 md:gap-10">
               {/* Left Column: Portrait Photograph */}
               <div className="shrink-0">
@@ -1056,8 +920,18 @@ export default function Portfolio() {
               </div>
             </div>
 
+            {/* Education Info Only */}
+            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} space-y-2`}>
+              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
+                Education
+              </div>
+              <div className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
+                <p>Bachelor of Science in Computer Science</p>
+              </div>
+            </div>
+
             {/* GitHub Activity Section */}
-            <div className={`mt-10 sm:mt-12 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted}`}>
+            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted}`}>
               <h2 className={`text-[16px] sm:text-[18px] font-semibold ${themeClasses.headline} mb-4`}>
                 GitHub Activity
               </h2>
@@ -1074,27 +948,100 @@ export default function Portfolio() {
                 />
               </div>
             </div>
+
+            {/* Let's Build Something */}
+            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} space-y-3`}>
+              <h2 className={`text-[16px] sm:text-[18px] font-semibold ${themeClasses.headline}`}>
+                Let's Build Something
+              </h2>
+              <p className={`text-[13.5px] sm:text-[15px] leading-[1.7] ${themeClasses.desc} max-w-[620px]`}>
+                Looking for an AI Backend Engineer to architect low-latency inference pipelines, build custom RAG architectures, or audit AI backend systems? Drop me an inquiry.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="/work"
+                  className={`inline-flex items-center gap-1 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink}`}
+                >
+                  <span>Freelance Services</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </div>
+
+            {/* © 2026 Mubashir Riaz AI Backend Engineer + Socials on right */}
+            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} flex flex-wrap items-center justify-between gap-3 text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
+              <span>&copy; {new Date().getFullYear()} {PROFILE.name} AI Backend Engineer</span>
+
+              {/* Social Icons on the right side */}
+              <div className="flex items-center gap-3">
+                {/* GitHub */}
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group inline-flex items-center justify-center transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title="GitHub Profile"
+                  aria-label="GitHub"
+                >
+                  <GithubIcon
+                    size={17}
+                    className="w-[17px] h-[17px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group inline-flex items-center justify-center transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title="LinkedIn Profile"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinIcon
+                    size={17}
+                    className="w-[17px] h-[17px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${PROFILE.email}`}
+                  className={`group inline-flex items-center justify-center transition-colors duration-200 cursor-pointer ${themeClasses.socialIcon}`}
+                  title={`Send email to ${PROFILE.email}`}
+                  aria-label="Email"
+                >
+                  <Mail
+                    size={17}
+                    className="w-[17px] h-[17px] transition-transform duration-300 ease-out origin-center group-hover:rotate-6"
+                    strokeWidth={2}
+                  />
+                </a>
+              </div>
+            </div>
           </main>
         )}
 
         {/* ---------------------------------------------------------- */}
-        {/* FOOTER HORIZONTAL DIVIDER                                  */}
-        {/* ---------------------------------------------------------- */}
-        <div className="px-[22px] sm:px-8">
-          <div
-            className={`border-t ${themeClasses.border}`}
-            style={{ borderTopWidth: '1px' }}
-          />
-        </div>
-
-        {/* ---------------------------------------------------------- */}
         {/* FOOTER (CLEAN RETRO MONOSPACE)                             */}
         {/* ---------------------------------------------------------- */}
-        <footer className={`py-6 sm:py-8 px-[22px] sm:px-8 text-center text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
-          <p>
-            &copy; {new Date().getFullYear()} {PROFILE.name}
-          </p>
-        </footer>
+        {currentView !== 'about' && (
+          <>
+            <div className="px-[22px] sm:px-8">
+              <div
+                className={`border-t ${themeClasses.border}`}
+                style={{ borderTopWidth: '1px' }}
+              />
+            </div>
+            <footer className={`py-6 sm:py-8 px-[22px] sm:px-8 text-center text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
+              <p>
+                &copy; {new Date().getFullYear()} {PROFILE.name}
+              </p>
+            </footer>
+          </>
+        )}
       </div>
     </div>
   );
