@@ -895,19 +895,19 @@ export default function Portfolio() {
               About
             </h1>
 
-            {/* Two-Column Editorial Layout: Photo Left, Text Right */}
-            <div className="flex flex-row items-start gap-4 sm:gap-8 md:gap-10">
-              {/* Left Column: Portrait Photograph */}
-              <div className="shrink-0">
+            {/* Responsive Editorial Layout: Stacked on Mobile (Image Top, Text Below), Side-by-Side on Desktop */}
+            <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-7 md:gap-8">
+              {/* Portrait Photograph: Exactly aligns width with the text content below on mobile */}
+              <div className="w-full sm:w-auto shrink-0 max-w-[560px] sm:max-w-none">
                 <img
                   src={PROFILE.avatar}
                   alt={PROFILE.name}
-                  className="w-[105px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[3/4] object-cover rounded-md select-none"
+                  className="w-full sm:w-[220px] md:w-[250px] aspect-[4/5] sm:aspect-[3/4] object-cover rounded-xl select-none shadow-sm"
                 />
               </div>
 
-              {/* Right Column: Editorial Paragraphs */}
-              <div className={`flex-1 min-w-0 max-w-[540px] space-y-3 sm:space-y-4 text-[13px] xs:text-[14px] sm:text-[15.5px] leading-[1.7] sm:leading-[1.75] font-mono ${themeClasses.desc}`}>
+              {/* About Text Details with average readable typography */}
+              <div className={`w-full flex-1 min-w-0 max-w-[560px] space-y-3.5 sm:space-y-4 text-[15px] sm:text-[16px] leading-[1.75] font-mono ${themeClasses.desc}`}>
                 <p>
                   I am an AI Backend Engineer focused on designing high-throughput API architectures,
                   multimodal document extraction pipelines, and citation-grounded RAG systems.
@@ -917,16 +917,16 @@ export default function Portfolio() {
                   treated as probabilistic components wrapped inside strictly typed, deterministic state
                   machines. I learn by building production-ready systems and testing their boundaries under load.
                 </p>
-              </div>
-            </div>
 
-            {/* Education Info Only */}
-            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} space-y-2`}>
-              <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
-                Education
-              </div>
-              <div className={`text-[14px] sm:text-[16px] leading-[1.7] ${themeClasses.desc}`}>
-                <p>Bachelor of Science in Computer Science</p>
+                {/* Education Section separated with a line */}
+                <div className={`pt-3 sm:pt-4 border-t ${themeClasses.borderMuted} space-y-1`}>
+                  <div className={`text-[13px] sm:text-[14px] ${themeClasses.accentText} font-semibold uppercase tracking-wider`}>
+                    Education
+                  </div>
+                  <div className={`text-[15px] sm:text-[16px] ${themeClasses.desc}`}>
+                    <p>Bachelor of Science in Computer Science</p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -954,22 +954,22 @@ export default function Portfolio() {
               <h2 className={`text-[16px] sm:text-[18px] font-semibold ${themeClasses.headline}`}>
                 Let's Build Something
               </h2>
-              <p className={`text-[13.5px] sm:text-[15px] leading-[1.7] ${themeClasses.desc} max-w-[620px]`}>
+              <p className={`text-[15px] sm:text-[16px] leading-[1.75] ${themeClasses.desc} max-w-[620px]`}>
                 Looking for an AI Backend Engineer to architect low-latency inference pipelines, build custom RAG architectures, or audit AI backend systems? Drop me an inquiry.
               </p>
               <div className="pt-1">
                 <a
                   href="/work"
-                  className={`inline-flex items-center gap-1 text-[13.5px] sm:text-[15px] ${themeClasses.accentLink}`}
+                  className={`inline-flex items-center gap-1 text-[15px] sm:text-[16px] ${themeClasses.accentLink}`}
                 >
                   <span>Freelance Services</span>
-                  <ArrowUpRight size={14} />
+                  <ArrowUpRight size={15} />
                 </a>
               </div>
             </div>
 
             {/* © 2026 Mubashir Riaz AI Backend Engineer + Socials on right */}
-            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} flex flex-wrap items-center justify-between gap-3 text-[13px] sm:text-[14px] font-mono ${themeClasses.footer}`}>
+            <div className={`mt-8 sm:mt-10 pt-6 sm:pt-8 border-t ${themeClasses.borderMuted} flex flex-wrap items-center justify-between gap-3 text-[13.5px] sm:text-[14.5px] font-mono ${themeClasses.footer}`}>
               <span>&copy; {new Date().getFullYear()} {PROFILE.name} AI Backend Engineer</span>
 
               {/* Social Icons on the right side */}
