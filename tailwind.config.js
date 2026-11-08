@@ -21,6 +21,7 @@ export default {
       },
       fontFamily: {
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+        heading: ['var(--font-heading)', 'Poppins', 'sans-serif'],
       }
     },
   },
