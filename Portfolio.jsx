@@ -20,6 +20,7 @@ import {
   Terminal,
 } from 'lucide-react';
 import { GitHubCalendar } from 'react-github-calendar';
+import TechStackSection from './src/TechStack.jsx';
 
 /* ------------------------------------------------------------------ */
 /*  PROFILE DATA                                                      */
@@ -223,33 +224,6 @@ const POSTS = [
     ],
     stack: ['FastAPI', 'React', 'Python', 'ChromaDB', 'Llama 3.3', 'LangChain'],
   },
-];
-
-/* ------------------------------------------------------------------ */
-/*  SKILLS & TECH STACK                                               */
-/* ------------------------------------------------------------------ */
-const TECH_STACK = [
-  'Python',
-  'FastAPI',
-  'LangChain',
-  'LLM Agents',
-  'RAG',
-  'Pydantic',
-  'ChromaDB',
-  'PostgreSQL',
-  'Redis',
-  'REST APIs',
-  'Vector Embeddings',
-  'Semantic Search',
-  'Docker',
-  'AWS',
-  'Linux',
-  'Git',
-  'GitHub Actions',
-  'SQL',
-  'Bash',
-  'JavaScript',
-  'Uvicorn',
 ];
 
 /* ------------------------------------------------------------------ */
@@ -890,28 +864,9 @@ export default function Portfolio() {
             </div>
 
             {/* ====================================================== */}
-            {/* 03 TECH & SKILLS SECTION                              */}
+            {/* 03 TECH STACK / WHAT I BUILD WITH                      */}
             {/* ====================================================== */}
-            <section id="tech-skills" className="pt-7 sm:pt-9 pb-12 sm:pb-16 px-[22px] sm:px-8 text-left">
-              {/* Section Header */}
-              <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
-                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
-                  Tech & Skills
-                </h2>
-              </div>
-
-              {/* Skills Grid / Pills */}
-              <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                {TECH_STACK.map((tech) => (
-                  <span
-                    key={tech}
-                    className={`px-3 py-1.5 rounded-md border text-[13px] sm:text-[14px] font-mono transition-colors duration-150 hover:border-[#38bdf8]/70 ${themeClasses.tagPill}`}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </section>
+            <TechStackSection themeClasses={themeClasses} theme={theme} />
 
             {/* Divider between Tech & Skills and Technical Writing */}
             <div className="px-[22px] sm:px-8">
