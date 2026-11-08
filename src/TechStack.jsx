@@ -70,23 +70,31 @@ export const TECH_CATEGORIES = [
     ],
   },
   {
-    category: 'FRONTEND & BACKEND',
+    category: 'FRAMEWORKS',
     skills: [
-      { name: 'React', icon: SiReact, color: '#61dafb' },
-      { name: 'Vite', icon: SiVite, color: '#bd34fe' },
-      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38bdf8' },
       { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
+      { name: 'React', icon: SiReact, color: '#61dafb' },
       { name: 'Node.js', icon: SiNodedotjs, color: '#5fa04e' },
       { name: 'Express.js', icon: SiExpress, color: '#94a3b8' },
+      { name: 'Vite', icon: SiVite, color: '#bd34fe' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38bdf8' },
     ],
   },
   {
-    category: 'DATABASES & STORAGE',
+    category: 'DATABASES',
     skills: [
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169e1' },
       { name: 'Microsoft SQL Server', icon: SqlServerIcon, color: '#cc292b' },
       { name: 'Redis', icon: SiRedis, color: '#dc382d' },
       { name: 'ChromaDB', icon: ChromaIcon, color: '#ff6b6b' },
+    ],
+  },
+  {
+    category: 'CLOUD AND DEVOPS',
+    skills: [
+      { name: 'Docker', icon: SiDocker, color: '#2496ed' },
+      { name: 'Git', icon: SiGit, color: '#f05032' },
+      { name: 'GitHub Actions', icon: SiGithubactions, color: '#2088ff' },
     ],
   },
   {
@@ -102,11 +110,8 @@ export const TECH_CATEGORIES = [
     ],
   },
   {
-    category: 'TOOLS & INFRASTRUCTURE',
+    category: 'TESTING',
     skills: [
-      { name: 'Docker', icon: SiDocker, color: '#2496ed' },
-      { name: 'Git', icon: SiGit, color: '#f05032' },
-      { name: 'GitHub Actions', icon: SiGithubactions, color: '#2088ff' },
       { name: 'Pytest', icon: SiPytest, color: '#0a9edc' },
     ],
   },
