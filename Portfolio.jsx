@@ -5,11 +5,19 @@ import {
   Moon,
   Calendar,
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   X,
   Mail,
   Menu,
   Rss,
+  Workflow,
+  Boxes,
+  Play,
+  FileText,
+  CheckCircle2,
+  AlertCircle,
+  Terminal,
 } from 'lucide-react';
 import { GitHubCalendar } from 'react-github-calendar';
 
@@ -30,6 +38,108 @@ const PROFILE = {
     'Every commit lands on GitHub for you to fork & remix.',
   ],
 };
+
+/* ------------------------------------------------------------------ */
+/*  02 FEATURED PROJECTS DATA                                         */
+/* ------------------------------------------------------------------ */
+const FEATURED_PROJECTS = [
+  {
+    id: 'invoice-guard',
+    number: '01',
+    title: 'InvoiceGuard AI',
+    subtitle: 'Autonomous Multi-Modal Freight Auditing & Tariff Engine',
+    description:
+      'Built an autonomous multimodal freight auditing and tariff engine using Vision LLMs to extract dense tabular invoice items and automate carrier disputes at scale.',
+    category: 'AI Auditing Platform',
+    status: 'Production Ready',
+    mainTech: ['FastAPI', 'Vision LLMs', 'PostgreSQL', 'Redis'],
+    problem:
+      'Freight billing has an error rate of 12–18% due to complex tariff schedules, ambiguous line-item surcharges (fuel adjustments, detention, accessorial tariffs), and scanned unstandardized paper receipts that break traditional OCR bounding-box templates. Manual audits average 25 minutes per invoice.',
+    solution:
+      'Architected an end-to-end multimodal auditing pipeline using Vision LLMs to extract dense tabular invoice line items with 98.4% accuracy without fragile OCR templates. Reconciles charges deterministically against contracted tariff schedules in PostgreSQL and auto-generates carrier dispute packages.',
+    pipelineSteps: [
+      { step: '01', label: 'Ingest', desc: 'Scanned PDF / image invoice intake' },
+      { step: '02', label: 'Vision LLM', desc: 'Tabular extraction without bounding boxes' },
+      { step: '03', label: 'Tariff DB', desc: 'Deterministic PostgreSQL rate card check' },
+      { step: '04', label: 'Delta Audit', desc: 'Mathematical discrepancy & overcharge delta' },
+      { step: '05', label: 'Dispute Out', desc: 'Automated carrier dispute claim & proof' },
+    ],
+    architectureDiagram: `┌────────────────────────┐      ┌─────────────────────────┐      ┌────────────────────────┐
+│ Scanned PDFs / Invoices│ ───► │ Vision LLM Extractor    │ ───► │ Structured JSON Tables │
+└────────────────────────┘      │ (Tabular Line Items)    │      └───────────┬────────────┘
+                                └─────────────────────────┘                  │
+                                                                             ▼
+┌────────────────────────┐      ┌─────────────────────────┐      ┌────────────────────────┐
+│ Carrier Dispute Emails │ ◄─── │ Delta & Overcharge Calc │ ◄─── │ PostgreSQL Tariff DB   │
+│ & Proof PDF Packages   │      │ (Mathematical Proof)    │      │ (Contracted Schedules) │
+└────────────────────────┘      └─────────────────────────┘      └────────────────────────┘`,
+    techStack: [
+      'Python',
+      'FastAPI',
+      'Vision LLMs',
+      'PostgreSQL',
+      'Redis',
+      'Docker',
+      'LangChain',
+    ],
+    metrics: [
+      '98.4% Tabular Accuracy',
+      'Audit Speed: 25m → <4s',
+      'Zero OCR Template Brittleness',
+    ],
+    liveDemo: 'https://invoiceguard-ai.vercel.app', // <-- Replace with your live deployment URL if hosted
+    github: 'https://github.com/mubashir-riaz/InvoiceGuard-ai',
+    articleId: 'invoice-guard',
+  },
+  {
+    id: 'docu-mind',
+    number: '02',
+    title: 'DocuMind AI',
+    subtitle: 'Zero-Hallucination Enterprise RAG Assistant with Page-Level Citations',
+    description:
+      'Built an enterprise citation-grounded RAG assistant with layout-aware parsing and sub-second vector search, delivering reliable document intelligence at scale.',
+    category: 'Vector RAG Search',
+    status: 'Production Ready',
+    mainTech: ['FastAPI', 'ChromaDB', 'Llama 3.3', 'LangChain'],
+    problem:
+      'Standard RAG pipelines break down when querying dense, multi-page business documents (financial spreadsheets with merged cells, scanned reports, multi-column decks). They lose tabular structure, causing cross-context hallucinations and lack verifiable audit provenance.',
+    solution:
+      'Engineered a high-precision RAG system featuring multi-stage layout-aware parsing, hierarchical table-preserving chunking, and sub-second vector retrieval using ChromaDB. Paired with Llama 3.3 for citation-grounded response generation that anchors assertions to exact source pages and cells.',
+    pipelineSteps: [
+      { step: '01', label: 'Doc Parser', desc: 'DOM-tree layout intake (PDF, XLSX, DOCX)' },
+      { step: '02', label: 'Chunking', desc: 'Hierarchical schema-preserving chunking' },
+      { step: '03', label: 'ChromaDB', desc: 'Dense vector embeddings & metadata filters' },
+      { step: '04', label: 'Re-ranking', desc: 'Cross-encoder query context alignment' },
+      { step: '05', label: 'Synthesis', desc: 'Grounded Llama 3.3 with citation pills' },
+    ],
+    architectureDiagram: `┌────────────────────────┐      ┌─────────────────────────┐      ┌────────────────────────┐
+│ Multi-Format Documents │ ───► │ Hierarchical DOM Parser │ ───► │ Layout-Aware Chunking  │
+│ (PDF, XLSX, DOCX)      │      │ (Preserves Tables)      │      └───────────┬────────────┘
+└────────────────────────┘      └─────────────────────────┘                  │
+                                                                             ▼
+┌────────────────────────┐      ┌─────────────────────────┐      ┌────────────────────────┐
+│ Interactive Citations  │ ◄─── │ Grounded Synthesis      │ ◄─── │ ChromaDB & Reranker    │
+│ (Source Page & Cell)   │      │ (Llama 3.3 Engine)      │      │ (Dense Semantic Search)│
+└────────────────────────┘      └─────────────────────────┘      └────────────────────────┘`,
+    techStack: [
+      'FastAPI',
+      'React',
+      'Python',
+      'ChromaDB',
+      'Llama 3.3',
+      'LangChain',
+      'Tailwind CSS',
+    ],
+    metrics: [
+      'Zero-Hallucination Guarantee',
+      'Sub-Second Vector Search',
+      'Page-Level Source Citations',
+    ],
+    liveDemo: 'https://documind-ai.vercel.app', // <-- Replace with your live deployment URL if hosted
+    github: 'https://github.com/mubashir-riaz/documind-ai',
+    articleId: 'docu-mind',
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /*  POSTS / WRITING / ARTICLES DATA                                   */
@@ -311,9 +421,11 @@ export function LinkedinIcon({
 /*  MAIN PORTFOLIO BLOG COMPONENT                                     */
 /* ------------------------------------------------------------------ */
 export default function Portfolio() {
-  // Navigation & View State: 'posts', 'about', or 'reader'
+  // Navigation & View State: 'posts', 'projects', 'project-detail', 'about', or 'reader'
   const [currentView, setCurrentView] = useState('posts');
   const [selectedPostId, setSelectedPostId] = useState(null);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [previousView, setPreviousView] = useState('posts');
 
   // Search Palette State
   const [searchOpen, setSearchOpen] = useState(false);
@@ -330,7 +442,7 @@ export default function Portfolio() {
     setTheme((prev) => (prev === 'navy' ? 'paper' : 'navy'));
   };
 
-  // Keyboard shortcut Ctrl+K / Cmd+K
+  // Keyboard shortcut Ctrl+K / Cmd+K and Escape
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -353,20 +465,45 @@ export default function Portfolio() {
 
   const handleGoHome = () => {
     setSelectedPostId(null);
+    setSelectedProjectId(null);
     setMobileMenuOpen(false);
     setCurrentView('posts');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleGoProjects = () => {
+    setSelectedPostId(null);
+    setSelectedProjectId(null);
+    setMobileMenuOpen(false);
+    setCurrentView('projects');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleGoAbout = () => {
     setSelectedPostId(null);
+    setSelectedProjectId(null);
     setMobileMenuOpen(false);
     setCurrentView('about');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenProject = (projectId) => {
+    setPreviousView(currentView);
+    setSelectedProjectId(projectId);
+    setMobileMenuOpen(false);
+    setCurrentView('project-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackFromProject = () => {
+    setSelectedProjectId(null);
+    setCurrentView(previousView === 'projects' ? 'projects' : 'posts');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleOpenPost = (postId) => {
     setSelectedPostId(postId);
+    setMobileMenuOpen(false);
     setCurrentView('reader');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -389,9 +526,28 @@ export default function Portfolio() {
     );
   }, [searchQuery]);
 
+  const filteredProjects = useMemo(() => {
+    if (!searchQuery.trim()) return FEATURED_PROJECTS;
+    const q = searchQuery.toLowerCase();
+    return FEATURED_PROJECTS.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.subtitle.toLowerCase().includes(q) ||
+        p.description?.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.problem.toLowerCase().includes(q) ||
+        p.solution.toLowerCase().includes(q) ||
+        p.techStack.some((t) => t.toLowerCase().includes(q))
+    );
+  }, [searchQuery]);
+
   const activePost = useMemo(() => {
     return POSTS.find((p) => p.id === selectedPostId) || POSTS[0];
   }, [selectedPostId]);
+
+  const activeProject = useMemo(() => {
+    return FEATURED_PROJECTS.find((p) => p.id === selectedProjectId) || FEATURED_PROJECTS[0];
+  }, [selectedProjectId]);
 
   const themeClasses = useMemo(() => {
     if (theme === 'paper') {
@@ -427,6 +583,16 @@ export default function Portfolio() {
         searchInput: 'text-[#111827] placeholder:text-[#9ca3af]',
         searchClear: 'text-[#555555] hover:text-[#111827]',
         footer: 'text-[#555555]',
+        projectCardBg: 'bg-[#fcfcfd] border-[#e5e5e5] hover:border-[#0077b5]/50',
+        projectTitle: 'text-[#111827]',
+        projectSubtitle: 'text-[#0077b5]',
+        projectArchBox: 'bg-[#f8fafc] border-[#e2e8f0] text-[#1e293b]',
+        projectTagPill: 'bg-[#f0f2f5] border-[#d0d7de] text-[#24292f]',
+        primaryBtn: 'bg-[#0077b5] hover:bg-[#005a8c] text-white',
+        secondaryBtn: 'bg-[#ffffff] hover:bg-[#f3f4f6] text-[#111827] border-[#e5e5e5]',
+        tertiaryBtn: 'text-[#0077b5] hover:underline',
+        metricPill: 'bg-[#ffffff] border-[#e5e5e5] text-[#111827]',
+        pipelineStepBg: 'bg-[#ffffff] border-[#e5e5e5]',
       };
     }
     return {
@@ -461,6 +627,16 @@ export default function Portfolio() {
       searchInput: 'text-[#f2f2f2] placeholder:text-[#94a3b8]',
       searchClear: 'text-[#94a3b8] hover:text-[#f2f2f2]',
       footer: 'text-[#94a3b8]',
+      projectCardBg: 'bg-[#161c28] border-[#2d374d] hover:border-[#38bdf8]/50',
+      projectTitle: 'text-[#f5f5f5]',
+      projectSubtitle: 'text-[#38bdf8]',
+      projectArchBox: 'bg-[#0f141d] border-[#253043] text-[#93c5fd]',
+      projectTagPill: 'bg-[#1f2738] border-[#2d374d] text-[#cbd5e1]',
+      primaryBtn: 'bg-[#38bdf8] hover:bg-[#0284c7] text-[#0f172a] font-semibold',
+      secondaryBtn: 'bg-[#1e2535] hover:bg-[#252f44] text-[#f2f2f2] border-[#2d374d]',
+      tertiaryBtn: 'text-[#38bdf8] hover:underline',
+      metricPill: 'bg-[#121620] border-[#2d374d] text-[#e2e8f0]',
+      pipelineStepBg: 'bg-[#131924] border-[#253043]',
     };
   }, [theme]);
 
@@ -485,6 +661,17 @@ export default function Portfolio() {
 
           {/* Desktop Navigation Items + Icons */}
           <nav className="hidden sm:flex items-center gap-6 md:gap-7 text-[17px] shrink-0">
+            <button
+              onClick={handleGoProjects}
+              className={`py-1 px-1.5 transition-colors cursor-pointer ${
+                currentView === 'projects' || currentView === 'project-detail'
+                  ? themeClasses.navLinkActive
+                  : themeClasses.navLinkInactive
+              }`}
+            >
+              Projects
+            </button>
+
             <button
               onClick={handleGoAbout}
               className={`py-1 px-1.5 transition-colors cursor-pointer ${
@@ -545,6 +732,17 @@ export default function Portfolio() {
         {mobileMenuOpen && (
           <div className={`sm:hidden border-b ${themeClasses.mobileDrawer} px-[22px] sm:px-8 py-3.5 space-y-3 font-mono text-[15px]`}>
             <div className="flex flex-col space-y-2">
+              <button
+                onClick={handleGoProjects}
+                className={`text-left py-1.5 px-2 rounded transition-colors cursor-pointer ${
+                  currentView === 'projects' || currentView === 'project-detail'
+                    ? themeClasses.mobileItemActive
+                    : themeClasses.mobileItemInactive
+                }`}
+              >
+                Projects
+              </button>
+
               <button
                 onClick={handleGoAbout}
                 className={`text-left py-1.5 px-2 rounded transition-colors cursor-pointer ${
@@ -730,58 +928,347 @@ export default function Portfolio() {
         {/* ---------------------------------------------------------- */}
 
         {/* ========================================================== */}
-        {/* VIEW 1: POSTS LIST                                         */}
+        {/* VIEW 1: HOME PAGE (FEATURED PROJECTS & ARTICLES)           */}
         {/* ========================================================== */}
         {currentView === 'posts' && (
-          <section id="recent-posts" className="pt-[83px] pb-[40px] px-[22px] sm:px-8">
+          <div>
+            {/* Global Search Results Indicator */}
             {searchQuery && (
-              <div className="mb-4 sm:mb-6 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
-                Found {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
+              <div className="pt-6 px-[22px] sm:px-8 text-[13.5px] sm:text-[15px] text-[#94a3b8]">
+                Found {filteredProjects.length} project{filteredProjects.length === 1 ? '' : 's'} and {filteredPosts.length} article{filteredPosts.length === 1 ? '' : 's'} matching "{searchQuery}"
               </div>
             )}
 
-            <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
-              {filteredPosts.map((post) => (
-                <article key={post.id} className="group text-left pb-2 sm:pb-3">
-                  {/* Title */}
-                  <h2 className="mb-1.5">
-                    <button
-                      onClick={() => handleOpenPost(post.id)}
-                      className={`text-[16px] sm:text-[18px] font-normal ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
-                    >
-                      {post.title}
-                    </button>
-                  </h2>
-
-                  {/* Metadata */}
-                  <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] italic ${themeClasses.meta} mb-2`}>
-                    <Calendar size={11} className="shrink-0 opacity-80 not-italic" />
-                    <span>{post.date}</span>
-                    {post.category && (
-                      <>
-                        <span className="opacity-50">·</span>
-                        <span className={themeClasses.metaAccent}>{post.category}</span>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Description */}
-                  <p
-                    onClick={() => handleOpenPost(post.id)}
-                    className={`text-[14px] sm:text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
+            {/* ====================================================== */}
+            {/* 02 FEATURED PROJECTS SECTION                          */}
+            {/* ====================================================== */}
+            <section id="featured-projects" className="pt-7 sm:pt-9 pb-12 sm:pb-16 px-[22px] sm:px-8 text-left">
+              {/* Section Header */}
+              <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
+                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+                  Featured Projects
+                </h2>
+                {!searchQuery && (
+                  <button
+                    onClick={handleGoProjects}
+                    className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group shrink-0`}
                   >
-                    {post.description}
-                  </p>
-                </article>
+                    <span>all projects</span>
+                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </button>
+                )}
+              </div>
+
+              {/* Projects Grid (Home) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                {(searchQuery ? filteredProjects : filteredProjects.slice(0, 2)).map((project) => (
+                  <div
+                    key={project.id}
+                    onClick={() => handleOpenProject(project.id)}
+                    className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between hover:border-[#38bdf8]/60 hover:shadow-md ${themeClasses.projectCardBg}`}
+                  >
+                    <div>
+                      {/* Project Name */}
+                      <h3 className={`text-[17px] sm:text-[19px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
+                        {project.title}
+                      </h3>
+
+                      {/* Project Description Detail */}
+                      <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.meta}`}>
+                        {project.description || project.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+
+                {filteredProjects.length === 0 && (
+                  <div className={`col-span-full text-center py-8 text-[14px] ${themeClasses.meta}`}>
+                    No featured projects matching "{searchQuery}".
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Divider between Featured Projects and Technical Writing */}
+            <div className="px-[22px] sm:px-8">
+              <div
+                className={`border-t ${themeClasses.border}`}
+                style={{ borderTopWidth: '1px' }}
+              />
+            </div>
+
+            {/* ====================================================== */}
+            {/* 03 TECHNICAL WRITING & ARTICLES SECTION               */}
+            {/* ====================================================== */}
+            <section id="recent-posts" className="pt-8 sm:pt-10 pb-[40px] px-[22px] sm:px-8 text-left">
+              <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
+                {filteredPosts.map((post) => (
+                  <article key={post.id} className="group text-left pb-2 sm:pb-3">
+                    {/* Title */}
+                    <h2 className="mb-1.5">
+                      <button
+                        onClick={() => handleOpenPost(post.id)}
+                        className={`text-[16px] sm:text-[18px] font-normal ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
+                      >
+                        {post.title}
+                      </button>
+                    </h2>
+
+                    {/* Metadata */}
+                    <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] italic ${themeClasses.meta} mb-2`}>
+                      <Calendar size={11} className="shrink-0 opacity-80 not-italic" />
+                      <span>{post.date}</span>
+                      {post.category && (
+                        <>
+                          <span className="opacity-50">·</span>
+                          <span className={themeClasses.metaAccent}>{post.category}</span>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Description */}
+                    <p
+                      onClick={() => handleOpenPost(post.id)}
+                      className={`text-[14px] sm:text-[16px] leading-[1.6] ${themeClasses.desc} cursor-pointer opacity-90 group-hover:opacity-100 transition-opacity`}
+                    >
+                      {post.description}
+                    </p>
+                  </article>
+                ))}
+
+                {filteredPosts.length === 0 && (
+                  <div className={`text-center py-10 text-[14px] sm:text-[16px] ${themeClasses.meta}`}>
+                    No posts found matching "{searchQuery}".
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* ========================================================== */}
+        {/* VIEW: ALL PROJECTS PAGE                                    */}
+        {/* ========================================================== */}
+        {currentView === 'projects' && (
+          <section className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[22px] sm:px-8 space-y-6 text-left">
+            {/* Top Back Button */}
+            <div>
+              <button
+                onClick={handleGoHome}
+                aria-label="Back to home"
+                title="Back to home"
+                className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
+              >
+                <ArrowLeft size={17} />
+                <span>Home</span>
+              </button>
+            </div>
+
+            {/* Page Header */}
+            <div className={`space-y-1.5 border-b ${themeClasses.borderMuted} pb-4`}>
+              <h1 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+                All Projects
+              </h1>
+              <p className={`text-[13px] sm:text-[14px] ${themeClasses.meta} font-mono`}>
+                Production AI systems, intelligent pipelines, and low-latency backends.
+              </p>
+            </div>
+
+            {/* Grid of all projects */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 pt-2">
+              {filteredProjects.map((project) => (
+                <div
+                  key={project.id}
+                  onClick={() => handleOpenProject(project.id)}
+                  className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between hover:border-[#38bdf8]/60 hover:shadow-md ${themeClasses.projectCardBg}`}
+                >
+                  <div>
+                    {/* Project Name */}
+                    <h3 className={`text-[17px] sm:text-[19px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
+                      {project.title}
+                    </h3>
+
+                    {/* Project Description Detail */}
+                    <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.meta}`}>
+                      {project.description || project.subtitle}
+                    </p>
+                  </div>
+                </div>
               ))}
 
-              {filteredPosts.length === 0 && (
-                <div className={`text-center py-12 text-[14px] sm:text-[16px] ${themeClasses.meta}`}>
-                  No posts found matching "{searchQuery}".
+              {filteredProjects.length === 0 && (
+                <div className={`col-span-full text-center py-10 text-[14px] ${themeClasses.meta}`}>
+                  No projects found matching "{searchQuery}".
                 </div>
               )}
             </div>
+
+            {/* Bottom Back Button */}
+            <div className={`pt-6 border-t ${themeClasses.borderMuted}`}>
+              <button
+                onClick={handleGoHome}
+                aria-label="Back to home"
+                title="Back to home"
+                className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
+              >
+                <ArrowLeft size={17} />
+                <span>Back to Home</span>
+              </button>
+            </div>
           </section>
+        )}
+
+        {/* ========================================================== */}
+        {/* VIEW: PROJECT DETAIL PAGE (NO POPUP MODAL)                 */}
+        {/* ========================================================== */}
+        {currentView === 'project-detail' && activeProject && (
+          <main className="pb-16 sm:pb-20 pt-4 sm:pt-6 px-[22px] sm:px-8 space-y-6 text-left font-mono">
+            {/* Top Back Button */}
+            <div>
+              <button
+                onClick={handleBackFromProject}
+                aria-label="Back"
+                title="Back"
+                className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
+              >
+                <ArrowLeft size={17} />
+                <span>{previousView === 'projects' ? 'Back to Projects' : 'Back to Home'}</span>
+              </button>
+            </div>
+
+            {/* Project Header */}
+            <div className={`space-y-2 border-b ${themeClasses.borderMuted} pb-4`}>
+              <h1 className={`text-[22px] sm:text-[27px] font-bold tracking-tight ${themeClasses.projectTitle}`}>
+                {activeProject.title}
+              </h1>
+
+              <p className={`text-[13.5px] sm:text-[15px] leading-relaxed ${themeClasses.meta}`}>
+                {activeProject.subtitle}
+              </p>
+            </div>
+
+            {/* Metrics Row */}
+            {activeProject.metrics && activeProject.metrics.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {activeProject.metrics.map((metric, mIdx) => (
+                  <span
+                    key={mIdx}
+                    className={`text-[11.5px] sm:text-[12px] px-2.5 py-1 rounded font-mono ${themeClasses.tagPill}`}
+                  >
+                    {metric}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Problem & Solution Clean Text */}
+            <div className={`space-y-5 text-[14px] sm:text-[15.5px] leading-[1.75] ${themeClasses.desc}`}>
+              {activeProject.problem && (
+                <div>
+                  <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
+                    Problem
+                  </h2>
+                  <p>{activeProject.problem}</p>
+                </div>
+              )}
+
+              {activeProject.solution && (
+                <div>
+                  <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
+                    Solution
+                  </h2>
+                  <p>{activeProject.solution}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Architecture Steps (Simple Clean List) */}
+            {activeProject.pipelineSteps && (
+              <div className="space-y-2 pt-2">
+                <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText}`}>
+                  Pipeline Flow
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  {activeProject.pipelineSteps.map((s) => (
+                    <div
+                      key={s.step}
+                      className={`p-3 rounded-lg border ${themeClasses.cardBg} flex items-start gap-2.5`}
+                    >
+                      <span className={`text-[10px] font-bold font-mono px-1.5 py-0.5 rounded border ${themeClasses.metricPill}`}>
+                        {s.step}
+                      </span>
+                      <div>
+                        <div className={`text-[12.5px] font-semibold ${themeClasses.headline}`}>
+                          {s.label}
+                        </div>
+                        <div className={`text-[11.5px] leading-snug ${themeClasses.meta} mt-0.5`}>
+                          {s.desc}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Complete Tech Stack */}
+            <div className="space-y-2 pt-2">
+              <div className={`flex items-center gap-1.5 text-[11px] sm:text-[12px] font-semibold uppercase tracking-wider ${themeClasses.meta}`}>
+                <Boxes size={13} />
+                <span>Complete Tech Stack</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {activeProject.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className={`text-[11.5px] sm:text-[12.5px] px-2.5 py-1 rounded font-mono border ${themeClasses.projectTagPill}`}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className={`flex flex-wrap items-center gap-4 pt-5 border-t ${themeClasses.borderMuted}`}>
+              {activeProject.github && (
+                <a
+                  href={activeProject.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] ${themeClasses.accentLink} font-medium`}
+                >
+                  <GithubIcon size={15} />
+                  <span>View Source</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              )}
+
+              {activeProject.articleId && (
+                <button
+                  onClick={() => handleOpenPost(activeProject.articleId)}
+                  className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] ${themeClasses.accentLink} font-medium cursor-pointer`}
+                >
+                  <FileText size={14} />
+                  <span>Read Article</span>
+                  <ArrowUpRight size={13} />
+                </button>
+              )}
+            </div>
+
+            {/* Bottom Back Button */}
+            <div className={`pt-6 border-t ${themeClasses.borderMuted}`}>
+              <button
+                onClick={handleBackFromProject}
+                aria-label="Back"
+                title="Back"
+                className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} transition-transform duration-200 hover:-translate-x-1 cursor-pointer`}
+              >
+                <ArrowLeft size={17} />
+                <span>{previousView === 'projects' ? 'Back to Projects' : 'Back to Home'}</span>
+              </button>
+            </div>
+          </main>
         )}
 
         {/* ========================================================== */}
@@ -909,13 +1396,17 @@ export default function Portfolio() {
               {/* About Text Details with average readable typography */}
               <div className={`w-full flex-1 min-w-0 max-w-[560px] space-y-3.5 sm:space-y-4 text-[15px] sm:text-[16px] leading-[1.75] font-mono ${themeClasses.desc}`}>
                 <p>
-                  I am an AI Backend Engineer focused on designing high-throughput API architectures,
-                  multimodal document extraction pipelines, and citation-grounded RAG systems.
+                  Backend AI Engineer focused on building intelligent applications and reliable backend systems.
                 </p>
                 <p>
-                  My engineering philosophy is rooted in pragmatism: I believe AI models should be
-                  treated as probabilistic components wrapped inside strictly typed, deterministic state
-                  machines. I learn by building production-ready systems and testing their boundaries under load.
+                  I enjoy exploring how modern technologies can solve real-world problems and developing practical applications that combine software engineering with AI.
+                </p>
+                <p>
+                  I'm continuously learning and working across backend development, AI engineering, and modern software architecture.
+                </p>
+                <p className="pt-1">
+                  <strong className={`font-semibold ${themeClasses.headline}`}>Technical Interests:</strong>{' '}
+                  Backend Engineering, Artificial Intelligence, Machine Learning, LLM Applications, and Agentic AI.
                 </p>
 
                 {/* Education Section separated with a line */}
