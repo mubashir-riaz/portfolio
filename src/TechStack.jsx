@@ -21,9 +21,7 @@ import {
   SiPytest,
 } from 'react-icons/si';
 import {
-  Workflow,
   Boxes,
-  Sparkles,
   Eye,
 } from 'lucide-react';
 
@@ -58,16 +56,8 @@ export function OpenAIIcon({ className = 'w-3.5 h-3.5 shrink-0' }) {
   );
 }
 
-export function DockerComposeIcon({ className = 'w-3.5 h-3.5 shrink-0' }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M4 4h7v7H4zM13 4h7v7h-7zM8.5 13h7v7h-7z" opacity="0.9" />
-    </svg>
-  );
-}
-
 /* ------------------------------------------------------------------ */
-/*  DATA: 5 CATEGORIES & ALL 27 USER TECHNOLOGIES                     */
+/*  DATA: 5 CATEGORIES & 24 USER TECHNOLOGIES                         */
 /* ------------------------------------------------------------------ */
 
 export const TECH_CATEGORIES = [
@@ -104,10 +94,8 @@ export const TECH_CATEGORIES = [
     skills: [
       { name: 'LLM APIs', icon: OpenAIIcon, color: '#10a37f' },
       { name: 'LangChain', icon: SiLangchain, color: '#1c3c3c' },
-      { name: 'RAG Pipelines', icon: Workflow, color: '#38bdf8' },
       { name: 'Sentence Transformers', icon: SiHuggingface, color: '#ffac45' },
       { name: 'Vector Embeddings', icon: Boxes, color: '#a855f7' },
-      { name: 'Semantic Search', icon: Sparkles, color: '#38bdf8' },
       { name: 'Vision LLMs', icon: Eye, color: '#ec4899' },
       { name: 'Scikit-learn', icon: SiScikitlearn, color: '#f89939' },
       { name: 'TensorFlow', icon: SiTensorflow, color: '#ff6f00' },
@@ -117,7 +105,6 @@ export const TECH_CATEGORIES = [
     category: 'TOOLS & INFRASTRUCTURE',
     skills: [
       { name: 'Docker', icon: SiDocker, color: '#2496ed' },
-      { name: 'Docker Compose', icon: DockerComposeIcon, color: '#2496ed' },
       { name: 'Git', icon: SiGit, color: '#f05032' },
       { name: 'GitHub Actions', icon: SiGithubactions, color: '#2088ff' },
       { name: 'Pytest', icon: SiPytest, color: '#0a9edc' },
