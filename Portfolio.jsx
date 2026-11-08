@@ -223,112 +223,6 @@ const POSTS = [
     ],
     stack: ['FastAPI', 'React', 'Python', 'ChromaDB', 'Llama 3.3', 'LangChain'],
   },
-  {
-    id: 'inference-speed',
-    title: 'Shipping at Inference-Speed: Designing Low-Latency FastAPI Pipelines',
-    date: '28 Dec, 2025',
-    category: 'AI Infrastructure',
-    description:
-      'Why async streaming endpoints, background worker queues, and Redis caching transform LLM response times for high-concurrency systems.',
-    github: 'https://github.com/mubashir-riaz',
-    tags: ['FastAPI', 'Performance', 'Redis', 'SSE Streaming', 'Architecture'],
-    codeSnippet: `@app.post("/v1/stream")
-async def stream_inference(req: PromptRequest):
-    # Check semantic cache for sub-10ms response
-    cached = await semantic_cache.lookup(req.prompt)
-    if cached:
-        return StreamingResponse(cached.stream(), media_type="text/event-stream")
-
-    # Asynchronous token streaming over HTTP/2
-    async def token_generator():
-        async for token in model_client.astream(req.prompt):
-            yield f"data: {json.dumps({'token': token})}\\n\\n"
-
-    return StreamingResponse(token_generator(), media_type="text/event-stream")`,
-    fullContent: [
-      'In production AI systems, latency is user retention. A 6-second blocking delay feels broken, whereas streaming the first token in under 300ms creates an immediate feeling of real-time responsiveness.',
-      'By decoupling FastAPI endpoints using Server-Sent Events (SSE) and asynchronous generator coroutines, users receive streamed text without blocking worker threads.',
-      'Furthermore, integrating Redis semantic caching for high-frequency queries intercepts identical and near-identical questions, returning responses in under 15ms without touching upstream LLM APIs.',
-      'This architecture sustained 450 concurrent connections in stress tests without degradation in Time-to-First-Token (TTFT).',
-    ],
-    highlights: [
-      'Real-time token streaming with Server-Sent Events (SSE)',
-      'Redis semantic caching eliminating redundant model compute',
-      'Async connection pooling with Uvicorn and Gunicorn workers',
-      'Production telemetry tracking TTFT and tokens-per-second',
-    ],
-    stack: ['Python', 'FastAPI', 'Redis', 'Uvicorn', 'Docker', 'Prometheus'],
-  },
-  {
-    id: 'agentic-engineering',
-    title: 'Agentic Engineering: The No-BS Way to Build Reliable AI Workflows',
-    date: '17 Nov, 2025',
-    category: 'Agent Systems',
-    description:
-      'Moving beyond naive prompt chaining: implementing Pydantic validation, structured outputs, deterministic state machines, and graceful fallback handling.',
-    github: 'https://github.com/mubashir-riaz',
-    tags: ['AI Agents', 'Pydantic', 'Reliability', 'System Design'],
-    codeSnippet: `class ToolExecutionResult(BaseModel):
-    step_id: str
-    status: Literal["success", "retry", "fatal"]
-    payload: dict
-    validation_notes: Optional[str] = None
-
-class ProductionAgentController:
-    async def execute_step(self, current_state: State) -> NextTransition:
-        # Probabilistic LLM produces structured action
-        action = await self.planner.next_step(current_state)
-        # Deterministic validator enforces invariants
-        validated = self.schema_guard.verify(action)
-        return await self.state_machine.transition(validated)`,
-    fullContent: [
-      'The biggest myth in autonomous agent development is that giving an LLM an open-ended loop and a dozen tools produces reliable software.',
-      'In enterprise environments, open-ended loops hallucinate parameter types, fall into cyclic retries, and blow through token budgets. Real reliability demands treating the model as a probabilistic decision function inside a deterministic state machine.',
-      'By anchoring every tool invocation with strict Pydantic schemas, setting deterministic fallback trees, and establishing finite transition graphs, agent workflows become predictable and production-ready.',
-    ],
-    highlights: [
-      'Finite state machine control loops avoiding infinite recursion',
-      'Strict Pydantic typing and validation on all model tool calls',
-      'Circuit breakers and exponential backoff retry algorithms',
-      'Deterministic audit trails for compliance and debugging',
-    ],
-    stack: ['Python', 'Pydantic', 'LangChain', 'FastAPI', 'PostgreSQL'],
-  },
-  {
-    id: 'production-vector-search',
-    title: 'Production Vector Search: Pitfalls in Chunking and Retrieval Quality',
-    date: '05 Oct, 2025',
-    category: 'Vector Search',
-    description:
-      'Why top-k similarity often fails on tabular data and how hybrid retrieval with metadata filtering eliminates irrelevant context.',
-    github: 'https://github.com/mubashir-riaz',
-    tags: ['Vector Search', 'Embeddings', 'ChromaDB', 'Chunking'],
-    codeSnippet: `# Hybrid retrieval: Dense vector similarity + metadata filtering
-matched_chunks = chroma_collection.query(
-    query_embeddings=[embedded_query],
-    where={"$and": [{"doc_type": "contract"}, {"year": 2025}]},
-    n_results=10
-)
-
-# Cross-encoder re-ranking step
-reranked = cross_encoder.rank(
-    query=user_query,
-    documents=[c.text for c in matched_chunks]
-)`,
-    fullContent: [
-      'Dense vector embeddings are exceptional at capturing abstract thematic meaning, but they consistently struggle with exact alphanumeric matches, serial numbers, and tabular data.',
-      'When splitting text purely by character counts (e.g., 500 characters), row 12 of a table gets separated from its column header in row 1, rendering the embedding useless.',
-      'We addressed this by pairing layout-aware chunking with hybrid search: metadata pre-filtering scopes down candidates, dense embeddings perform recall, and a cross-encoder re-ranker picks the top 3 high-precision context snippets.',
-      'This hybrid pipeline increased answer relevance from 68% to over 94% on real enterprise datasets.',
-    ],
-    highlights: [
-      'Layout-aware chunking preserving tables and lists intact',
-      'Metadata filtering before dense vector query execution',
-      'Cross-encoder re-ranking for ultra-precise context alignment',
-      'Sub-50ms query latency on indexed vector collections',
-    ],
-    stack: ['ChromaDB', 'Sentence-Transformers', 'Python', 'FastAPI'],
-  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -336,28 +230,26 @@ reranked = cross_encoder.rank(
 /* ------------------------------------------------------------------ */
 const TECH_STACK = [
   'Python',
-  'JavaScript',
-  'SQL',
-  'Bash',
-  'HTML',
-  'CSS',
   'FastAPI',
-  'Pydantic',
   'LangChain',
   'LLM Agents',
   'RAG',
-  'REST APIs',
-  'Uvicorn',
+  'Pydantic',
   'ChromaDB',
   'PostgreSQL',
   'Redis',
-  'Semantic Search',
+  'REST APIs',
   'Vector Embeddings',
+  'Semantic Search',
   'Docker',
-  'Git',
-  'GitHub Actions',
   'AWS',
   'Linux',
+  'Git',
+  'GitHub Actions',
+  'SQL',
+  'Bash',
+  'JavaScript',
+  'Uvicorn',
 ];
 
 /* ------------------------------------------------------------------ */
@@ -945,7 +837,7 @@ export default function Portfolio() {
             <section id="featured-projects" className="pt-7 sm:pt-9 pb-12 sm:pb-16 px-[22px] sm:px-8 text-left">
               {/* Section Header */}
               <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
-                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+                <h2 className={`text-[23px] sm:text-[28px] font-bold font-heading tracking-tight ${themeClasses.headline}`}>
                   Featured Projects
                 </h2>
                 {!searchQuery && (
@@ -989,7 +881,7 @@ export default function Portfolio() {
               </div>
             </section>
 
-            {/* Divider between Featured Projects and Technical Writing */}
+            {/* Divider between Featured Projects and Tech & Skills */}
             <div className="px-[22px] sm:px-8">
               <div
                 className={`border-t ${themeClasses.border}`}
@@ -998,9 +890,48 @@ export default function Portfolio() {
             </div>
 
             {/* ====================================================== */}
-            {/* 03 TECHNICAL WRITING & ARTICLES SECTION               */}
+            {/* 03 TECH & SKILLS SECTION                              */}
             {/* ====================================================== */}
-            <section id="recent-posts" className="pt-8 sm:pt-10 pb-[40px] px-[22px] sm:px-8 text-left">
+            <section id="tech-skills" className="pt-7 sm:pt-9 pb-12 sm:pb-16 px-[22px] sm:px-8 text-left">
+              {/* Section Header */}
+              <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
+                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+                  Tech & Skills
+                </h2>
+              </div>
+
+              {/* Skills Grid / Pills */}
+              <div className="flex flex-wrap gap-2 sm:gap-2.5">
+                {TECH_STACK.map((tech) => (
+                  <span
+                    key={tech}
+                    className={`px-3 py-1.5 rounded-md border text-[13px] sm:text-[14px] font-mono transition-colors duration-150 hover:border-[#38bdf8]/70 ${themeClasses.tagPill}`}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+            {/* Divider between Tech & Skills and Technical Writing */}
+            <div className="px-[22px] sm:px-8">
+              <div
+                className={`border-t ${themeClasses.border}`}
+                style={{ borderTopWidth: '1px' }}
+              />
+            </div>
+
+            {/* ====================================================== */}
+            {/* 04 BLOGS & ARTICLES SECTION                           */}
+            {/* ====================================================== */}
+            <section id="recent-posts" className="pt-7 sm:pt-9 pb-[40px] px-[22px] sm:px-8 text-left">
+              {/* Section Header */}
+              <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
+                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+                  Latest Blog Posts
+                </h2>
+              </div>
+
               <div className="flex flex-col space-y-8 sm:space-y-12 md:space-y-14">
                 {filteredPosts.map((post) => (
                   <article key={post.id} className="group text-left pb-2 sm:pb-3">
