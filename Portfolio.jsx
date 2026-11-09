@@ -420,45 +420,44 @@ export default function Portfolio() {
       return {
         bg: 'bg-[#ffffff]',
         text: 'text-[#111827]',
-        navLogo: 'text-[#111827] hover:text-[#38bdf8]',
-        navLinkActive: 'text-[#38bdf8] font-semibold underline decoration-[#38bdf8] underline-offset-4',
-        navLinkInactive: 'text-[#111111] hover:text-[#38bdf8]',
-        navIcon: 'text-[#222222] hover:text-[#38bdf8]',
+        navLogo: 'text-black hover:text-[#0077b5]',
+        navLinkActive: 'text-[#0077b5] font-semibold underline decoration-[#0077b5] underline-offset-4',
+        navLinkInactive: 'text-[#111111] hover:text-[#0077b5]',
+        navIcon: 'text-[#222222] hover:text-[#0077b5]',
         border: 'border-[#e5e5e5]',
         borderMuted: 'border-[#e5e5e5]',
         headline: 'text-[#111827]',
-        handleText: 'text-[#111827]',
-        rssIcon: 'text-[#38bdf8] hover:text-[#38bdf8]/80',
+        rssIcon: 'text-[#0077b5] hover:text-[#005a8c]',
         profileDesc: 'text-[#111827]',
-        socialIcon: 'text-[#4b4b4b] hover:text-[#38bdf8]',
-        postTitle: 'text-[#38bdf8]',
+        socialIcon: 'text-[#4b4b4b] hover:text-[#0077b5]',
+        postTitle: 'text-[#0077b5]',
         meta: 'text-[#555555]',
-        metaAccent: 'text-[#38bdf8]',
+        metaAccent: 'text-[#0077b5]',
         desc: 'text-[#555555]',
-        accentText: 'text-[#38bdf8]',
-        accentLink: 'text-[#38bdf8] hover:underline',
+        accentText: 'text-[#0077b5]',
+        accentLink: 'text-[#0077b5] hover:underline',
         cardBg: 'bg-[#f9fafb] border-[#e5e5e5]',
         codeBox: 'bg-[#f3f4f6] border-[#e5e5e5] text-[#1e293b]',
         tagPill: 'bg-[#f3f4f6] border-[#e5e5e5] text-[#555555]',
-        contactBtn: 'bg-[#ffffff] border-[#e5e5e5] hover:border-[#38bdf8] text-[#111827]',
-        contactIcon: 'text-[#38bdf8]',
+        contactBtn: 'bg-[#ffffff] border-[#e5e5e5] hover:border-[#0077b5] text-[#111827]',
+        contactIcon: 'text-[#0077b5]',
         mobileDrawer: 'bg-[#ffffff] border-[#e5e5e5]',
-        mobileItemActive: 'text-[#38bdf8] font-semibold bg-[#f3f4f6]',
-        mobileItemInactive: 'text-[#111111] hover:text-[#38bdf8]',
-        mobileSubText: 'text-[#444444] hover:text-[#38bdf8]',
-        searchIcon: 'text-[#38bdf8]',
+        mobileItemActive: 'text-[#0077b5] font-semibold bg-[#f3f4f6]',
+        mobileItemInactive: 'text-[#111111] hover:text-[#0077b5]',
+        mobileSubText: 'text-[#444444] hover:text-[#0077b5]',
+        searchIcon: 'text-[#0077b5]',
         searchInput: 'text-[#111827] placeholder:text-[#9ca3af]',
         searchClear: 'text-[#555555] hover:text-[#111827]',
         footer: 'text-[#555555]',
         projectCardBg: 'bg-[#fcfcfd] border-[#e5e5e5]',
-        projectCardHover: 'hover:-translate-y-1 hover:border-[#38bdf8]/70 hover:shadow-[0_8px_25px_rgba(56,189,248,0.2)]',
+        projectCardHover: 'hover:-translate-y-1 hover:border-[#0077b5]/70 hover:shadow-[0_8px_25px_rgba(0,119,181,0.2)]',
         projectTitle: 'text-[#111827]',
-        projectSubtitle: 'text-[#38bdf8]',
-        projectArchBox: 'bg-[#f8fafc] border-[#e2e8f0] text-[#38bdf8]',
+        projectSubtitle: 'text-[#0077b5]',
+        projectArchBox: 'bg-[#f8fafc] border-[#e2e8f0] text-[#1e293b]',
         projectTagPill: 'bg-[#fcfcfd] border-[#d0d7de] text-[#24292f]',
-        primaryBtn: 'bg-[#38bdf8] hover:bg-[#38bdf8]/90 text-[#0f172a] font-semibold',
+        primaryBtn: 'bg-[#0077b5] hover:bg-[#005a8c] text-white',
         secondaryBtn: 'bg-[#ffffff] hover:bg-[#f3f4f6] text-[#111827] border-[#e5e5e5]',
-        tertiaryBtn: 'text-[#38bdf8] hover:underline',
+        tertiaryBtn: 'text-[#0077b5] hover:underline',
         metricPill: 'bg-[#ffffff] border-[#e5e5e5] text-[#111827]',
         pipelineStepBg: 'bg-[#ffffff] border-[#e5e5e5]',
       };
@@ -466,15 +465,14 @@ export default function Portfolio() {
     return {
       bg: 'bg-[#202838]',
       text: 'text-[#f2f2f2]',
-      navLogo: 'text-white hover:text-[#38bdf8]',
-      navLinkActive: 'text-[#38bdf8] font-semibold underline decoration-[#38bdf8] underline-offset-4',
+      navLogo: 'text-black',
+      navLinkActive: 'text-[#38bdf8] font-semibold underline decoration-[#0284c7] underline-offset-4',
       navLinkInactive: 'text-white hover:text-[#38bdf8]',
       navIcon: 'text-white hover:text-[#38bdf8]',
-      border: 'border-[#38bdf8]/50',
-      borderMuted: 'border-[#38bdf8]/25',
+      border: 'border-[#0ea5e9]/50',
+      borderMuted: 'border-[#0ea5e9]/25',
       headline: 'text-[#f5f5f5]',
-      handleText: 'text-white',
-      rssIcon: 'text-[#38bdf8] hover:text-[#38bdf8]/80',
+      rssIcon: 'text-[#38bdf8] hover:text-[#7dd3fc]',
       profileDesc: 'text-[#f1f1f1]',
       socialIcon: 'text-[#d5d8df] hover:text-[#38bdf8]',
       postTitle: 'text-[#38bdf8]',
@@ -488,7 +486,7 @@ export default function Portfolio() {
       tagPill: 'bg-[#161c28] border-[#2d374d] text-[#cbd5e1]',
       contactBtn: 'bg-[#161c28] border-[#2d374d] hover:border-[#38bdf8] text-[#f2f2f2]',
       contactIcon: 'text-[#38bdf8]',
-      mobileDrawer: 'bg-[#161c28] border-[#38bdf8]/25',
+      mobileDrawer: 'bg-[#161c28] border-[#0ea5e9]/25',
       mobileItemActive: 'text-[#38bdf8] font-semibold bg-[#202838]',
       mobileItemInactive: 'text-[#f2f2f2] hover:text-[#38bdf8]',
       mobileSubText: 'text-[#cbd5e1] hover:text-[#38bdf8]',
@@ -500,9 +498,9 @@ export default function Portfolio() {
       projectCardHover: 'hover:-translate-y-1 hover:border-[#38bdf8]/70 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)]',
       projectTitle: 'text-[#f5f5f5]',
       projectSubtitle: 'text-[#38bdf8]',
-      projectArchBox: 'bg-[#0f141d] border-[#253043] text-[#38bdf8]',
+      projectArchBox: 'bg-[#0f141d] border-[#253043] text-[#93c5fd]',
       projectTagPill: 'bg-[#161c28] border-[#2d374d] text-[#cbd5e1]',
-      primaryBtn: 'bg-[#38bdf8] hover:bg-[#38bdf8]/90 text-[#0f172a] font-semibold',
+      primaryBtn: 'bg-[#38bdf8] hover:bg-[#0284c7] text-[#0f172a] font-semibold',
       secondaryBtn: 'bg-[#1e2535] hover:bg-[#252f44] text-[#f2f2f2] border-[#2d374d]',
       tertiaryBtn: 'text-[#38bdf8] hover:underline',
       metricPill: 'bg-[#121620] border-[#2d374d] text-[#e2e8f0]',
@@ -714,7 +712,7 @@ export default function Portfolio() {
               {/* Headline with RSS badge */}
               <div className="flex items-center justify-center sm:justify-start gap-2">
                 <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                  Hi, I'm <span className={`inline-block tracking-normal ${themeClasses.handleText}`}><span className="font-normal mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}.</span>
+                  Hi, I'm <span className="inline-block tracking-normal text-white"><span className="font-normal mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}.</span>
                 </h1>
                 <span
                   className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
@@ -813,14 +811,14 @@ export default function Portfolio() {
             {/* ====================================================== */}
             <section id="featured-projects" className="pt-7 sm:pt-9 pb-12 sm:pb-16 px-[22px] sm:px-8 text-left">
               {/* Section Header */}
-              <div className="mb-6 sm:mb-8 flex items-baseline justify-between gap-4">
-                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+              <div className="mb-6 sm:mb-8 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
+                <h2 className={`text-[23px] sm:text-[28px] font-bold tracking-tight whitespace-nowrap ${themeClasses.headline}`}>
                   Featured Projects
                 </h2>
                 {!searchQuery && (
                   <button
                     onClick={handleGoProjects}
-                    className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group shrink-0`}
+                    className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group shrink-0 ml-auto sm:ml-0 whitespace-nowrap`}
                   >
                     <span>all projects</span>
                     <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
