@@ -9,6 +9,7 @@ html {
 :root {
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-heading: "Poppins", sans-serif;
+  --font-brand: "Rock Salt", cursive;
   font-family: var(--font-mono);
   font-size: 16px;
   color-scheme: dark;
@@ -31,6 +32,10 @@ body {
 
 .font-heading {
   font-family: var(--font-heading);
+}
+
+.font-brand {
+  font-family: var(--font-brand);
 }
 
 /* Subtle dev tool background grid */
@@ -74,7 +79,7 @@ body {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0ea5e9;
+  background: #38bdf8;
 }
 
 ::selection {

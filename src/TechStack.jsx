@@ -124,7 +124,7 @@ export const TECH_CATEGORIES = [
 export function TechBadge({ name, icon: Icon, color, themeClasses, theme }) {
   const hoverClass =
     theme === 'paper'
-      ? 'hover:border-[#0077b5]/60 hover:bg-[#ffffff] hover:text-[#111827]'
+      ? 'hover:border-[#38bdf8]/60 hover:bg-[#ffffff] hover:text-[#111827]'
       : 'hover:border-[#38bdf8]/70 hover:bg-[#1a2333] hover:text-[#f8fafc]';
 
   return (
