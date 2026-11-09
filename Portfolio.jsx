@@ -519,8 +519,7 @@ export default function Portfolio() {
           {/* Brand / Logo */}
           <button
             onClick={handleGoHome}
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-            className={`font-mono text-[20px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left cursor-pointer`}
+            className={`font-heading text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left cursor-pointer`}
           >
             {PROFILE.name}
           </button>
