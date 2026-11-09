@@ -449,7 +449,8 @@ export default function Portfolio() {
         searchInput: 'text-[#111827] placeholder:text-[#9ca3af]',
         searchClear: 'text-[#555555] hover:text-[#111827]',
         footer: 'text-[#555555]',
-        projectCardBg: 'bg-[#fcfcfd] border-[#e5e5e5] hover:border-[#0077b5]/50',
+        projectCardBg: 'bg-[#fcfcfd] border-[#e5e5e5]',
+        projectCardHover: 'hover:-translate-y-1 hover:border-[#0077b5]/70 hover:shadow-[0_8px_25px_rgba(0,119,181,0.2)]',
         projectTitle: 'text-[#111827]',
         projectSubtitle: 'text-[#0077b5]',
         projectArchBox: 'bg-[#f8fafc] border-[#e2e8f0] text-[#1e293b]',
@@ -493,7 +494,8 @@ export default function Portfolio() {
       searchInput: 'text-[#f2f2f2] placeholder:text-[#94a3b8]',
       searchClear: 'text-[#94a3b8] hover:text-[#f2f2f2]',
       footer: 'text-[#94a3b8]',
-      projectCardBg: 'bg-[#161c28] border-[#2d374d] hover:border-[#38bdf8]/50',
+      projectCardBg: 'bg-[#161c28] border-[#2d374d]',
+      projectCardHover: 'hover:-translate-y-1 hover:border-[#38bdf8]/70 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)]',
       projectTitle: 'text-[#f5f5f5]',
       projectSubtitle: 'text-[#38bdf8]',
       projectArchBox: 'bg-[#0f141d] border-[#253043] text-[#93c5fd]',
@@ -710,7 +712,7 @@ export default function Portfolio() {
               {/* Headline with RSS badge */}
               <div className="flex items-center justify-center sm:justify-start gap-2">
                 <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                  Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span><span className={themeClasses.accentText}>{PROFILE.handle.replace(/^@/, '')}.</span></span>
+                  Hi, I'm <span className={`inline-block tracking-normal ${themeClasses.accentText}`}><span className="font-normal mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}.</span>
                 </h1>
                 <span
                   className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
@@ -830,7 +832,7 @@ export default function Portfolio() {
                   <div
                     key={project.id}
                     onClick={() => handleOpenProject(project.id)}
-                    className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between hover:border-[#38bdf8]/60 hover:shadow-md ${themeClasses.projectCardBg}`}
+                    className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between ${themeClasses.projectCardBg} ${themeClasses.projectCardHover}`}
                   >
                     <div>
                       {/* Project Name */}
@@ -850,7 +852,7 @@ export default function Portfolio() {
                         {(project.techStack || project.mainTech).map((tech) => (
                           <span
                             key={tech}
-                            className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono ${themeClasses.projectTagPill}`}
+                            className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono shadow-none ${themeClasses.projectTagPill}`}
                           >
                             {tech}
                           </span>
@@ -979,7 +981,7 @@ export default function Portfolio() {
                 <div
                   key={project.id}
                   onClick={() => handleOpenProject(project.id)}
-                  className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between hover:border-[#38bdf8]/60 hover:shadow-md ${themeClasses.projectCardBg}`}
+                  className={`rounded-xl border p-5 sm:p-6 transition-all duration-200 cursor-pointer group flex flex-col justify-between ${themeClasses.projectCardBg} ${themeClasses.projectCardHover}`}
                 >
                   <div>
                     {/* Project Name */}
@@ -999,7 +1001,7 @@ export default function Portfolio() {
                       {(project.techStack || project.mainTech).map((tech) => (
                         <span
                           key={tech}
-                          className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono ${themeClasses.projectTagPill}`}
+                          className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono shadow-none ${themeClasses.projectTagPill}`}
                         >
                           {tech}
                         </span>
