@@ -710,7 +710,7 @@ export default function Portfolio() {
             <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left w-full">
               {/* Headline with RSS badge */}
               <div className="flex items-center justify-center sm:justify-start gap-2">
-                <h1 className={`text-[21px] sm:text-[27px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
+                <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
                   Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
                 </h1>
                 <span
@@ -835,7 +835,7 @@ export default function Portfolio() {
                   >
                     <div>
                       {/* Project Name */}
-                      <h3 className={`text-[17px] sm:text-[19px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
+                      <h3 className={`text-[16.5px] sm:text-[18px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
                         {project.title}
                       </h3>
 
@@ -844,6 +844,20 @@ export default function Portfolio() {
                         {project.description || project.subtitle}
                       </p>
                     </div>
+
+                    {/* Tech Stack in Project Box */}
+                    {(project.techStack || project.mainTech) && (
+                      <div className={`mt-4 pt-3 border-t ${themeClasses.borderMuted} flex flex-wrap gap-1.5`}>
+                        {(project.techStack || project.mainTech).map((tech) => (
+                          <span
+                            key={tech}
+                            className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono ${themeClasses.projectTagPill}`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
 
@@ -891,14 +905,14 @@ export default function Portfolio() {
                 {filteredPosts.map((post) => (
                   <article key={post.id} className="group text-left pb-2 sm:pb-3">
                     {/* Title */}
-                    <h2 className="mb-1.5">
+                    <h3 className="mb-1.5">
                       <button
                         onClick={() => handleOpenPost(post.id)}
-                        className={`text-[16px] sm:text-[18px] font-normal ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
+                        className={`text-[16px] sm:text-[18px] font-medium ${themeClasses.postTitle} hover:underline cursor-pointer transition-colors text-left block leading-snug`}
                       >
                         {post.title}
                       </button>
-                    </h2>
+                    </h3>
 
                     {/* Metadata */}
                     <div className={`flex flex-wrap items-center gap-1.5 text-[11px] sm:text-[13px] italic ${themeClasses.meta} mb-2`}>
@@ -952,7 +966,7 @@ export default function Portfolio() {
 
             {/* Page Header */}
             <div className={`space-y-1.5 border-b ${themeClasses.borderMuted} pb-4`}>
-              <h1 className={`text-[23px] sm:text-[28px] font-bold tracking-tight ${themeClasses.headline}`}>
+              <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.headline}`}>
                 All Projects
               </h1>
               <p className={`text-[13px] sm:text-[14px] ${themeClasses.meta} font-mono`}>
@@ -970,7 +984,7 @@ export default function Portfolio() {
                 >
                   <div>
                     {/* Project Name */}
-                    <h3 className={`text-[17px] sm:text-[19px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
+                    <h3 className={`text-[16.5px] sm:text-[18px] font-bold tracking-tight mb-2 group-hover:text-[#38bdf8] transition-colors ${themeClasses.projectTitle}`}>
                       {project.title}
                     </h3>
 
@@ -979,6 +993,20 @@ export default function Portfolio() {
                       {project.description || project.subtitle}
                     </p>
                   </div>
+
+                  {/* Tech Stack in Project Box */}
+                  {(project.techStack || project.mainTech) && (
+                    <div className={`mt-4 pt-3 border-t ${themeClasses.borderMuted} flex flex-wrap gap-1.5`}>
+                      {(project.techStack || project.mainTech).map((tech) => (
+                        <span
+                          key={tech}
+                          className={`text-[11px] sm:text-[11.5px] px-2 py-0.5 rounded border font-mono ${themeClasses.projectTagPill}`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
 
@@ -1024,7 +1052,7 @@ export default function Portfolio() {
 
             {/* Project Header */}
             <div className={`space-y-2 border-b ${themeClasses.borderMuted} pb-4`}>
-              <h1 className={`text-[22px] sm:text-[27px] font-bold tracking-tight ${themeClasses.projectTitle}`}>
+              <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.projectTitle}`}>
                 {activeProject.title}
               </h1>
 
@@ -1051,18 +1079,18 @@ export default function Portfolio() {
             <div className={`space-y-5 text-[14px] sm:text-[15.5px] leading-[1.75] ${themeClasses.desc}`}>
               {activeProject.problem && (
                 <div>
-                  <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
+                  <h3 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
                     Problem
-                  </h2>
+                  </h3>
                   <p>{activeProject.problem}</p>
                 </div>
               )}
 
               {activeProject.solution && (
                 <div>
-                  <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
+                  <h3 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText} mb-1.5`}>
                     Solution
-                  </h2>
+                  </h3>
                   <p>{activeProject.solution}</p>
                 </div>
               )}
@@ -1071,9 +1099,9 @@ export default function Portfolio() {
             {/* Architecture Steps (Simple Clean List) */}
             {activeProject.pipelineSteps && (
               <div className="space-y-2 pt-2">
-                <h2 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText}`}>
+                <h3 className={`text-[12px] sm:text-[13px] uppercase font-semibold tracking-wider ${themeClasses.accentText}`}>
                   Pipeline Flow
-                </h2>
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                   {activeProject.pipelineSteps.map((s) => (
                     <div
@@ -1176,7 +1204,7 @@ export default function Portfolio() {
 
             {/* Post Header */}
             <div className={`space-y-1.5 sm:space-y-2 border-b ${themeClasses.borderMuted} pb-3`}>
-              <h1 className={`text-[17px] sm:text-[19px] md:text-[21px] font-bold leading-snug ${themeClasses.postTitle}`}>
+              <h1 className={`text-[22px] sm:text-[26px] md:text-[28px] font-bold tracking-tight leading-snug ${themeClasses.postTitle}`}>
                 {activePost.title}
               </h1>
 
@@ -1264,7 +1292,7 @@ export default function Portfolio() {
         {/* ========================================================== */}
         {currentView === 'about' && (
           <main className="pb-6 sm:pb-8 pt-5 sm:pt-7 px-[22px] sm:px-8 text-left">
-            <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-semibold tracking-tight ${themeClasses.headline} mb-5 sm:mb-7`}>
+            <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.headline} mb-5 sm:mb-7`}>
               About
             </h1>
 
