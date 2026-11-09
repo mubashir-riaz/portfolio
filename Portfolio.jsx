@@ -519,7 +519,7 @@ export default function Portfolio() {
           {/* Brand / Logo */}
           <button
             onClick={handleGoHome}
-            className={`font-heading text-[20px] sm:text-[28px] md:text-[30px] font-bold tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left cursor-pointer`}
+            className={`font-heading text-[20px] sm:text-[28px] md:text-[30px] font-normal tracking-tight ${themeClasses.navLogo} transition-colors leading-none text-left cursor-pointer`}
           >
             {PROFILE.name}
           </button>
@@ -710,7 +710,7 @@ export default function Portfolio() {
               {/* Headline with RSS badge */}
               <div className="flex items-center justify-center sm:justify-start gap-2">
                 <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                  Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}</span>.
+                  Hi, I'm <span className="inline-block tracking-normal"><span className="font-normal opacity-80 mr-[2.5px]">@</span><span className={themeClasses.accentText}>{PROFILE.handle.replace(/^@/, '')}.</span></span>
                 </h1>
                 <span
                   className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
@@ -839,7 +839,7 @@ export default function Portfolio() {
                       </h3>
 
                       {/* Project Description Detail */}
-                      <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.meta}`}>
+                      <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.footer}`}>
                         {project.description || project.subtitle}
                       </p>
                     </div>
@@ -988,7 +988,7 @@ export default function Portfolio() {
                     </h3>
 
                     {/* Project Description Detail */}
-                    <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.meta}`}>
+                    <p className={`text-[13px] sm:text-[14px] leading-relaxed ${themeClasses.footer}`}>
                       {project.description || project.subtitle}
                     </p>
                   </div>
