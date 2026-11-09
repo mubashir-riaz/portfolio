@@ -427,6 +427,7 @@ export default function Portfolio() {
         border: 'border-[#e5e5e5]',
         borderMuted: 'border-[#e5e5e5]',
         headline: 'text-[#111827]',
+        handleText: 'text-[#111827]',
         rssIcon: 'text-[#0077b5] hover:text-[#005a8c]',
         profileDesc: 'text-[#111827]',
         socialIcon: 'text-[#4b4b4b] hover:text-[#0077b5]',
@@ -465,13 +466,14 @@ export default function Portfolio() {
     return {
       bg: 'bg-[#202838]',
       text: 'text-[#f2f2f2]',
-      navLogo: 'text-black',
+      navLogo: 'text-white hover:text-[#38bdf8]',
       navLinkActive: 'text-[#38bdf8] font-semibold underline decoration-[#0284c7] underline-offset-4',
       navLinkInactive: 'text-white hover:text-[#38bdf8]',
       navIcon: 'text-white hover:text-[#38bdf8]',
       border: 'border-[#0ea5e9]/50',
       borderMuted: 'border-[#0ea5e9]/25',
       headline: 'text-[#f5f5f5]',
+      handleText: 'text-white',
       rssIcon: 'text-[#38bdf8] hover:text-[#7dd3fc]',
       profileDesc: 'text-[#f1f1f1]',
       socialIcon: 'text-[#d5d8df] hover:text-[#38bdf8]',
@@ -712,7 +714,7 @@ export default function Portfolio() {
               {/* Headline with RSS badge */}
               <div className="flex items-center justify-center sm:justify-start gap-2">
                 <h1 className={`text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight leading-tight ${themeClasses.headline}`}>
-                  Hi, I'm <span className="inline-block tracking-normal text-white"><span className="font-normal mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}.</span>
+                  Hi, I'm <span className={`inline-block tracking-normal ${themeClasses.handleText}`}><span className="font-normal mr-[2.5px]">@</span>{PROFILE.handle.replace(/^@/, '')}.</span>
                 </h1>
                 <span
                   className={`${themeClasses.rssIcon} cursor-pointer inline-flex items-center ml-0.5 transition-colors duration-150`}
@@ -818,7 +820,7 @@ export default function Portfolio() {
                 {!searchQuery && (
                   <button
                     onClick={handleGoProjects}
-                    className={`inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group shrink-0 ml-auto sm:ml-0 whitespace-nowrap`}
+                    className={`hidden sm:inline-flex items-center gap-1.5 text-[13px] sm:text-[14px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group shrink-0 ml-auto sm:ml-0 whitespace-nowrap`}
                   >
                     <span>all projects</span>
                     <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -868,6 +870,19 @@ export default function Portfolio() {
                   </div>
                 )}
               </div>
+
+              {/* Mobile All Projects Button placed at the bottom of the project boxes */}
+              {!searchQuery && (
+                <div className="mt-4 sm:hidden flex justify-end">
+                  <button
+                    onClick={handleGoProjects}
+                    className={`inline-flex items-center gap-1.5 text-[13px] font-mono ${themeClasses.accentLink} hover:underline cursor-pointer group`}
+                  >
+                    <span>all projects</span>
+                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </button>
+                </div>
+              )}
             </section>
 
             {/* Divider between Featured Projects and Tech & Skills */}
